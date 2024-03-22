@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { Connection } from '../database/mariadb.database.js';
-export const UnitConversionModel = Connection.define(
-	'UnitConversion',
+export const vwUnitConversionModel = Connection.define(
+	'vwUnitConversion',
 	{
 		ConversionId:{
             type:DataTypes.INTEGER,
@@ -12,7 +12,13 @@ export const UnitConversionModel = Connection.define(
         UnidadOrigenId:{
             type:DataTypes.INTEGER
         },
+        NombreUnidadOrigen:{
+            type:DataTypes.STRING
+        },
         UnidadDestinoId:{
+            type: DataTypes.INTEGER
+        },
+        NombreUnidadDestino:{
             type: DataTypes.INTEGER
         },
         FactorConversion:{
@@ -41,7 +47,7 @@ export const UnitConversionModel = Connection.define(
         }
 	},
 	{
-		tableName: 'cat_ConversionUnidad',
+		tableName: 'vwConversionUnidad',
 		timestamps: false,
 		freezeTableName: false,
 	},
