@@ -75,7 +75,7 @@ export const findByUnitSourceId = async ( req, res )=>{
     
     try{
 
-        const data = vwUnitConversionModel.findOne({
+        const data = await vwUnitConversionModel.findOne({
             attributes:[ 
                 'ConversionId', 
                 'UnidadOrigenId',
@@ -149,15 +149,30 @@ export const updateUnitConversion = async ( req, res )=>{
 export const disableConversionUnit = async ( req, res )=>{
     const { ConversionId, BorradoPor } = req.body
 
+    console.log( `ConversionId ${ ConversionId }` )
+    console.log( `BorradoPor ${ BorradoPor }` )
+
     try{
         
         const data = await UnitConversionModel.update({
             Borrado: true,
-            BorradoPor,
-            BorradoEn:  Date.now()
+            BorradoPor:  BorradoPor,
+            BorradoEn: Date.now()
         },{
-            ConversionId,
-            Borrado: false
+            where: {
+                ConversionId,
+                Borrado: false
+            }
+        })
+
+        if(!data){
+            return res.status(404).send({
+                 error: 'No se encontro el registro'
+            })
+        }
+
+        return res.status(200).send({
+             error: 'Se ha borrado la conversión'
         })
 
     }catch( error ){

@@ -175,7 +175,7 @@ router.put( '/', schema.updateUnit, validateSchema, validateUnitName ,methods.up
 /**
  * @swagger
  * /api/v1/unidades:
- *  put:
+ *  delete:
  *      summary: Deshabilita la unidad de medida.
  *      tags: [Unidades de medidas]
  *      requestBody:

@@ -4,10 +4,191 @@ import { methods } from "../controllers/conversionunidad.controller.js";
 
 const router = Router()
 
+
+/**
+ * @swagger
+ * tags:
+ *   - name: Conversión de medidas
+ *     description: Registro de conversiones de medida para los diversos productos.
+ */
+
+/**
+ * @swagger
+ * /api/v1/conversionu/:
+ *  post:
+ *      summary: Crea una nueva conversión de unidad de medida.
+ *      tags: [Conversión de medidas]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                schema:
+ *                  type: object
+ *                  properties:
+ *                      UnidadOrigenId:
+ *                          type: integer
+ *                          description: El UnidadId que sera la base para la conversión
+ *                          example: 14
+ *                      UnidadDestinoId:
+ *                          type: integer
+ *                          description: El UnidadId que sera la unidad a convertir
+ *                          example: 13
+ *                      FactorConversion:
+ *                          type: decimal
+ *                          description: Es el factor de conversión.
+ *                          example: 30
+ *                      CreadoPor:
+ *                          type: integer
+ *                          description: El id del usuario que crea la unidad de medida
+ *                          example: 1
+ *      responses:
+ *        200:
+ *          description: Creación de la conversion de unidad
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                   response:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ */
+
 router.post('/', methods.createUnitConversion)
+
+/**
+ * @swagger
+ * /api/v1/conversionu/:
+ *   get:
+ *      summary: En lista las conversiones .
+ *      tags: [Conversión de medidas]
+ *      responses:
+ *        200:
+ *          description: Buscar unidad de medida por medio de UnidadId
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                   response:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ */
+
+
 router.get('/', methods.findAll)
-router.get('/', methods.findByUnitSourceId)
+
+/**
+ * @swagger
+ * /api/v1/conversionu/{unitsourceid}:
+ *   get:
+ *      summary: Buscar por UnidadId.
+ *      tags: [Conversión de medidas]
+ *      parameters:
+ *        - in: path
+ *          name: unitsourceid
+ *          schema:
+ *              type: integer
+ *          required: true
+ *          description: El id de la unidad de base para la conversión.
+ *      responses:
+ *        200:
+ *          description: Buscar unidad de medida por medio de UnidadId que se establecio como unidad base.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                   response:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ */
+
+router.get('/:unitsourceid', methods.findByUnitSourceId)
+
+/**
+ * @swagger
+ * /api/v1/conversionu/:
+ *  put:
+ *      summary: Actualiza los datos de la unidad de medida.
+ *      tags: [Conversión de medidas]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                schema:
+ *                  type: object
+ *                  properties:
+ *                      ConversionId:
+ *                          type: integer
+ *                          description: El id de la conversión
+ *                          example: 1
+ *                      UnidadDestinoId:
+ *                          type: integer
+ *                          description: El id de la unidad de medida que a la que sera convertidad la base
+ *                          example: Pieza
+ *                      FactorConversion:
+ *                          type: decimal
+ *                          description: El numero de veces de unidades que conforma a la unidad base
+ *                          example: Pieza
+ *                      ActualizadoPor:
+ *                          type: integer
+ *                          description: El id del usuario que actualiza la unidad de medida
+ *                          example: 1
+ *      responses:
+ *        200:
+ *          description: Actualización de unidad e medida
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                   response:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ */
+
 router.put('/', methods.updateUnitConversion)
+
+/**
+ * @swagger
+ * /api/v1/conversionu/:
+ *  delete:
+ *      summary: Deshabilita la unidad de medida.
+ *      tags: [Conversión de medidas]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                schema:
+ *                  type: object
+ *                  properties:
+ *                      UnidadId:
+ *                          type: integer
+ *                          description: El id de la Conversin de medida
+ *                          example: 1
+ *                      BorradoPor:
+ *                          type: integer
+ *                          description: El id del usuario que deshabilita la unidad de medida
+ *                          example: 1
+ *      responses:
+ *        200:
+ *          description: Actualización de unidad e medida
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                   response:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ */
+
 router.delete('/', methods.disableConversionUnit)
 
 export default router
