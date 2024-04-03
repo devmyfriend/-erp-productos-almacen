@@ -1,4 +1,4 @@
-import { DataType, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import { Connection } from "../database/mariadb.database";
 
 
