@@ -12,7 +12,7 @@ const findAll = async ( req, res ) =>{
 
         if( !data){
             return res.status(404).send({
-                 error: 'mensaje de respuesta'
+                 error: 'No se encontraron datos'
             })
         }
 
