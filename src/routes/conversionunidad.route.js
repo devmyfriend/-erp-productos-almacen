@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { methods } from "../controllers/conversionunidad.controller.js";
-
+import * as schema  from '../schemas/conversiones/index.js'
+import { validateSchema } from "../middlewares/express-validator/index.js";
 
 const router = Router()
 
@@ -55,7 +56,7 @@ const router = Router()
  *                       type: object
  */
 
-router.post('/', methods.createUnitConversion)
+router.post('/', schema.creatConversionUnitSchema, validateSchema, methods.createUnitConversion)
 
 /**
  * @swagger
@@ -107,7 +108,7 @@ router.get('/', methods.findAll)
  *                       type: object
  */
 
-router.get('/:unitsourceid', methods.findByUnitSourceId)
+router.get('/:unitsourceid', schema.findByUnitSourceIdSchema, validateSchema, methods.findByUnitSourceId)
 
 /**
  * @swagger
@@ -152,7 +153,7 @@ router.get('/:unitsourceid', methods.findByUnitSourceId)
  *                       type: object
  */
 
-router.put('/', methods.updateUnitConversion)
+router.put('/', schema.updateConversionUnitSchema, validateSchema, methods.updateUnitConversion)
 
 /**
  * @swagger
@@ -167,7 +168,7 @@ router.put('/', methods.updateUnitConversion)
  *                schema:
  *                  type: object
  *                  properties:
- *                      UnidadId:
+ *                      ConversionId:
  *                          type: integer
  *                          description: El id de la Conversin de medida
  *                          example: 1
