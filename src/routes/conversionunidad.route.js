@@ -190,6 +190,6 @@ router.put('/', schema.updateConversionUnitSchema, validateSchema, methods.updat
  *                       type: object
  */
 
-router.delete('/', methods.disableConversionUnit)
+router.delete('/', schema.disableConversionUnitSchema, validateSchema, methods.disableConversionUnit)
 
 export default router

@@ -67,3 +67,13 @@ export const updateConversionUnitSchema = [
         'El campo FactorConversion es obligatorio y debe ser mayor que 0.'
     )
 ]
+
+
+export const disableConversionUnitSchema = [
+    body('ConversionId')
+    .notEmpty()
+    .isInt()
+    .withMessage(
+        'El campo ConversionId es obligatorio.'
+    ),
+]
