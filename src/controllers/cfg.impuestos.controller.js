@@ -15,7 +15,7 @@ const findAll = async ( req, res ) =>{
            })
         }
 
-        return res.status(estatusservidor).send({
+        return res.status(200).send({
              response: data
         })
 
