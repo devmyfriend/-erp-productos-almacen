@@ -1,5 +1,5 @@
-import { DataType, DataTypes } from "sequelize";
-import { Connection } from "../database/mariadb.database";
+import { DataTypes } from "sequelize";
+import { Connection } from "../database/mariadb.database.js";
 
 export const cfgTaxModel = Connection.define(
     'cfgTax',
@@ -7,6 +7,7 @@ export const cfgTaxModel = Connection.define(
         cfgImpuestoId: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            primaryKey: true,
             autoIncrement: true
         },
         NombreImpuesto:{

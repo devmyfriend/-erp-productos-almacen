@@ -1,4 +1,4 @@
-import { cfgTaxModel } from "../models/cfg.impuesto.model";
+import { cfgTaxModel } from "../models/cfg.impuesto.model.js";
 
 const findAll = async ( req, res ) =>{
     try{
@@ -195,4 +195,13 @@ const disableTax = async ( req, res ) =>{
         })
     }
 
+}
+
+export const methods = {
+    createTax,
+    disableTax,
+    findAll,
+    findById,
+    findByName,
+    updateTax
 }
