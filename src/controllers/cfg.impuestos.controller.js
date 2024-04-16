@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import { cfgTaxModel } from "../models/cfg.impuesto.model.js";
 
 const findAll = async ( req, res ) =>{
@@ -59,9 +60,11 @@ const findByName = async ( req, res )=>{
 
     try{
 
-        const data = await cfgTaxModel.findOne({
+        const data = await cfgTaxModel.findAll({
             where: {
-                NombreImpuesto: taxname,
+                NombreImpuesto: {
+                    [Op.like]: `%${ taxname }%`
+                },
                 Borrado: false
             }
         })
