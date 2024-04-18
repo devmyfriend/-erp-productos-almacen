@@ -6,17 +6,9 @@ import morgan from 'morgan';
 // Rutas
 import productsRoutes from './src/routes/producto.routes.js';
 
-import productsPosRoutes from './src/routes/producto.pos.routes.js';
-
 import productsServiceRoutes from './src/routes/producto.servicio.routes.js';
 
-import productsSuppliesRoutes from './src/routes/producto.insumo.routes.js';
-
 import productsActivRoutes from './src/routes/producto.activo.routes.js';
-
-import productsFinallyRoutes from './src/routes/producto.terminado.routes.js';
-
-import productsVendorRoutes from './src/routes/producto.proveedor.routes.js';
 
 import productSubscriptionRoutes from './src/routes/producto.suscripcion.routes.js';
 
@@ -61,17 +53,9 @@ const App = {
 
 		app.use('/api/v1/productos', productsRoutes);
 
-		app.use('/api/v1/productos/pos', productsPosRoutes);
-
 		app.use('/api/v1/productos/servicio', productsServiceRoutes);
 
-		app.use('/api/v1/productos/insumo', productsSuppliesRoutes);
-
 		app.use('/api/v1/productos/activo', productsActivRoutes);
-
-		app.use('/api/v1/productos/final', productsFinallyRoutes);
-
-		app.use('/api/v1/productos/proveedor', productsVendorRoutes);
 
 		app.use('/api/v1/productos/suscripcion', productSubscriptionRoutes);
 
