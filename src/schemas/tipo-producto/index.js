@@ -51,3 +51,27 @@ export const updateTypeProductSchema = [
 		.isInt()
 		.withMessage('El campo ActualizadoPor debe ser un número entero.'),
 ];
+
+export const disableTypeProductSchema = [
+	body('TipoProductoId')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo TipoProductoId debe ser un numero entero  '),
+
+	body('BorradoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo BorradoPor debe ser un número entero.'),
+];
+
+export const enableTypeProductSchema = [
+	body('TipoProductoId')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo TipoProductoId debe ser un numero entero  '),
+
+	body('ActualizadoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo ActualizadoPor debe ser un número entero.'),
+];

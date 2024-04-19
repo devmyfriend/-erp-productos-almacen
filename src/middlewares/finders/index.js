@@ -43,6 +43,9 @@ export const findAllProductById = async id =>
 export const findTypeProductById = async id_type =>
 	findItem(TypeProductModel, { TipoProductoId: id_type, Borrado: false });
 
+export const findAllTypeProductById = async id_type =>
+	findItem(TypeProductModel, { TipoProductoId: id_type });
+
 export const findTypeProductByName = async name =>
 	findItem(TypeProductModel, { NombreTipoProducto: name, Borrado: false });
 

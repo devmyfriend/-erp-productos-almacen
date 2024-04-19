@@ -1,4 +1,5 @@
 import {
+	findAllTypeProductById,
 	findTypeProductById,
 	findTypeProductByName,
 	findUserById,
@@ -115,8 +116,82 @@ const update = async (req, res) => {
 	}
 };
 
+const disable = async (req, res) => {
+	try {
+		const data = req.body;
+		const userFound = await findUserById(data.BorradoPor);
+		const typeFound = await findTypeProductById(data.TipoProductoId);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!typeFound.exist) {
+			return res.status(404).json({ error: 'El tipo de producto no existe' });
+		}
+
+		await TypeProductModel.update(
+			Object.assign(data, {
+				BorradoEn: new Date(),
+				Borrado: true,
+			}),
+			{
+				where: {
+					TipoProductoId: data.TipoProductoId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Producto eliminado' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
+const enable = async (req, res) => {
+	try {
+		const data = req.body;
+		const userFound = await findUserById(data.ActualizadoPor);
+		const typeFound = await findAllTypeProductById(data.TipoProductoId);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!typeFound.exist) {
+			return res.status(404).json({ error: 'El tipo de producto no existe' });
+		}
+
+		await TypeProductModel.update(
+			Object.assign(data, {
+				ActualizadoPor: data.ActualizadoPor,
+				ActualizadoEn: new Date(),
+				BorradoEn: null,
+				Borrado: false,
+			}),
+			{
+				where: {
+					TipoProductoId: data.TipoProductoId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Producto activado' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	create,
 	update,
+	disable,
+	enable,
 };

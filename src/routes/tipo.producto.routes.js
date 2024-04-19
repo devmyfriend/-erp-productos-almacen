@@ -126,4 +126,82 @@ router.put(
 	methods.update,
 );
 
+/**
+ * @swagger
+ * /api/v1/productos/tipo/borrar:
+ *   delete:
+ *     summary: Eliminar un tipo de producto
+ *     tags: [Tipos de productos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoProductoId:
+ *                 type: integer
+ *                 example: 1
+ *               BorradoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Producto eliminado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Tipo de producto eliminado"
+ */
+
+router.delete(
+	'/borrar',
+	schemas.disableTypeProductSchema,
+	validateSchema,
+	methods.disable,
+);
+
+/**
+ * @swagger
+ * /api/v1/productos/tipo/activar:
+ *   put:
+ *     summary: Activar un tipo de producto
+ *     tags: [Tipos de productos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoProductoId:
+ *                 type: integer
+ *                 example: 1
+ *               ActualizadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Producto activado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Tipo de producto activado"
+ */
+
+router.put(
+	'/activar',
+	schemas.enableTypeProductSchema,
+	validateSchema,
+	methods.enable,
+);
+
 export default router;
