@@ -6,8 +6,9 @@ import {
 	findTypeProductById,
 	findUserById,
 } from '../middlewares/finders/index.js';
-import { GenProductModel } from '../models/producto.gral.model.js';
+
 import { Connection as sequelize } from '../database/mariadb.database.js';
+import { GenProductModel } from '../models/producto.gral.model.js';
 
 const findAll = async (req, res) => {
 	try {
@@ -245,5 +246,5 @@ export const methods = {
 	findById,
 	update,
 	disable,
-	enable
+	enable,
 };

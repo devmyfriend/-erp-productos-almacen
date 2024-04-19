@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { methods } from '../controllers/tipo.producto.controller.js';
 import { validateSchema } from '../middlewares/express-validator/index.js';
+import * as schemas from '../schemas/tipo-producto/index.js';
 
 const router = Router();
 
@@ -33,5 +34,47 @@ const router = Router();
  */
 
 router.get('/', methods.findAll);
+
+/**
+ * @swagger
+ * /api/v1/productos/tipo/crear:
+ *   post:
+ *     summary: Crear un nuevo tipo de producto
+ *     tags: [Tipos de productos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               NombreTipoProducto:
+ *                 type: string
+ *                 example: Limpieza
+ *               DescripcionTipoProducto:
+ *                 type: string
+ *                 example: Es un producto de limpieza
+ *               CreadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Tipo de producto creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha creado el tipo de producto"
+ */
+
+router.post(
+	'/crear',
+	schemas.createTypeProductSchema,
+	validateSchema,
+	methods.create,
+);
 
 export default router;

@@ -44,7 +44,7 @@ export const findTypeProductById = async id_type =>
 	findItem(TypeProductModel, { TipoProductoId: id_type, Borrado: false });
 
 export const findTypeProductByName = async name =>
-	findItem(TypeProductModel, { NombreTipoProductoId: name, Borrado: false });
+	findItem(TypeProductModel, { NombreTipoProducto: name, Borrado: false });
 
 /* Lines */
 
