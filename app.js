@@ -6,6 +6,8 @@ import morgan from 'morgan';
 // Rutas
 import productsRoutes from './src/routes/producto.routes.js';
 
+import typeProductsRoutes from './src/routes/tipo.producto.routes.js';
+
 import productsServiceRoutes from './src/routes/producto.servicio.routes.js';
 
 import productsActivRoutes from './src/routes/producto.activo.routes.js';
@@ -52,6 +54,8 @@ const App = {
 		// Initialize Routes
 
 		app.use('/api/v1/productos', productsRoutes);
+
+		app.use('/api/v1/productos/tipo', typeProductsRoutes);
 
 		app.use('/api/v1/productos/servicio', productsServiceRoutes);
 
