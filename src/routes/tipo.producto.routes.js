@@ -77,4 +77,53 @@ router.post(
 	methods.create,
 );
 
+/**
+ * @swagger
+ * /api/v1/productos/tipo/editar/{id}:
+ *   put:
+ *     summary: Editar tipo de producto
+ *     tags: [Tipos de productos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Código del producto a editar
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               NombreTipoProducto:
+ *                 type: string
+ *                 example: Limpieza (actualizado)
+ *               DescripcionTipoProducto:
+ *                 type: string
+ *                 example: Es un producto de limpieza actualizado
+ *               ActualizadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Tipo de producto editado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha editado el tipo de producto"
+ */
+
+router.put(
+	'/editar/:id',
+	schemas.updateTypeProductSchema,
+	validateSchema,
+	methods.update,
+);
+
 export default router;

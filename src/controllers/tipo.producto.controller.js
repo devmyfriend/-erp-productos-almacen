@@ -1,4 +1,5 @@
 import {
+	findTypeProductById,
 	findTypeProductByName,
 	findUserById,
 } from '../middlewares/finders/index.js';
@@ -67,7 +68,55 @@ const create = async (req, res) => {
 	}
 };
 
+const update = async (req, res) => {
+	try {
+		const data = req.body;
+
+		const typeId = req.params.id;
+
+		const userFound = await findUserById(data.ActualizadoPor);
+		const typeFound = await findTypeProductById(typeId);
+		const nameTypeFound = await findTypeProductByName(data.NombreTipoProducto);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!typeFound.exist) {
+			return res.status(404).json({ error: 'El tipo de producto no existe' });
+		}
+
+		if (nameTypeFound.exist) {
+			return res.status(409).json({
+				error: `El nombre '${data.NombreTipoProducto}' ya está en uso`,
+			});
+		}
+
+		await TypeProductModel.update(
+			Object.assign(data, {
+				ActualizadoPor: data.ActualizadoPor,
+				ActualizadoEn: new Date(),
+			}),
+			{
+				where: {
+					TipoProductoId: typeId,
+				},
+			},
+		);
+
+		return res.status(200).json({
+			message: 'Se ha editado el tipo de producto',
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	create,
+	update,
 };
