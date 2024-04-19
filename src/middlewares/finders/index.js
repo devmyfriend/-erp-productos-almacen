@@ -1,12 +1,13 @@
-import { StoreModel } from '../../models/almacen.model.js';
-import { StoreProductModel } from '../../models/almacen.producto.model.js';
-import { LinetModel } from '../../models/linea.model.js';
-import { ProductModel } from '../../models/producto.model.js';
-import { ShopModel } from '../../models/sucursal.model.js';
-import { UserModel } from '../../models/usuario.model.js';
-import { PoliticasMembresiaModel } from '../../models/politicas.membresia.model.js';
-import { TypeProductModel } from '../../models/tipo.producto.model.js';
-import { GenProductModel } from '../../models/producto.gral.model.js';
+import {
+	GenProductModel,
+	LinetModel,
+	ProductModel,
+	ShopModel,
+	StoreModel,
+	StoreProductModel,
+	TypeProductModel,
+	UserModel,
+} from '../../models/index.js';
 
 const handleDatabaseError = error => {
 	console.error(error);
@@ -41,6 +42,9 @@ export const findAllProductById = async id =>
 
 export const findTypeProductById = async id_type =>
 	findItem(TypeProductModel, { TipoProductoId: id_type, Borrado: false });
+
+export const findTypeProductByName = async name =>
+	findItem(TypeProductModel, { NombreTipoProductoId: name, Borrado: false });
 
 /* Lines */
 
