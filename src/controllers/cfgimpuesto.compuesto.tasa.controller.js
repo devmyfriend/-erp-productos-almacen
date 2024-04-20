@@ -1,10 +1,21 @@
-import { cfgCompositeTaxesxRateModel } from '../models/cfgimpcompestoxtasa.model.js'
+import { cfgCompositeTaxesxRateModel } from '../models/cfg.imp.compesto.x.tasa.model.js'
+import { cfgCompositeTaxs } from '../models/cfg.impuestos.compuestos.model.js'
+
 
 
 // TODO: OBTENER LISTADOS DE RELACION DE IMPUESTOS.
 
+
+
 export const test = ( req, res )=>{
     console.log('test')
+}
+
+
+export const getDeailComsiteTaxesxRate = async ( req, res )=>{
+        
+
+
 }
 
 export const getCompositeTaxxRate = async ( req, res ) =>{

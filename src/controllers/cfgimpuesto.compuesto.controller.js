@@ -1,11 +1,10 @@
-import { cfgCompositeTaxs } from "../models/cfgimpuestosCompuestos.model.js";
+import { cfgCompositeTaxs } from "../models/cfg.impuestos.compuestos.model.js";
 
 // TODO: 
-//      CREAR IMPUESTOS COMPUETOS ya
-//      ACTAULIZAR IMPUESTOS COMPUETOS.
-//      BORRAR IMPUESTOS COMPUETOS
-//      ENLISTAR IMPUESTOS COMPUETOS
-//      OBTENER IMPUESTOS COMPUESTOS
+//      CALCULOS DE IMPUESTO DE IVA
+
+//  RECORDATORIO QUE POSTERIOMENTE SE VAN A GENERAR LOS PROCESOS DE CALCULOS PARA LOS DE 
+//  MAS IMPUESTOS COMO EIPS, RETENCIONES E IMPUESTOS LOCALES.
 
 
 export const getCompositeTaxList = async ( req, res )=>{
@@ -17,6 +16,17 @@ export const getCompositeTaxList = async ( req, res )=>{
             where:{
                 Borrado: false
             }
+        })
+
+        if( !data ){
+            return res.status(404).send({
+                 error: 'No se encontraron los impuestos compuestos'
+            })
+        }
+
+        return res.status(200).send({
+             response: data,
+             message: 'Listado de impuestos compuestos'
         })
 
 
