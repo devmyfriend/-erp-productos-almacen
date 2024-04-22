@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";  
-import { Connection } from "../database/mariadb.database";  
+import { Connection } from "../database/mariadb.database.js";  
 
 
 export const cfgCompositeTaxs = Connection.define(

@@ -1,24 +1,45 @@
 import { cfgCompositeTaxesxRateModel } from '../models/cfg.imp.compesto.x.tasa.model.js'
 import { cfgCompositeTaxs } from '../models/cfg.impuestos.compuestos.model.js'
-
+import { cfgTaxRateModel } from '../models/cfg.impuesto.tasa.model.js'
 
 
 // TODO: OBTENER LISTADOS DE RELACION DE IMPUESTOS.
 
 
 
-export const test = ( req, res )=>{
+const test = ( req, res )=>{
     console.log('test')
 }
 
 
-export const getDeailComsiteTaxesxRate = async ( req, res )=>{
+const getDetailComsiteTaxesxRate = async ( req, res )=>{
         
+    const { ImpuestoCompuestoId } = req.params
 
+    try{
+
+        const data = cfgCompositeTaxesxRateModel.findAll({
+            include:[cfgCompositeTaxs, cfgTaxRateModel],
+                where:{
+                    Borrado: false
+                }
+        })
+
+        return res.status(200).send({
+             response: data,
+             message: 'Lista de impuestos'
+        })
+
+    }catch( error ){
+        console.log( error )
+        return res.status(500).send({
+             error: 'Error interno del servidor'
+        })
+    }
 
 }
 
-export const getCompositeTaxxRate = async ( req, res ) =>{
+const getCompositeTaxxRate = async ( req, res ) =>{
 
     const { ImpuestoCompuestoId, ImpuestoTasaId } = req.params
 
@@ -35,7 +56,7 @@ export const getCompositeTaxxRate = async ( req, res ) =>{
 
 }
 
-export const createCompositeTaxesxRate = async ( req, res )=>{
+const createCompositeTaxesxRate = async ( req, res )=>{
 
     const { ImpuestoCompuestoId, ImpuestoTasaId, CreadoPor } =  req.body
 
@@ -68,7 +89,7 @@ export const createCompositeTaxesxRate = async ( req, res )=>{
 
 }
 
-export const updateCompositeTaxesxRate = async ( req, res )=>{
+const updateCompositeTaxesxRate = async ( req, res )=>{
     
     const { ImpuestoCompuestoId, ImpuestoTasaId, ActualizadoPor } = req.body
 
@@ -107,7 +128,7 @@ export const updateCompositeTaxesxRate = async ( req, res )=>{
 
 }
 
-export const disableCompositeTaxexxRate = async ( req, res )=>{
+const disableCompositeTaxexxRate = async ( req, res )=>{
 
     const { ImpuestoCompuestoId, ImpuestoTasaId, BorradoPor } = req.body
 
@@ -141,4 +162,12 @@ export const disableCompositeTaxexxRate = async ( req, res )=>{
         })
     }
 
+}
+
+export const methods = {
+    createCompositeTaxesxRate,
+    disableCompositeTaxexxRate,
+    getCompositeTaxxRate,
+    getDetailComsiteTaxesxRate,
+    updateCompositeTaxesxRate
 }

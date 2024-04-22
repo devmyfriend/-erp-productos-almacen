@@ -7,16 +7,20 @@ import { cfgCompositeTaxs } from "../models/cfg.impuestos.compuestos.model.js";
 //  MAS IMPUESTOS COMO EIPS, RETENCIONES E IMPUESTOS LOCALES.
 
 
-export const getCompositeTaxList = async ( req, res )=>{
+const getCompositeTaxList = async ( req, res )=>{
 
 
     try{
+
+        console.log( 'Ingreso al control ')
 
         const data = await cfgCompositeTaxs.findAll({
             where:{
                 Borrado: false
             }
         })
+
+        console.log(`Información de la base de datos ${ data } `)
 
         if( !data ){
             return res.status(404).send({
@@ -38,7 +42,7 @@ export const getCompositeTaxList = async ( req, res )=>{
     }
 }
 
-export const getCompositeTax = async ( req, res ) =>{
+const getCompositeTax = async ( req, res ) =>{
     const { ImpuestoCompuestoId } = req.params
 
     try{
@@ -53,7 +57,7 @@ export const getCompositeTax = async ( req, res ) =>{
 
         if( !data ){
             return res.status(404).send({
-                 error: 'No se encontro el impuesto compueto'
+                 error: 'No se encontro el impuesto compuesto'
             })
         }
 
@@ -70,7 +74,7 @@ export const getCompositeTax = async ( req, res ) =>{
     }
 }
 
-export const createCompositeTax = async ( req, res )=>{
+const createCompositeTax = async ( req, res )=>{
 
     const { Nombre, Predeterminado, CreadoPor } = req.body
 
@@ -80,7 +84,8 @@ export const createCompositeTax = async ( req, res )=>{
             Nombre,
             Predeterminado,
             CreadoPor,
-            CreadoEn: Date.now()
+            CreadoEn: Date.now(),
+            Borrado: false
         })
 
         if( !data ){
@@ -103,7 +108,7 @@ export const createCompositeTax = async ( req, res )=>{
 
 }
 
-export const updateCompositeTax = async ( req, res )=>{
+const updateCompositeTax = async ( req, res )=>{
 
     const { ImpuestoCompuestoId, Nombre, Predeterminado, ActualizadoPor } = req.body
 
@@ -128,7 +133,6 @@ export const updateCompositeTax = async ( req, res )=>{
         }
 
         return res.status(200).send({
-             response: data,
              message: 'Se ha actualizado el impuesto compuesto'
         })
 
@@ -141,7 +145,7 @@ export const updateCompositeTax = async ( req, res )=>{
 
 }
 
-export const disableCompositeTax = async ( req, res )=>{
+const disableCompositeTax = async ( req, res )=>{
 
     const { ImpuestoCompuestoId, BorradoPor } = req.body
 
@@ -176,6 +180,14 @@ export const disableCompositeTax = async ( req, res )=>{
     }
 
 
+}
+
+export const methods ={
+    createCompositeTax,
+    disableCompositeTax,
+    getCompositeTax,
+    getCompositeTaxList,
+    updateCompositeTax
 }
 
 

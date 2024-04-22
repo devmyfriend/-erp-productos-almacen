@@ -38,6 +38,8 @@ import unitconversionRoutes from './src/routes/conversion.unidad.routes.js'
 
 import cfgTaxModel from './src/routes/cfdi.impuestos.routes.js'
 
+import compositeTax from './src/routes/cfg.impuestos.compuesto.routes.js'
+
 // Base de datos
 import { Connection } from './src/database/mariadb.database.js';
 
@@ -98,6 +100,8 @@ const App = {
 		app.use( '/api/v1/conversionu', unitconversionRoutes  );
 
 		app.use( '/api/v1/cfgimp', cfgTaxModel );
+
+		app.use( '/api/v1/impuestocompuesto', compositeTax );
 
 		app.use('/', (req, res) => {
 			res.status(404).json({ error: 'error en la solicitud' });
