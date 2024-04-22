@@ -24,7 +24,9 @@ import storeRoutes from './src/routes/almacen.routes.js';
 
 import storeProducRoutes from './src/routes/almacen.producto.routes.js';
 
-import preciosRoutes from './src/routes/precios.routes.js';
+import priceRoutes from './src/routes/precios.routes.js';
+
+import serviceRoutes from './src/routes/servicio.routes.js';
 
 // Base de datos
 import { Connection } from './src/database/mariadb.database.js';
@@ -73,7 +75,9 @@ const App = {
 
 		app.use('/api/v1/almacen/producto', storeProducRoutes);
 
-		app.use('/api/v1/precios', preciosRoutes);
+		app.use('/api/v1/precios', priceRoutes);
+
+		app.use('/api/v1/servicios', serviceRoutes);
 
 		app.use('/', (req, res) => {
 			res.status(404).json({ error: 'error en la solicitud' });
