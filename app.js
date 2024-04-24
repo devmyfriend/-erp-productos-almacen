@@ -40,6 +40,10 @@ import cfgTaxModel from './src/routes/cfdi.impuestos.routes.js'
 
 import compositeTax from './src/routes/cfg.impuestos.compuesto.routes.js'
 
+import taxByRate from './src/routes/cfg.impuestos.tasas.routes.js'
+
+import compositeTaxByTaxRate from './src/routes/cfg.impuestos.compuestos.tasa.routes.js'
+
 // Base de datos
 import { Connection } from './src/database/mariadb.database.js';
 
@@ -102,7 +106,11 @@ const App = {
 		app.use( '/api/v1/cfgimp', cfgTaxModel );
 
 		app.use( '/api/v1/impuestocompuesto', compositeTax );
-
+		
+		app.use( '/api/v1/impcompxtasaimp', compositeTaxByTaxRate )
+		
+		app.use( '/api/v1/impuestostasa', taxByRate )
+		
 		app.use('/', (req, res) => {
 			res.status(404).json({ error: 'error en la solicitud' });
 		});

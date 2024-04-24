@@ -18,13 +18,13 @@ export const cfgTaxRateModel = Connection.define(
             type: DataTypes.STRING
         },
         Tasa:{
-            type: DataTypes.STRING
+            type: DataTypes.DECIMAL
         },
         Retencion:{
             type: DataTypes.BOOLEAN
         },
         TipoFactor:{
-            type: DataTypes.STRING
+            type: DataTypes.INTEGER
         },
         IVA_S_IEPS:{
             type: DataTypes.BOOLEAN

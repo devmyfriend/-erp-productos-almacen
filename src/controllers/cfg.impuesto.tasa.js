@@ -1,8 +1,8 @@
 
 
-import { cfgTaxRateModel } from "../models/cfg.impuesto.tasa.model";
+import { cfgTaxRateModel } from "../models/cfg.impuesto.tasa.model.js";
 
-export const createTaxRate = async ( req, res )=>{
+const createTaxRate = async ( req, res )=>{
     const { ImpuestoId, Nombre, Tasa, Retencion, TipoFactor, IVA_S_IEPS, Desglosar, CreadoPor } = req.body
 
     try{
@@ -40,12 +40,13 @@ export const createTaxRate = async ( req, res )=>{
 
 }
 
-export const getTaxRate = async ( res, req )=>{
+const getTaxRate = async ( req, res )=>{
 
-    const { ImpuestoTasaId } = req.params
-
+    
     try{
-
+        
+        const { ImpuestoTasaId } = req.params
+        
         const data = await cfgTaxRateModel.findByPk(ImpuestoTasaId)
 
         return res.status(200).send({
@@ -61,10 +62,11 @@ export const getTaxRate = async ( res, req )=>{
         })
     }
 
+    
 }
 
 
-export const updateTaxRate = async ( req, res )=>{
+const updateTaxRate = async ( req, res )=>{
  
     const { ImpuestoTasaId, ImpuestoId, Nombre, Tasa, Retencion, TipoFactor, IVA_S_IEPS, Desglosar, ActualizadoPor } = req.body
 
@@ -78,7 +80,8 @@ export const updateTaxRate = async ( req, res )=>{
             TipoFactor,
             IVA_S_IEPS,
             Desglosar,
-            ActualizadoPor
+            ActualizadoPor,
+            ActualizadoEn: Date.now()
         },{
             where:{
                 ImpuestoTasaId: ImpuestoTasaId
@@ -86,7 +89,6 @@ export const updateTaxRate = async ( req, res )=>{
         })
 
         return res.status(200).send({
-             response: data,
              message: 'Se ha actualizado la configuración'
         })
 
@@ -99,7 +101,7 @@ export const updateTaxRate = async ( req, res )=>{
 
 }
 
-export const disableTaxRate = async ( req, res )=>{
+const disableTaxRate = async ( req, res )=>{
 
 
     const { ImpuestoTasaId, BorradoPor } = req.body
@@ -127,4 +129,12 @@ export const disableTaxRate = async ( req, res )=>{
         })
     }
 
+}
+
+
+export const methods = {
+    createTaxRate,
+    disableTaxRate,
+    getTaxRate,
+    updateTaxRate,
 }
