@@ -5,10 +5,12 @@ import { Connection } from "../database/mariadb.database.js";
 export const cfgCompositeTaxesxRateModel = Connection.define(
     'CompositeTaxxRate',{
         ImpuestoCompuestoId:{
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            primaryKey: true
         },
         ImpuestoTasaId:{
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            primaryKey: true
         },
         Borrado:{
             type: DataTypes.INTEGER
@@ -34,6 +36,6 @@ export const cfgCompositeTaxesxRateModel = Connection.define(
     },{
         tableName: 'cfgImpCompuestoxTasa',
         timestamps: false,
-        freezeTableName: false
+        freezeTableName: false,
     }
 )
