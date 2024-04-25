@@ -4,12 +4,8 @@ import { cfgCompositeTaxesxRateModel } from '../models/cfg.imp.compesto.x.tasa.m
 import { vwDetalleImpCompTasaModel } from '../models/vwDetallesImpCompTasa.model.js'
 
 
-// TODO: CORREGIR EL getDatailCompositeTaxesxRate
 
-
-
-
-const getDetailComsiteTaxesxRate = async ( req, res )=>{
+const getDetailCompositeTaxesxRate = async ( req, res )=>{
         
     const { ImpuestoCompuestoId } = req.params
 
@@ -37,22 +33,7 @@ const getDetailComsiteTaxesxRate = async ( req, res )=>{
 
 }
 
-const getCompositeTaxxRate = async ( req, res ) =>{
 
-    const { ImpuestoCompuestoId, ImpuestoTasaId } = req.params
-
-    try{
-
-        // const data = await cfgCompositeTaxesxRateModel.findOne()
-
-    }catch( error ){
-        console.log( error )
-        return res.status(500).send({
-             error: 'Error interno del servidor'
-        })
-    }
-
-}
 
 const createCompositeTaxesxRate = async ( req, res )=>{
 
@@ -166,7 +147,6 @@ const disableCompositeTaxexxRate = async ( req, res )=>{
 export const methods = {
     createCompositeTaxesxRate,
     disableCompositeTaxexxRate,
-    getCompositeTaxxRate,
-    getDetailComsiteTaxesxRate,
+    getDetailCompositeTaxesxRate,
     updateCompositeTaxesxRate
 }

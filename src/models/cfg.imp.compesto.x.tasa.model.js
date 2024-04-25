@@ -6,7 +6,9 @@ export const cfgCompositeTaxesxRateModel = Connection.define(
     'CompositeTaxxRate',{
         ImpuestoCompuestoId:{
             type: DataTypes.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement:false,
+            allowNull:false
         },
         ImpuestoTasaId:{
             type: DataTypes.INTEGER,
