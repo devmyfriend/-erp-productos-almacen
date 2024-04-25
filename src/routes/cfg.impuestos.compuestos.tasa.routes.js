@@ -5,7 +5,7 @@ const router = Router()
 
 router.post( '/', methods.createCompositeTaxesxRate )
 
-router.get('/detail', methods.getDetailComsiteTaxesxRate )
+router.get('/detail/:ImpuestoCompuestoId', methods.getDetailComsiteTaxesxRate )
 
 router.get( '/:ImpuestoCompuestoId/:ImpuestoTasaId', methods.getCompositeTaxxRate )
 

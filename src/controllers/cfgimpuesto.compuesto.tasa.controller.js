@@ -1,15 +1,12 @@
 import { cfgCompositeTaxesxRateModel } from '../models/cfg.imp.compesto.x.tasa.model.js'
-import { cfgCompositeTaxs } from '../models/cfg.impuestos.compuestos.model.js'
-import { cfgTaxRateModel } from '../models/cfg.impuesto.tasa.model.js'
+// import { cfgCompositeTaxs } from '../models/cfg.impuestos.compuestos.model.js'
+// import { cfgTaxRateModel } from '../models/cfg.impuesto.tasa.model.js'
+import { vwDetalleImpCompTasaModel } from '../models/vwDetallesImpCompTasa.model.js'
 
 
-// TODO: OBTENER LISTADOS DE RELACION DE IMPUESTOS.
+// TODO: CORREGIR EL getDatailCompositeTaxesxRate
 
 
-
-const test = ( req, res )=>{
-    console.log('test')
-}
 
 
 const getDetailComsiteTaxesxRate = async ( req, res )=>{
@@ -18,13 +15,14 @@ const getDetailComsiteTaxesxRate = async ( req, res )=>{
 
     try{
 
-        const data = cfgCompositeTaxesxRateModel.findAll({
-            include:[cfgCompositeTaxs, cfgTaxRateModel],
+        const data = await vwDetalleImpCompTasaModel.findAll(
+            {
+                attributes: [ 'ImpuestoTasaId', 'Nombre' ],
                 where:{
-                    Borrado: false
+                    ImpuestoCompuestoId
                 }
-        })
-
+            })
+        
         return res.status(200).send({
              response: data,
              message: 'Lista de impuestos'
@@ -65,6 +63,7 @@ const createCompositeTaxesxRate = async ( req, res )=>{
         const data = await cfgCompositeTaxesxRateModel.create({
             ImpuestoCompuestoId,
             ImpuestoTasaId,
+            Borrado: false,
             CreadoPor,
             CreadoEn:  Date.now()
         })
