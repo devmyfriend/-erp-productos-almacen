@@ -6,23 +6,13 @@ import morgan from 'morgan';
 // Rutas
 import productsRoutes from './src/routes/producto.routes.js';
 
-import productsPosRoutes from './src/routes/producto.pos.routes.js';
-
-import productsServiceRoutes from './src/routes/producto.servicio.routes.js';
-
-import productsSuppliesRoutes from './src/routes/producto.insumo.routes.js';
+import typeProductsRoutes from './src/routes/tipo.producto.routes.js';
 
 import productsActivRoutes from './src/routes/producto.activo.routes.js';
-
-import productsFinallyRoutes from './src/routes/producto.terminado.routes.js';
-
-import productsVendorRoutes from './src/routes/producto.proveedor.routes.js';
 
 import productSubscriptionRoutes from './src/routes/producto.suscripcion.routes.js';
 
 import productComboRoutes from './src/routes/producto.combo.routes.js';
-
-import refComboBoxRoutes from './src/routes/ref.combo.box.routes.js';
 
 import politicasMembresiaRoutes from './src/routes/politicas.membresia.routes.js';
 
@@ -30,7 +20,9 @@ import storeRoutes from './src/routes/almacen.routes.js';
 
 import storeProducRoutes from './src/routes/almacen.producto.routes.js';
 
-import preciosRoutes from './src/routes/precios.routes.js';
+import priceRoutes from './src/routes/precios.routes.js';
+
+import serviceRoutes from './src/routes/servicio.routes.js';
 
 // Base de datos
 import { Connection } from './src/database/mariadb.database.js';
@@ -61,23 +53,13 @@ const App = {
 
 		app.use('/api/v1/productos', productsRoutes);
 
-		app.use('/api/v1/productos/pos', productsPosRoutes);
-
-		app.use('/api/v1/productos/servicio', productsServiceRoutes);
-
-		app.use('/api/v1/productos/insumo', productsSuppliesRoutes);
+		app.use('/api/v1/productos/tipo', typeProductsRoutes);
 
 		app.use('/api/v1/productos/activo', productsActivRoutes);
-
-		app.use('/api/v1/productos/final', productsFinallyRoutes);
-
-		app.use('/api/v1/productos/proveedor', productsVendorRoutes);
 
 		app.use('/api/v1/productos/suscripcion', productSubscriptionRoutes);
 
 		app.use('/api/v1/productos/combo', productComboRoutes);
-
-		app.use('/api/v1/comboBox', refComboBoxRoutes);
 
 		app.use('/api/v1/politicasMembresia', politicasMembresiaRoutes);
 
@@ -85,7 +67,9 @@ const App = {
 
 		app.use('/api/v1/almacen/producto', storeProducRoutes);
 
-		app.use('/api/v1/precios', preciosRoutes);
+		app.use('/api/v1/precios', priceRoutes);
+
+		app.use('/api/v1/servicios', serviceRoutes);
 
 		app.use('/', (req, res) => {
 			res.status(404).json({ error: 'error en la solicitud' });

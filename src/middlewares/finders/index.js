@@ -1,227 +1,103 @@
-import { StoreModel } from '../../models/almacen.model.js';
-import { StoreProductModel } from '../../models/almacen.producto.model.js';
-import { LinetModel } from '../../models/linea.model.js';
-import { ProductModel } from '../../models/producto.model.js';
-import { ShopModel } from '../../models/sucursal.model.js';
-import { UserModel } from '../../models/usuario.model.js';
-import { PoliticasMembresiaModel } from '../../models/politicas.membresia.model.js';
+import {
+	GenProductModel,
+	LinetModel,
+	ProductModel,
+	ServiceModel,
+	ShopModel,
+	StoreModel,
+	StoreProductModel,
+	TypeProductModel,
+	UserModel,
+} from '../../models/index.js';
+import { TypeServiceModel } from '../../models/tipo.servicio.model.js';
 
-/*
-TODO -> VALIDAR QUE ESTAS LLAVES EXISTAN 
+const handleDatabaseError = error => {
+	console.error(error);
+	return { message: 'Error interno del servidor' };
+};
 
-  ClaveProductoServicio
-  ClaveUnidadSat
-  ImpuestoCompuestoId
-  LineaId
-  CategoriaId_1
-  CategoriaId_2	
-*/
-
-// Busca entre todos los codigos activos y deshabilitados
-
-export const findAllItemByCode = async code => {
+const findItem = async (model, whereClause) => {
 	try {
-		const item = await ProductModel.findOne({
-			where: {
-				CodigoProducto: code,
-			},
-		});
-
-		if (!item) {
-			return { exist: false };
-		}
-
-		return { exist: true, data: item.dataValues };
+		const item = await model.findOne({ where: whereClause });
+		return item ? { exist: true, data: item.dataValues } : { exist: false };
 	} catch (error) {
-		console.log(error);
-
-		return {
-			message: 'Error interno del servidor',
-		};
+		return handleDatabaseError(error);
 	}
 };
 
-// Busca entre todos los codigos activos
-export const findItemByCode = async code => {
-	try {
-		const item = await ProductModel.findOne({
-			where: {
-				Borrado: 0,
-				CodigoProducto: code,
-			},
-		});
+/* SE VA A BORRAR */
+export const findAllItemByCode = async code =>
+	findItem(ProductModel, { CodigoProducto: code });
+export const findItemByCode = async code =>
+	findItem(ProductModel, { Borrado: 0, CodigoProducto: code });
 
-		if (!item) {
-			return { exist: false };
-		}
+/* Porducts */
 
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
+export const findProductByCode = async code =>
+	findItem(GenProductModel, { Borrado: 0, CodigoProducto: code });
 
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
+export const findProductById = async id =>
+	findItem(GenProductModel, { Borrado: 0, ProductoId: id });
 
-export const findLineById = async id_line => {
-	try {
-		const item = await LinetModel.findOne({
-			where: {
-				LineaId: id_line,
-				Borrado: false,
-			},
-		});
+export const findAllProductById = async id =>
+	findItem(GenProductModel, { ProductoId: id });
 
-		if (!item) {
-			return { exist: false };
-		}
+export const findTypeProductById = async id_type =>
+	findItem(TypeProductModel, { TipoProductoId: id_type, Borrado: false });
 
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
+export const findAllTypeProductById = async id_type =>
+	findItem(TypeProductModel, { TipoProductoId: id_type });
 
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
+export const findTypeProductByName = async name =>
+	findItem(TypeProductModel, { NombreTipoProducto: name, Borrado: false });
 
-export const findUserById = async id_user => {
-	try {
-		const item = await UserModel.findOne({
-			where: {
-				UsuarioId: id_user,
-				Borrado: false,
-			},
-		});
+/* Services */
 
-		if (!item) {
-			return { exist: false };
-		}
+export const findServiceById = async id =>
+	findItem(ServiceModel, { Borrado: 0, ServicioId: id });
 
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
+export const findAllServiceById = async id =>
+	findItem(ServiceModel, { ServicioId: id });
 
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
+export const findServiceByName = async name =>
+	findItem(ServiceModel, { Borrado: 0, NombreServicio: name });
 
-export const findStoreByName = async (name, s_id) => {
-	try {
-		const item = await StoreModel.findOne({
-			where: {
-				NombreAlmacen: name,
-				SucursalId: s_id,
-				Borrado: false,
-			},
-		});
+export const findtypeServiceById = async id =>
+	findItem(TypeServiceModel, { Borrado: 0, TipoServicioId: id });
 
-		if (!item) {
-			return { exist: false };
-		}
+/* Lines */
 
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
+export const findLineById = async id_line =>
+	findItem(LinetModel, { LineaId: id_line, Borrado: false });
 
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
+/* Users */
 
-export const findStoreById = async id => {
-	try {
-		const item = await StoreModel.findOne({
-			where: {
-				AlmacenId: id,
-				Borrado: false,
-			},
-		});
+export const findUserById = async id_user =>
+	findItem(UserModel, { UsuarioId: id_user, Borrado: false });
 
-		if (!item) {
-			return { exist: false };
-		}
+/* Store */
 
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
+export const findStoreByName = async (name, s_id) =>
+	findItem(StoreModel, {
+		NombreAlmacen: name,
+		SucursalId: s_id,
+		Borrado: false,
+	});
 
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
-export const findShopById = async id => {
-	try {
-		const item = await ShopModel.findOne({
-			where: {
-				SucursalId: id,
-				Borrado: false,
-			},
-		});
+export const findStoreById = async id =>
+	findItem(StoreModel, { AlmacenId: id, Borrado: false });
 
-		if (!item) {
-			return { exist: false };
-		}
+export const findStoreByIdInShop = async (store_id, shop_id) =>
+	findItem(StoreModel, {
+		AlmacenId: store_id,
+		SucursalId: shop_id,
+		Borrado: false,
+	});
 
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
+export const findStoreProductById = async id =>
+	findItem(StoreProductModel, { ProductoAlmacenId: id, Borrado: false });
 
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
-export const findStoreByIdInShop = async (store_id, shop_id) => {
-	try {
-		const item = await StoreModel.findOne({
-			where: {
-				AlmacenId: store_id,
-				SucursalId: shop_id,
-				Borrado: false,
-			},
-		});
+/* Shop */
 
-		if (!item) {
-			return { exist: false };
-		}
-
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
-
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
-
-export const findStoreProductById = async id => {
-	try {
-		const item = await StoreProductModel.findOne({
-			where: {
-				ProductoAlmacenId: id,
-				Borrado: false,
-			},
-		});
-
-		if (!item) {
-			return { exist: false };
-		}
-
-		return { exist: true, data: item.dataValues };
-	} catch (error) {
-		console.log(error);
-
-		return {
-			message: 'Error interno del servidor',
-		};
-	}
-};
+export const findShopById = async id =>
+	findItem(ShopModel, { SucursalId: id, Borrado: false });
