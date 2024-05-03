@@ -8,15 +8,11 @@ import productsRoutes from './src/routes/producto.routes.js';
 
 import typeProductsRoutes from './src/routes/tipo.producto.routes.js';
 
-import productsServiceRoutes from './src/routes/producto.servicio.routes.js';
-
 import productsActivRoutes from './src/routes/producto.activo.routes.js';
 
 import productSubscriptionRoutes from './src/routes/producto.suscripcion.routes.js';
 
 import productComboRoutes from './src/routes/producto.combo.routes.js';
-
-import refComboBoxRoutes from './src/routes/ref.combo.box.routes.js';
 
 import politicasMembresiaRoutes from './src/routes/politicas.membresia.routes.js';
 
@@ -59,15 +55,11 @@ const App = {
 
 		app.use('/api/v1/productos/tipo', typeProductsRoutes);
 
-		app.use('/api/v1/productos/servicio', productsServiceRoutes);
-
 		app.use('/api/v1/productos/activo', productsActivRoutes);
 
 		app.use('/api/v1/productos/suscripcion', productSubscriptionRoutes);
 
 		app.use('/api/v1/productos/combo', productComboRoutes);
-
-		app.use('/api/v1/comboBox', refComboBoxRoutes);
 
 		app.use('/api/v1/politicasMembresia', politicasMembresiaRoutes);
 
