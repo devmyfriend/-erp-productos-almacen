@@ -6,3 +6,4 @@ export { ShopModel } from './sucursal.model.js';
 export { UserModel } from './usuario.model.js';
 export { TypeProductModel } from './tipo.producto.model.js';
 export { GenProductModel } from './producto.gral.model.js';
+export { ServiceModel } from './servicio.model.js';

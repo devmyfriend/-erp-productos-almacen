@@ -55,11 +55,13 @@ router.get('/', methods.findAll);
  *                 type: string
  *                 minLength: 5
  *                 description: Nombre del servicio (mínimo 5 caracteres).
+ *                 example: Nuevo servicio
  *               ClaveProductoServicio:
  *                 type: string
  *                 minLength: 3
  *                 maxLength: 8
  *                 description: Clave del producto o servicio (entre 3 y 8 caracteres).
+ *                 example: 0101
  *               ImpuestoCompuestoId:
  *                 type: integer
  *                 description: ID del impuesto compuesto.

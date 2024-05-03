@@ -1,23 +1,21 @@
 import { DataTypes } from 'sequelize';
 import { Connection } from '../database/mariadb.database.js';
-export const TypeProductModel = Connection.define(
-	'TypeProducts',
+export const TypeServiceModel = Connection.define(
+	'TypeService',
 	{
-		TipoProductoId: {
+		TipoServicioId: {
 			type: DataTypes.NUMBER,
 			primaryKey: true,
 			allowNull: false,
 			autoIncrement: true,
 		},
-		NombreTipoProducto: {
+		SucursalId: {
+			type: DataTypes.INTEGER,
+		},
+		NombreTipoServicio: {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		DescripcionTipoProducto: {
-			type: DataTypes.STRING,
-			allowNull: false,
-		},
-
 		CreadoPor: {
 			type: DataTypes.INTEGER,
 		},
@@ -42,7 +40,7 @@ export const TypeProductModel = Connection.define(
 		},
 	},
 	{
-		tableName: 'TipoProducto',
+		tableName: 'TipoServicio',
 		timestamps: false,
 		freezeTableName: false,
 	},

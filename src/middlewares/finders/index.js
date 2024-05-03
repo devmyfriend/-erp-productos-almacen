@@ -2,12 +2,14 @@ import {
 	GenProductModel,
 	LinetModel,
 	ProductModel,
+	ServiceModel,
 	ShopModel,
 	StoreModel,
 	StoreProductModel,
 	TypeProductModel,
 	UserModel,
 } from '../../models/index.js';
+import { TypeServiceModel } from '../../models/tipo.servicio.model.js';
 
 const handleDatabaseError = error => {
 	console.error(error);
@@ -48,6 +50,13 @@ export const findAllTypeProductById = async id_type =>
 
 export const findTypeProductByName = async name =>
 	findItem(TypeProductModel, { NombreTipoProducto: name, Borrado: false });
+
+/* Services */
+export const findServiceByName = async name =>
+	findItem(ServiceModel, { Borrado: 0, NombreServicio: name });
+
+export const findtypeServiceById = async id =>
+	findItem(TypeServiceModel, { Borrado: 0, TipoServicioId: id });
 
 /* Lines */
 
