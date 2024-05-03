@@ -87,4 +87,65 @@ router.get('/', methods.findAll);
 
 router.post('/', schemas.createServiceSchema, validateSchema, methods.create);
 
+
+
+/**
+ * @swagger
+ * /api/v1/servicios/editar:
+ *   put:
+ *     summary: Editar un nuevo servicio
+ *     tags: [Servicios]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ServicioId:
+ *                 type: integer
+ *                 description: ID del servicio.
+ *               TipoServicioId:
+ *                 type: integer
+ *                 description: ID del tipo de servicio.
+ *               NombreServicio:
+ *                 type: string
+ *                 minLength: 5
+ *                 description: Nombre del servicio (mínimo 5 caracteres).
+ *                 example: Nuevo servicio
+ *               ClaveProductoServicio:
+ *                 type: string
+ *                 minLength: 3
+ *                 maxLength: 8
+ *                 description: Clave del producto o servicio (entre 3 y 8 caracteres).
+ *                 example: 0101
+ *               ImpuestoCompuestoId:
+ *                 type: integer
+ *                 description: ID del impuesto compuesto.
+ *               Cita:
+ *                 type: boolean
+ *                 description: Indica si el servicio requiere cita.
+ *               ActualizadoPor:
+ *                 type: integer
+ *                 description: ID del usuario que EDITó el servicio.
+ *     responses:
+ *       200:
+ *         description: Servicio creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha editado el servicio"
+ */
+router.put(
+	'/editar',
+	schemas.updateServiceSchema,
+	validateSchema,
+	methods.update,
+);
+
 export default router;
