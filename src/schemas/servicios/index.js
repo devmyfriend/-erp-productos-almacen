@@ -75,3 +75,29 @@ export const updateServiceSchema = [
 		.isInt()
 		.withMessage('El campo ActualizadoPor debe ser un número entero.'),
 ];
+
+
+export const disableServiceSchema  = [
+	body('ServicioId')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo ServicioId debe ser un numero entero  '),
+
+	body('BorradoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo BorradoPor debe ser un número entero.'),
+];
+
+
+export const enableServiceSchema  = [
+	body('ServicioId')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo ServicioId debe ser un numero entero  '),
+
+	body('ActualizadoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo ActualizadoPor debe ser un número entero.'),
+];

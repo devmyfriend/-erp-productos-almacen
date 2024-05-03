@@ -56,6 +56,9 @@ export const findTypeProductByName = async name =>
 export const findServiceById = async id =>
 	findItem(ServiceModel, { Borrado: 0, ServicioId: id });
 
+export const findAllServiceById = async id =>
+	findItem(ServiceModel, { ServicioId: id });
+
 export const findServiceByName = async name =>
 	findItem(ServiceModel, { Borrado: 0, NombreServicio: name });
 

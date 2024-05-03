@@ -87,8 +87,6 @@ router.get('/', methods.findAll);
 
 router.post('/', schemas.createServiceSchema, validateSchema, methods.create);
 
-
-
 /**
  * @swagger
  * /api/v1/servicios/editar:
@@ -146,6 +144,84 @@ router.put(
 	schemas.updateServiceSchema,
 	validateSchema,
 	methods.update,
+);
+
+/**
+ * @swagger
+ * /api/v1/servicios/borrar:
+ *   delete:
+ *     summary: Eliminar un Servicio
+ *     tags: [Servicios]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ServicioId:
+ *                 type: integer
+ *                 example: 1
+ *               BorradoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Servicio eliminado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Servicio eliminado"
+ */
+
+router.delete(
+	'/borrar',
+	schemas.disableServiceSchema,
+	validateSchema,
+	methods.disable,
+);
+
+/**
+ * @swagger
+ * /api/v1/servicios/activar:
+ *   put:
+ *     summary: Activar un Servicio
+ *     tags: [Servicios]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ServicioId:
+ *                 type: integer
+ *                 example: 1
+ *               ActualizadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Servicio Activado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Servicio Activado"
+ */
+
+router.put(
+	'/activar',
+	schemas.enableServiceSchema,
+	validateSchema,
+	methods.enable,
 );
 
 export default router;
