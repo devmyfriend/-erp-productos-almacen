@@ -125,4 +125,60 @@ router.post(
 	methods.create,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/editar:
+ *   put:
+ *     summary: Actualizar una membresía existente
+ *     description: Endpoint para actualizar una membresía existente en la base de datos.
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               MembresiaId:
+ *                 type: integer
+ *               TipoMembresiaId:
+ *                 type: integer
+ *               NombreMembresia:
+ *                 type: string
+ *                 example: Nueva membresia editada
+ *               Descripcion:
+ *                 type: string
+ *                 example: Ejemplo de una descripcion editada
+ *               Puntos:
+ *                 type: number
+ *                 example: 10
+ *               ClaveProductoServicio:
+ *                 type: string
+ *                 example: 010
+ *               ClaveUnidadSat:
+ *                 type: string
+ *                 example: 1k
+ *               ActualizadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Membresia editada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Se ha editado la Membresia"
+ */
+
+router.put(
+	'/editar',
+	schemas.updateMembershipSchema,
+	validateSchema,
+	methods.update,
+);
+
 export default router;
