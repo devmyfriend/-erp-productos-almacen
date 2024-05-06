@@ -1,4 +1,7 @@
 import { cfgCompositeTaxs } from "../models/cfg.impuestos.compuestos.model.js";
+import { vwDetalleImpCompTasaModel } from "../models/vwDetallesImpCompTasa.model.js";
+import { cfgTaxModel } from "../models/cfg.impuesto.model.js";
+import { TaxModel } from "../models/sat.impuesto.model.js";
 
 // TODO: 
 //      CALCULOS DE IMPUESTO DE IVA
@@ -182,12 +185,71 @@ const disableCompositeTax = async ( req, res )=>{
 
 }
 
+
+const isValidateTax = async ( typeTax, ImpuestoId )=>{
+
+    try{
+
+        const tax =  await cfgTaxModel.findByPk( ImpuestoId )
+
+        const { ClaveImpuesto } = tax.dataValues
+
+        // console.log( tax.dataValues )
+        console.log( `ClaveImpuesto ${ ClaveImpuesto }`)
+
+        const typetax = await TaxModel.findAll({
+            where:{
+                ClaveImpuesto
+            }
+        })
+
+        console.log( typetax)
+        return false
+
+    }catch( error ){
+        console.log( error )
+        return true
+    }
+
+}
+
+const calculateCompoundTaxes = async ( req, res )=>{
+    try{
+
+        const { ValorBase, ImpuestoCompuestoId } = req.body
+
+        const taxes = await vwDetalleImpCompTasaModel.findAll({
+            attributes: [ 'ImpuestoTasaId', 'Nombre', 'Tasa', 'Retencion', 'IVA_S_IEPS', 'TipoFactor', 'ImpuestoId' ],    
+            where: { ImpuestoCompuestoId }
+        })
+
+        const { Tasa, Retencion, IVA_S_IEPS, TipoFactor, ImpuestoId } = taxes[0].dataValues
+
+        //VALIDAR QUE SEA UN IMPUESTO TIPO IVA
+
+        isValidateTax( 'IVA', ImpuestoId )
+
+        return res.status(200).send({
+             status: 'ok',
+             message: 'ok',
+             taxes
+        })
+
+    }catch( error ){
+        console.log( error )
+        return res.status(500).send({
+             error: 'Error interno en el servidor',
+        })
+    }
+}
+
 export const methods ={
     createCompositeTax,
     disableCompositeTax,
     getCompositeTax,
     getCompositeTaxList,
-    updateCompositeTax
+    updateCompositeTax,
+    calculateCompoundTaxes,
 }
 
 

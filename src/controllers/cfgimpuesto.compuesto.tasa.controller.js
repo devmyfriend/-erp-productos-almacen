@@ -1,4 +1,4 @@
-import { cfgCompositeTaxesxRateModel } from '../models/cfg.imp.compesto.x.tasa.model.js'
+import { cfgCompositeTaxesxRateModel } from '../models/cfg.imp.compuesto.x.tasa.model.js'
 // import { cfgCompositeTaxs } from '../models/cfg.impuestos.compuestos.model.js'
 // import { cfgTaxRateModel } from '../models/cfg.impuesto.tasa.model.js'
 import { vwDetalleImpCompTasaModel } from '../models/vwDetallesImpCompTasa.model.js'
