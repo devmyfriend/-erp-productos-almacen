@@ -201,7 +201,7 @@ router.put(
  *                 type: integer
  *     responses:
  *       200:
- *         description: Membresia eliminado exitosamente
+ *         description: Membresia eliminada exitosamente
  *         content:
  *           application/json:
  *             schema:
@@ -215,9 +215,48 @@ router.put(
 
 router.delete(
 	'/borrar',
-	schemas.disableGenProductSchema,
+	schemas.disableMembershipSchema,
 	validateSchema,
 	methods.disable,
+);
+
+/**
+ * @swagger
+ * /api/v1/membresias/activar:
+ *   put:
+ *     summary: Activar una membresia
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               MembresiaId:
+ *                 type: integer
+ *                 example: 1
+ *               ActualizadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Membresia activada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Membresia Activada"
+ */
+
+router.put(
+	'/activar',
+	schemas.enableMembershipSchema,
+	validateSchema,
+	methods.enable,
 );
 
 export default router;

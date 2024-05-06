@@ -1,4 +1,5 @@
 import {
+	findAllMembershipById,
 	findMembershipById,
 	findMembershipByName,
 	findTypeMembershipById,
@@ -186,10 +187,45 @@ export const disable = async (req, res) => {
 	}
 };
 
+export const enable = async (req, res) => {
+	try {
+		const data = req.body;
+		const membershipFound = await findAllMembershipById(data.MembresiaId);
+		const userFound = await findUserById(data.ActualizadoPor);
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!membershipFound.exist) {
+			return res.status(404).json({ error: 'La membresia no existe' });
+		}
+		await MembershipModel.update(
+			Object.assign(data, {
+				ActualizadoEn: new Date(),
+				Borrado: false,
+				BorradoEn: null,
+			}),
+			{
+				where: {
+					MembresiaId: data.MembresiaId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Membresia activada' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
 	create,
 	update,
 	disable,
+	enable,
 };

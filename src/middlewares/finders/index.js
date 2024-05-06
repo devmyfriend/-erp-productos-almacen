@@ -109,6 +109,9 @@ export const findShopById = async id =>
 export const findMembershipById = async id =>
 	findItem(MembershipModel, { MembresiaId: id, Borrado: false });
 
+export const findAllMembershipById = async id =>
+	findItem(MembershipModel, { MembresiaId: id });
+
 export const findMembershipByName = async name =>
 	findItem(MembershipModel, { NombreMembresia: name, Borrado: false });
 
