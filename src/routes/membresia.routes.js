@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { methods } from '../controllers/membresia.controller.js';
 import { validateSchema } from '../middlewares/express-validator/index.js';
+import * as schemas from '../schemas/membresia/index.js';
 
 const router = Router();
 
@@ -70,5 +71,58 @@ router.get('/', methods.findAll);
  *                       description: Descripción de la membresía
  */
 router.get('/detalle/:id', methods.findById);
+
+/**
+ * @swagger
+ * /api/v1/membresias/crear:
+ *   post:
+ *     summary: Crear un nuevo Producto e Insumo
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoMembresiaId:
+ *                 type: number
+ *                 example: 1
+ *               NombreMembresia:
+ *                 type: string
+ *                 example: Nueva membresia
+ *               Descripcion:
+ *                 type: string
+ *                 example: Ejemplo de una descripcion
+ *               Puntos:
+ *                 type: number
+ *                 example: 10
+ *               ClaveProductoServicio:
+ *                 type: string
+ *                 example: 010
+ *               ClaveUnidadSat:
+ *                 type: string
+ *                 example: 1k
+ *               CreadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Membresia creada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha creado la Membresia"
+ */
+router.post(
+	'/crear',
+	schemas.createMembershipSchema,
+	validateSchema,
+	methods.create,
+);
 
 export default router;

@@ -1,11 +1,13 @@
 import {
 	GenProductModel,
 	LinetModel,
+	MembershipModel,
 	ProductModel,
 	ServiceModel,
 	ShopModel,
 	StoreModel,
 	StoreProductModel,
+	TypeMembershipModel,
 	TypeProductModel,
 	UserModel,
 } from '../../models/index.js';
@@ -101,3 +103,11 @@ export const findStoreProductById = async id =>
 
 export const findShopById = async id =>
 	findItem(ShopModel, { SucursalId: id, Borrado: false });
+
+/* Memberships */
+
+export const findMembershipByName = async name =>
+	findItem(MembershipModel, { NombreMembresia: name, Borrado: false });
+
+export const findTypeMembershipById = async id =>
+	findItem(TypeMembershipModel, { TipoMembresiaId: id, Borrado: false });

@@ -1,4 +1,9 @@
 import {
+	findMembershipByName,
+	findTypeMembershipById,
+	findUserById,
+} from '../middlewares/finders/index.js';
+import {
 	MembershipModel,
 	TypeMembershipModel,
 	TypeSchedule,
@@ -28,43 +33,82 @@ const findAll = async (req, res) => {
 };
 
 const findById = async (req, res) => {
-	const id = req.params.id;
-	const data = await MembershipModel.findOne({
-		attributes: [
-			'MembresiaId',
-			'TipoMembresiaId',
-			'NombreMembresia',
-			'Descripcion',
-			'Puntos',
-			'ClaveUnidadsat',
-			'ClaveProdcutoServicio',
-		],
+	try {
+		const id = req.params.id;
+		const data = await MembershipModel.findOne({
+			attributes: [
+				'MembresiaId',
+				'TipoMembresiaId',
+				'NombreMembresia',
+				'Descripcion',
+				'Puntos',
+				'ClaveUnidadsat',
+				'ClaveProdcutoServicio',
+			],
 
-		where: { MembresiaId: id },
-	});
+			where: { MembresiaId: id },
+		});
 
-	const type = await TypeMembershipModel.findOne({
-		attributes: [
-			'TipoMembresiaId',
-			'TipoPeriodoId',
-			'NombreTipoMembresia',
-			'Cita',
-			'MinimoAsociados',
-		],
-		where: { TipoMembresiaId: data.dataValues.TipoMembresiaId },
-	});
+		const type = await TypeMembershipModel.findOne({
+			attributes: [
+				'TipoMembresiaId',
+				'TipoPeriodoId',
+				'NombreTipoMembresia',
+				'Cita',
+				'MinimoAsociados',
+			],
+			where: { TipoMembresiaId: data.dataValues.TipoMembresiaId },
+		});
 
-	const typeSchedule = await TypeSchedule.findOne({
-		attributes: ['TipoPeriodoId', 'PeriodoNombre'],
-		where: {
-			TipoPeriodoId: type.dataValues.TipoPeriodoId,
-		},
-	});
+		const typeSchedule = await TypeSchedule.findOne({
+			attributes: ['TipoPeriodoId', 'PeriodoNombre'],
+			where: {
+				TipoPeriodoId: type.dataValues.TipoPeriodoId,
+			},
+		});
 
-	return res.status(200).json({ response: data, type, typeSchedule });
+		return res.status(200).json({ response: data, type, typeSchedule });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
+const create = async (req, res) => {
+	try {
+		const data = req.body;
+		const userFound = await findUserById(data.CreadoPor);
+		const nameFound = await findMembershipByName(data.NombreMembresia);
+		const typeFound = await findTypeMembershipById(data.TipoMembresiaId);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+		if (nameFound.exist) {
+			return res
+				.status(409)
+				.json({ error: 'El nombre de la membresia ya esta en uso' });
+		}
+
+		if (!typeFound.exist) {
+			return res.status(404).json({ error: 'El tipo de membresia no existe' });
+		}
+
+		await MembershipModel.create(data);
+
+		return res.status(200).json({ message: 'Se ha creado la Membresia' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
 };
 
 export const methods = {
 	findAll,
 	findById,
+	create,
 };
