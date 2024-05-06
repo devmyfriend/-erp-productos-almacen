@@ -135,7 +135,6 @@ const update = async (req, res) => {
 
 		await MembershipModel.update(
 			Object.assign(data, {
-				ActualizadoPor: data.ActualizadoPor,
 				ActualizadoEn: new Date(),
 			}),
 			{
@@ -154,9 +153,43 @@ const update = async (req, res) => {
 	}
 };
 
+export const disable = async (req, res) => {
+	try {
+		const data = req.body;
+		const membershipFound = await findMembershipById(data.MembresiaId);
+		const userFound = await findUserById(data.BorradoPor);
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!membershipFound.exist) {
+			return res.status(404).json({ error: 'La membresia no existe' });
+		}
+		await MembershipModel.update(
+			Object.assign(data, {
+				Borrado: true,
+				BorradoEn: new Date(),
+			}),
+			{
+				where: {
+					MembresiaId: data.MembresiaId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Membresia eliminada' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
 	create,
 	update,
+	disable,
 };

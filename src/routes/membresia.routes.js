@@ -181,4 +181,43 @@ router.put(
 	methods.update,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/borrar:
+ *   delete:
+ *     summary: Eliminar una membresia
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               MembresiaId:
+ *                 type: integer
+ *                 example: 1
+ *               BorradoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Membresia eliminado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Membresia eliminada"
+ */
+
+router.delete(
+	'/borrar',
+	schemas.disableGenProductSchema,
+	validateSchema,
+	methods.disable,
+);
+
 export default router;

@@ -50,8 +50,6 @@ export const createMembershipSchema = [
 		.withMessage('El campo CreadoPor debe ser un número entero.'),
 ];
 
-
-
 export const updateMembershipSchema = [
 	body('MembresiaId')
 		.notEmpty()
@@ -105,4 +103,17 @@ export const updateMembershipSchema = [
 		.withMessage('El campo ActualizadoPor no puede estar vacío.')
 		.isInt()
 		.withMessage('El campo ActualizadoPor debe ser un número entero.'),
+];
+
+export const disableGenProductSchema = [
+	body('MembresiaId')
+		.notEmpty()
+		.withMessage('El campo MembresiaId no puede estar vacío.')
+		.isInt()
+		.withMessage('El campo MembresiaId debe ser un número entero.'),
+
+	body('BorradoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo BorradoPor debe ser un número entero.'),
 ];
