@@ -5,6 +5,7 @@ import {
 	findTypeMembershipById,
 	findTypeMembershipByName,
 	findTypeScheduleById,
+	findTypeScheduleByName,
 	findUserById,
 } from '../middlewares/finders/index.js';
 import {
@@ -56,6 +57,10 @@ const findById = async (req, res) => {
 			where: { MembresiaId: id },
 		});
 
+		if (!data) {
+			return res.status(404).json({ error: 'No hay datos disponibles' });
+		}
+
 		const type = await TypeMembershipModel.findOne({
 			attributes: [
 				'TipoMembresiaId',
@@ -68,7 +73,7 @@ const findById = async (req, res) => {
 		});
 
 		const typeSchedule = await TypeScheduleModel.findOne({
-			attributes: ['TipoPeriodoId', 'PeriodoNombre'],
+			attributes: ['TipoPeriodoId', 'NombrePeriodo'],
 			where: {
 				TipoPeriodoId: type.dataValues.TipoPeriodoId,
 			},
@@ -368,6 +373,45 @@ export const disableType = async (req, res) => {
 	}
 };
 
+const findAllTypeSchedule = async (req, res) => {
+	try {
+		const data = await TypeScheduleModel.findAll({
+			attributes: ['TipoPeriodoId', 'NombrePeriodo'],
+		});
+
+		return res.status(200).json({ response: data });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
+const createTypeSchedule = async (req, res) => {
+	try {
+		const data = req.body;
+		const userFound = await findUserById(data.CreadoPor);
+		const typeFound = await findTypeScheduleByName(data.NombrePeriodo);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+		if (typeFound.exist) {
+			return res.status(404).json({ error: 'El nombre ya está en uso' });
+		}
+
+		await TypeScheduleModel.create(data);
+
+		return res.status(200).json({ message: 'Se ha creado el periodo' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
@@ -379,4 +423,6 @@ export const methods = {
 	createType,
 	updatetype,
 	disableType,
+	findAllTypeSchedule,
+	createTypeSchedule,
 };

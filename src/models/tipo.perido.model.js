@@ -9,7 +9,7 @@ export const TypeScheduleModel = Connection.define(
 			allowNull: false,
 			autoIncrement: true,
 		},
-		PeriodoNombre: {
+		NombrePeriodo: {
 			type: DataTypes.NUMBER,
 		},
 		CreadoPor: {

@@ -413,4 +413,59 @@ router.delete(
 	methods.disableType,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/periodo:
+ *   get:
+ *     summary: Obtener una lista de los periodos
+ *     tags: [Membresias]
+ *     responses:
+ *       200:
+ *         description: Lista de periodos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 response:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ */
+router.get('/periodo', methods.findAllTypeSchedule);
+
+/**
+ * @swagger
+ * /api/v1/membresias/periodo/crear:
+ *   post:
+ *     summary: Crear un nuevo Periodo
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               NombrePeriodo:
+ *                 type: string
+ *                 example: Nuevo Periodo
+ *               CreadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Periodo creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha creado el periodo"
+ */
+router.post('/periodo/crear' ,methods.createTypeSchedule)
+
 export default router;

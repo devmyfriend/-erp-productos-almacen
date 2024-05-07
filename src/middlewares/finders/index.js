@@ -130,3 +130,9 @@ export const findTypeScheduleById = async id =>
 		TipoPeriodoId: id,
 		Borrado: false,
 	});
+
+export const findTypeScheduleByName = async name =>
+	findItem(TypeScheduleModel, {
+		NombrePeriodo: name,
+		Borrado: false,
+	});
