@@ -230,3 +230,16 @@ export const disableTypeMembershipSchema = [
 		.isInt()
 		.withMessage('El campo BorradoPor debe ser un número entero.'),
 ];
+
+export const createScheduleSchema = [
+	body('NombrePeriodo')
+		.notEmpty()
+		.withMessage('El campo NombrePeriodo no puede estar vacío.')
+		.isString()
+		.withMessage('El campo NombrePeriodo debe se una cadena de texto.'),
+	body('CreadoPor')
+		.notEmpty()
+		.withMessage('El campo CreadoPor no puede estar vacío.')
+		.isInt({ min: 1 })
+		.withMessage('El campo CreadoPor debe ser un número entero positivo.'),
+];

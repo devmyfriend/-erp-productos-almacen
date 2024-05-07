@@ -466,6 +466,11 @@ router.get('/periodo', methods.findAllTypeSchedule);
  *                    description: Mensaje de confirmación de la creación.
  *                    example: "Se ha creado el periodo"
  */
-router.post('/periodo/crear' ,methods.createTypeSchedule)
+router.post(
+	'/periodo/crear',
+	schemas.createScheduleSchema,
+	validateSchema,
+	methods.createTypeSchedule,
+);
 
 export default router;
