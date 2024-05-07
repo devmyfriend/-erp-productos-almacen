@@ -335,6 +335,39 @@ const updatetype = async (req, res) => {
 	}
 };
 
+export const disableType = async (req, res) => {
+	try {
+		const data = req.body;
+		const typeFound = await findTypeMembershipById(data.TipoMembresiaId);
+		const userFound = await findUserById(data.BorradoPor);
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!typeFound.exist) {
+			return res.status(404).json({ error: 'El tipo de membresia no existe' });
+		}
+		await TypeMembershipModel.update(
+			Object.assign(data, {
+				Borrado: true,
+				BorradoEn: new Date(),
+			}),
+			{
+				where: {
+					TipoMembresiaId: data.TipoMembresiaId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Registro eliminado' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
@@ -345,4 +378,5 @@ export const methods = {
 	findAllType,
 	createType,
 	updatetype,
+	disableType,
 };

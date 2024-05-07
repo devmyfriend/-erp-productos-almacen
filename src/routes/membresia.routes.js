@@ -374,4 +374,43 @@ router.put(
 	methods.updatetype,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/tipo/borrar:
+ *   delete:
+ *     summary: Eliminar una tipo de membresia
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoMembresiaId:
+ *                 type: integer
+ *                 example: 1
+ *               BorradoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Tipo de mbresia eliminada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Registro eliminado"
+ */
+
+router.delete(
+	'/tipo/borrar',
+	schemas.disableTypeMembershipSchema,
+	validateSchema,
+	methods.disableType,
+);
+
 export default router;

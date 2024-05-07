@@ -177,7 +177,7 @@ export const updateTypeMembershipSchema = [
 		.withMessage('El campo TipoMembresiaId no puede estar vacío.')
 		.isInt({ min: 1 })
 		.withMessage(
-			'El campo TipoMembresiaId debe ser un número entero positivo.'
+			'El campo TipoMembresiaId debe ser un número entero positivo.',
 		),
 	body('TipoPeriodoId')
 		.notEmpty()
@@ -216,4 +216,17 @@ export const updateTypeMembershipSchema = [
 		.withMessage(
 			'El campo MinimoAsociados debe ser un número entero positivo.',
 		),
+];
+
+export const disableTypeMembershipSchema = [
+	body('TipoMembresiaId')
+		.notEmpty()
+		.withMessage('El campo TipoMembresiaId no puede estar vacío.')
+		.isInt()
+		.withMessage('El campo TipoMembresiaId debe ser un número entero.'),
+
+	body('BorradoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo BorradoPor debe ser un número entero.'),
 ];
