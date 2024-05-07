@@ -3,12 +3,14 @@ import {
 	findMembershipById,
 	findMembershipByName,
 	findTypeMembershipById,
+	findTypeMembershipByName,
+	findTypeScheduleById,
 	findUserById,
 } from '../middlewares/finders/index.js';
 import {
 	MembershipModel,
 	TypeMembershipModel,
-	TypeSchedule,
+	TypeScheduleModel,
 } from '../models/index.js';
 
 const findAll = async (req, res) => {
@@ -23,6 +25,9 @@ const findAll = async (req, res) => {
 				'ClaveUnidadsat',
 				'ClaveProdcutoServicio',
 			],
+			where: {
+				Borrado: false,
+			},
 		});
 
 		return res.status(200).json({ response: data });
@@ -62,7 +67,7 @@ const findById = async (req, res) => {
 			where: { TipoMembresiaId: data.dataValues.TipoMembresiaId },
 		});
 
-		const typeSchedule = await TypeSchedule.findOne({
+		const typeSchedule = await TypeScheduleModel.findOne({
 			attributes: ['TipoPeriodoId', 'PeriodoNombre'],
 			where: {
 				TipoPeriodoId: type.dataValues.TipoPeriodoId,
@@ -221,6 +226,62 @@ export const enable = async (req, res) => {
 	}
 };
 
+const findAllType = async (req, res) => {
+	try {
+		const data = await TypeMembershipModel.findAll({
+			attributes: [
+				'TipoMembresiaId',
+				'TipoPeriodoId',
+				'NombreTipoMembresia',
+				'Cita',
+				'MinimoAsociados',
+			],
+			where: {
+				Borrado: false,
+			},
+		});
+
+		return res.status(200).json({ response: data });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
+const createType = async (req, res) => {
+	try {
+		const data = req.body;
+		const userFound = await findUserById(data.CreadoPor);
+		const dataFound = await findTypeMembershipByName(data.NombreTipoMembresia);
+		const typeScheduleFound = await findTypeScheduleById(data.TipoPeriodoId);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!typeScheduleFound.exist) {
+			return res.status(404).json({ error: 'Periodo no encontrado' });
+		}
+
+		if (dataFound.exist) {
+			return res
+				.status(409)
+				.json({ error: 'El nombre del tipo de membresia ya esta en uso' });
+		}
+
+		await TypeMembershipModel.create(data);
+
+		return res.status(200).json({ message: 'Se ha creado el registro' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
@@ -228,4 +289,6 @@ export const methods = {
 	update,
 	disable,
 	enable,
+	findAllType,
+	createType,
 };

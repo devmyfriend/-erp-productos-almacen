@@ -9,9 +9,10 @@ import {
 	StoreProductModel,
 	TypeMembershipModel,
 	TypeProductModel,
+	TypeScheduleModel,
+	TypeServiceModel,
 	UserModel,
 } from '../../models/index.js';
-import { TypeServiceModel } from '../../models/tipo.servicio.model.js';
 
 const handleDatabaseError = error => {
 	console.error(error);
@@ -117,3 +118,15 @@ export const findMembershipByName = async name =>
 
 export const findTypeMembershipById = async id =>
 	findItem(TypeMembershipModel, { TipoMembresiaId: id, Borrado: false });
+
+export const findTypeMembershipByName = async name =>
+	findItem(TypeMembershipModel, { NombreTipoMembresia: name, Borrado: false });
+
+export const findAllTypeMembershipByName = async name =>
+	findItem(TypeMembershipModel, { NombreTipoMembresia: name });
+
+export const findTypeScheduleById = async id =>
+	findItem(TypeScheduleModel, {
+		TipoPeriodoId: id,
+		Borrado: false,
+	});

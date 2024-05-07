@@ -259,4 +259,72 @@ router.put(
 	methods.enable,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/tipo:
+ *   get:
+ *     summary: Obtener una lista de Tipos de Membresias
+ *     tags: [Membresias]
+ *     responses:
+ *       200:
+ *         description: Lista de membresias
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 response:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ */
+
+router.get('/tipo', methods.findAllType);
+
+/**
+ * @swagger
+ * /api/v1/membresias/tipo/crear:
+ *   post:
+ *     summary: Crear un nuevo Tipo de Membresia
+ *     description: Crear un nuevo registro
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoPeriodoId:
+ *                 type: integer
+ *               NombreTipoMembresia:
+ *                 type: string
+ *               Cita:
+ *                 type: boolean
+ *               CreadoPor:
+ *                 type: integer
+ *               MinimoAsociados:
+ *                 type: integer
+ *
+ *     responses:
+ *       200:
+ *         description: Membresia creada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha creado el registro"
+ */
+router.post(
+	'/tipo/crear',
+	schemas.createRecordSchema,
+	validateSchema,
+	methods.createType,
+);
+
 export default router;

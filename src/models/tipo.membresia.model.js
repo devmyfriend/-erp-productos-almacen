@@ -6,8 +6,6 @@ export const TypeMembershipModel = Connection.define(
 		TipoMembresiaId: {
 			type: DataTypes.NUMBER,
 			primaryKey: true,
-			allowNull: false,
-			autoIncrement: true,
 		},
 		TipoPeriodoId: {
 			type: DataTypes.NUMBER,

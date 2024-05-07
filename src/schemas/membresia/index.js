@@ -130,3 +130,38 @@ export const enableMembershipSchema = [
 		.isInt()
 		.withMessage('El campo ActualizadoPor debe ser un número entero.'),
 ];
+
+
+export const createRecordSchema = [
+    body('TipoPeriodoId')
+        .notEmpty()
+        .withMessage('El campo TipoPeriodoId no puede estar vacío.')
+        .isInt({ min: 1 })
+        .withMessage('El campo TipoPeriodoId debe ser un número entero positivo.'),
+
+    body('NombreTipoMembresia')
+        .notEmpty()
+        .withMessage('El campo NombreTipoMembresia no puede estar vacío.')
+        .isString()
+        .withMessage('El campo NombreTipoMembresia debe ser una cadena de caracteres.')
+        .isLength({ max: 100 })
+        .withMessage('El campo NombreTipoMembresia debe tener máximo 100 caracteres.'),
+
+    body('Cita')
+        .notEmpty()
+        .withMessage('El campo Cita no puede estar vacío.')
+        .isBoolean()
+        .withMessage('El campo Cita debe ser un booleano.'),
+
+    body('CreadoPor')
+        .notEmpty()
+        .withMessage('El campo CreadoPor no puede estar vacío.')
+        .isInt({ min: 1 })
+        .withMessage('El campo CreadoPor debe ser un número entero positivo.'),
+
+    body('MinimoAsociados')
+        .notEmpty()
+        .withMessage('El campo MinimoAsociados no puede estar vacío.')
+        .isInt({ min: 1 })
+        .withMessage('El campo MinimoAsociados debe ser un número entero positivo.')
+];
