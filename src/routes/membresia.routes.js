@@ -322,9 +322,56 @@ router.get('/tipo', methods.findAllType);
  */
 router.post(
 	'/tipo/crear',
-	schemas.createRecordSchema,
+	schemas.createTypeMembershipSchema,
 	validateSchema,
 	methods.createType,
+);
+
+/**
+ * @swagger
+ * /api/v1/membresias/tipo/editar:
+ *   put:
+ *     summary: Editar un Tipo de Membresia
+ *     description: Editar un nuevo registro
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoMembresiaId:
+ *                 type: integer
+ *               TipoPeriodoId:
+ *                 type: integer
+ *               NombreTipoMembresia:
+ *                 type: string
+ *               Cita:
+ *                 type: boolean
+ *               ActualizadoPor:
+ *                 type: integer
+ *               MinimoAsociados:
+ *                 type: integer
+ *
+ *     responses:
+ *       200:
+ *         description: Membresia editada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha editado el registro"
+ */
+router.put(
+	'/tipo/editar',
+	schemas.updateTypeMembershipSchema,
+	validateSchema,
+	methods.updatetype,
 );
 
 export default router;

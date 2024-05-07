@@ -282,6 +282,59 @@ const createType = async (req, res) => {
 	}
 };
 
+const updatetype = async (req, res) => {
+	try {
+		const data = req.body;
+
+		const userFound = await findUserById(data.ActualizadoPor);
+		const typeFound = await findTypeMembershipById(data.TipoMembresiaId);
+		const dataFound = await findTypeMembershipByName(data.NombreTipoMembresia);
+		const typeScheduleFound = await findTypeScheduleById(data.TipoPeriodoId);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!typeFound.exist) {
+			return res
+				.status(404)
+				.json({ error: 'No se ha encontrado el tipo de mebresia' });
+		}
+
+		if (!typeScheduleFound.exist) {
+			return res.status(404).json({ error: 'Periodo no encontrado' });
+		}
+
+		if (
+			dataFound.exist &&
+			dataFound.data.TipoMembresiaId != data.TipoMembresiaId
+		) {
+			return res
+				.status(409)
+				.json({ error: 'El nombre del tipo de membresia ya esta en uso' });
+		}
+
+		await TypeMembershipModel.update(
+			Object.assign(data, {
+				ActualizadoPor: data.ActualizadoPor,
+				ActualizadoEn: new Date(),
+			}),
+			{
+				where: {
+					TipoMembresiaId: data.TipoMembresiaId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Se ha editado el registro' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
@@ -291,4 +344,5 @@ export const methods = {
 	enable,
 	findAllType,
 	createType,
+	updatetype,
 };
