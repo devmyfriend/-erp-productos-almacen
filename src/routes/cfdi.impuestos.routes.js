@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { methods } from '../controllers/cfg.impuestos.controller.js'
 import * as schemas from '../schemas/Impuestos/index.js'
+import { validateSchema } from '../middlewares/express-validator/index.js'
+import { validateTaxCode, validateTaxId, validateTaxName } from '../middlewares/taxs/index.js'
 
 
 const router = Router()
@@ -51,7 +53,7 @@ const router = Router()
  *                       type: object
  */
 
-router.post('/', schemas.createTaxSchema, methods.createTax)
+router.post('/', schemas.createTaxSchema, validateSchema, validateTaxName, validateTaxCode,  methods.createTax)
 
 /**
  * @swagger
@@ -103,7 +105,7 @@ router.get('/',methods.findAll)
  */
 
 
-router.get('/:taxid', schemas.findByIdTax, methods.findById)
+router.get('/:taxid', schemas.findByIdTax, validateSchema, methods.findById)
 
 /**
  * @swagger
@@ -132,7 +134,7 @@ router.get('/:taxid', schemas.findByIdTax, methods.findById)
  *                       type: object
  */
 
-router.get('/impuesto/:taxname', schemas.findByName, methods.findByName)
+router.get('/impuesto/:taxname', schemas.findByName, validateSchema, methods.findByName)
 
 /**
  * @swagger
@@ -173,7 +175,7 @@ router.get('/impuesto/:taxname', schemas.findByName, methods.findByName)
  *                       type: object
  */
 
-router.put('/', schemas.updateTaxSchema, methods.updateTax)
+router.put('/', schemas.updateTaxSchema, validateSchema, validateTaxId, validateTaxName, validateTaxCode, methods.updateTax)
 
 /**
  * @swagger
@@ -210,6 +212,6 @@ router.put('/', schemas.updateTaxSchema, methods.updateTax)
  *                       type: object
  */
 
-router.delete('/', schemas.disableTax, methods.disableTax)
+router.delete('/', schemas.disableTax, validateSchema, validateTaxId, methods.disableTax)
 
 export default router
