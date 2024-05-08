@@ -1,6 +1,9 @@
 
 import { cfgTaxModel } from "../../models/cfg.impuesto.model.js";
+import { cfgCompositeTaxs } from "../../models/cfg.impuestos.compuestos.model.js";
 import { Impuesto } from "../../models/common/impuesto.model.js";
+
+//cfgImpuestos
 
 export const validateTaxName = async ( req, res, next )=>{
 
@@ -56,7 +59,7 @@ export const validateTaxCode = async ( req, res, next )=>{
 
     }catch( error ){
         return res.status(500).send({
-             status: 'Error interno en el servidor'
+             error: 'Error interno en el servidor'
         })
     }
 
@@ -78,7 +81,7 @@ export const validateTaxId = async ( req, res, next )=>{
         if( !id ){
             return res.status(404).send({
                  status: 'Error de validacion',
-                 message: 'No se encontro el id del impuesto'
+                 errors: 'No se encontro el id del impuesto'
             })
         }
 
@@ -86,10 +89,108 @@ export const validateTaxId = async ( req, res, next )=>{
 
     }catch( error ){
         return res.status(500).send({
-            status: 'Error interno en el servidor'
+            error: 'Error interno en el servidor'
        })
     }
 
 
 
 }
+
+
+//cfgImpuestoscompuetos.
+
+export const validateNameCompositeTax = async ( req, res, next )=>{
+
+    const nameCompositeTax = req.body.Nombre
+
+    try{
+
+        const name = await cfgCompositeTaxs.findOne({
+            where:{
+                Nombre: nameCompositeTax,
+                Borrado: false
+            }
+        })
+
+        if( name ){
+            return res.status(400).send({
+                 status: 'Error de validación',
+                 errors: 'El nombre para el impuesto compuesto ya se encuentra registrado'
+            })
+        }
+
+        next()
+        
+    }catch( error ){
+        return res.status(500).send({
+            error: 'Error interno en el servidor'
+        })
+    }
+
+}
+
+export const validatePredeterminedCompositeTax = async (req, res, next)=>{
+
+    const  defaultcompoundtax = req.body.Predeterminado
+
+    try{
+
+        if( defaultcompoundtax ){
+            
+            const data = await cfgCompositeTaxs.update({
+                    Predeterminado: false
+                },
+                {
+                    where:{
+                        Predeterminado: true
+                    }
+                }
+            )
+
+
+        }
+
+        next()
+
+    }catch( error ){
+        console.log( error)
+        return res.status(500).send({
+            error: 'Error interno en el servidor'
+        })
+    }
+
+}
+
+export const validateCompositeTaxId = async ( req, res, next ) =>{
+
+    const taxid = req.body.ImpuestoCompuestoId
+
+    try{
+
+        const tax = await cfgCompositeTaxs.findOne({
+            where:{
+                ImpuestoCompuestoId:  taxid,
+                Borrado: false
+            }
+        })
+
+        if( tax ){
+            return res.status(400).send({
+                 status: 'Error de validación',
+                 errors: 'No se encontro el ID el impuesto compuesto'
+            })
+        }
+
+        next()
+
+    }catch( error ){
+        return res.status(500).send({
+            error: 'Error interno en el servidor'
+        })
+    }
+
+}
+
+//TODO VALIDACIONES DE CALCULOS 
+

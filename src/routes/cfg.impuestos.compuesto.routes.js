@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { methods } from '../controllers/cfgimpuesto.compuesto.controller.js'
-
+import * as schemas from '../schemas/Impuestos/index.js'
+import { validateSchema } from '../middlewares/express-validator/index.js'
+import { validateCompositeTaxId, validateNameCompositeTax, validatePredeterminedCompositeTax } from '../middlewares/taxs/index.js'
 const router = Router()
 
 
@@ -51,7 +53,7 @@ const router = Router()
  */
 
 
-router.post( '/', methods.createCompositeTax )
+router.post( '/', schemas.createCompositeTaxSchema, validateSchema, validateNameCompositeTax, validatePredeterminedCompositeTax , methods.createCompositeTax )
 
 
 
@@ -106,7 +108,7 @@ router.get( '/list/', methods.getCompositeTaxList )
  *                       type: object
  */
 
-router.get( '/:ImpuestoCompuestoId', methods.getCompositeTax )
+router.get( '/:ImpuestoCompuestoId', schemas.findCompositeTaxSchema, validateSchema, methods.getCompositeTax )
 
 /**
  * @swagger
@@ -147,7 +149,7 @@ router.get( '/:ImpuestoCompuestoId', methods.getCompositeTax )
  *                       type: object
  */
 
-router.put( '/', methods.updateCompositeTax )
+router.put( '/', schemas.updateCompositeTaxSchema, validateCompositeTaxId, validateNameCompositeTax, validatePredeterminedCompositeTax, methods.updateCompositeTax )
 
 /**
  * @swagger
@@ -184,6 +186,6 @@ router.put( '/', methods.updateCompositeTax )
  *                       type: object
  */
 
-router.delete( '/', methods.disableCompositeTax )
+router.delete( '/', validateCompositeTaxId, methods.disableCompositeTax )
 
 export default router

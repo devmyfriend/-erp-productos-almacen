@@ -63,7 +63,7 @@ export const disableTax = [
 
 //cfgImpuestosCompuetos
 
-export const createCompositeTax = [
+export const createCompositeTaxSchema = [
     body( 'Nombre' )
     .notEmpty()
     .isString()
@@ -79,14 +79,14 @@ export const createCompositeTax = [
 
 ]
 
-export const findCompositeTax = [
+export const findCompositeTaxSchema = [
     param( 'ImpuestoCompuestoId' )
     .isInt()
     .notEmpty()
     .withMessage('El parametro ImpuestoCompuestoId es obligatorio y debe ser del tipo numero')
 ]
 
-export const updateCompositeTax = [
+export const updateCompositeTaxSchema = [
     body( 'ImpuestoCompuestoId' )
     .isInt()
     .notEmpty()
@@ -105,7 +105,7 @@ export const updateCompositeTax = [
     .withMessage('El campo ActualizadoPor es obligatorio y debe de ser un valor numérico')
 ]
 
-export const disableCompositeTax = [
+export const disableCompositeTaxSchema = [
     body( 'ImpuestoCompuestoId' )
     .isInt()
     .notEmpty()
