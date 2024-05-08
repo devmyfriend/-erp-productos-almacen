@@ -1,15 +1,18 @@
 import {
 	GenProductModel,
 	LinetModel,
+	MembershipModel,
 	ProductModel,
 	ServiceModel,
 	ShopModel,
 	StoreModel,
 	StoreProductModel,
+	TypeMembershipModel,
 	TypeProductModel,
+	TypeScheduleModel,
+	TypeServiceModel,
 	UserModel,
 } from '../../models/index.js';
-import { TypeServiceModel } from '../../models/tipo.servicio.model.js';
 
 const handleDatabaseError = error => {
 	console.error(error);
@@ -101,3 +104,35 @@ export const findStoreProductById = async id =>
 
 export const findShopById = async id =>
 	findItem(ShopModel, { SucursalId: id, Borrado: false });
+
+/* Memberships */
+
+export const findMembershipById = async id =>
+	findItem(MembershipModel, { MembresiaId: id, Borrado: false });
+
+export const findAllMembershipById = async id =>
+	findItem(MembershipModel, { MembresiaId: id });
+
+export const findMembershipByName = async name =>
+	findItem(MembershipModel, { NombreMembresia: name, Borrado: false });
+
+export const findTypeMembershipById = async id =>
+	findItem(TypeMembershipModel, { TipoMembresiaId: id, Borrado: false });
+
+export const findTypeMembershipByName = async name =>
+	findItem(TypeMembershipModel, { NombreTipoMembresia: name, Borrado: false });
+
+export const findAllTypeMembershipByName = async name =>
+	findItem(TypeMembershipModel, { NombreTipoMembresia: name });
+
+export const findTypeScheduleById = async id =>
+	findItem(TypeScheduleModel, {
+		TipoPeriodoId: id,
+		Borrado: false,
+	});
+
+export const findTypeScheduleByName = async name =>
+	findItem(TypeScheduleModel, {
+		NombrePeriodo: name,
+		Borrado: false,
+	});
