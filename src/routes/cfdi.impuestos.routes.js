@@ -1,5 +1,7 @@
 import { Router } from 'express'
 import { methods } from '../controllers/cfg.impuestos.controller.js'
+import * as schemas from '../schemas/Impuestos/index.js'
+
 
 const router = Router()
 
@@ -49,7 +51,7 @@ const router = Router()
  *                       type: object
  */
 
-router.post('/', methods.createTax)
+router.post('/', schemas.createTaxSchema, methods.createTax)
 
 /**
  * @swagger
@@ -101,7 +103,7 @@ router.get('/',methods.findAll)
  */
 
 
-router.get('/:taxid', methods.findById)
+router.get('/:taxid', schemas.findByIdTax, methods.findById)
 
 /**
  * @swagger
@@ -130,7 +132,7 @@ router.get('/:taxid', methods.findById)
  *                       type: object
  */
 
-router.get('/impuesto/:taxname', methods.findByName)
+router.get('/impuesto/:taxname', schemas.findByName, methods.findByName)
 
 /**
  * @swagger
@@ -171,7 +173,7 @@ router.get('/impuesto/:taxname', methods.findByName)
  *                       type: object
  */
 
-router.put('/',methods.updateTax)
+router.put('/', schemas.updateTaxSchema, methods.updateTax)
 
 /**
  * @swagger
@@ -208,6 +210,6 @@ router.put('/',methods.updateTax)
  *                       type: object
  */
 
-router.delete('/', methods.disableTax)
+router.delete('/', schemas.disableTax, methods.disableTax)
 
 export default router
