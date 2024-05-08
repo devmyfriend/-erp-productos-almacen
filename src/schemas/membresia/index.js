@@ -261,3 +261,16 @@ export const updateSchedulesSchema = [
 		.isInt({ min: 1 })
 		.withMessage('El campo ActualizadoPor debe ser un número entero positivo.'),
 ];
+
+export const disableSchedulesSchema = [
+	body('TipoPeriodoId')
+		.notEmpty()
+		.withMessage('El campo TipoPeriodoId no puede estar vacío.')
+		.isInt()
+		.withMessage('El campo TipoPeriodoId debe ser un número entero.'),
+
+	body('BorradoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo BorradoPor debe ser un número entero.'),
+];

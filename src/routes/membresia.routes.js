@@ -58,17 +58,10 @@ router.get('/', methods.findAll);
  *               type: object
  *               properties:
  *                 response:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: string
- *                       description: ID de la membresía
- *                     nombre:
- *                       type: string
- *                       description: Nombre de la membresía
- *                     descripcion:
- *                       type: string
- *                       description: Descripción de la membresía
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
  */
 router.get('/detalle/:id', methods.findById);
 
@@ -394,7 +387,7 @@ router.put(
  *                 type: integer
  *     responses:
  *       200:
- *         description: Tipo de mbresia eliminada exitosamente
+ *         description: Tipo de Membresia eliminada exitosamente
  *         content:
  *           application/json:
  *             schema:
@@ -511,6 +504,43 @@ router.put(
 	schemas.updateSchedulesSchema,
 	validateSchema,
 	methods.updateTypeSchedule,
+);
+
+/**
+ * @swagger
+ * /api/v1/membresias/periodo/borrar:
+ *   delete:
+ *     summary: Eliminar un periodo
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoPeriodoId:
+ *                 type: integer
+ *                 example: 1
+ *               BorradoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Tipo de periodo eliminado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Registro eliminado"
+ */
+router.delete(
+	'/periodo/borrar',
+	schemas.disableSchedulesSchema,
+	methods.disableTypeSchedule,
 );
 
 export default router;

@@ -449,6 +449,37 @@ const updateTypeSchedule = async (req, res) => {
 	}
 };
 
+const disableTypeSchedule = async (req, res) => {
+	try {
+		const data = req.body;
+		const typeScheduleFound = await findTypeScheduleById(data.TipoPeriodoId);
+		const userFound = await findUserById(data.BorradoPor);
+
+		if (!typeScheduleFound.exist) {
+			return res.status(404).json({ error: 'Periodo no encontrado' });
+		}
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		await TypeScheduleModel.update(
+			Object.assign(data, { Borrado: true, BorradoEn: new Date() }),
+			{
+				where: {
+					TipoPeriodoId: data.TipoPeriodoId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Se ha borrado el registro' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
@@ -463,4 +494,5 @@ export const methods = {
 	findAllTypeSchedule,
 	createTypeSchedule,
 	updateTypeSchedule,
+	disableTypeSchedule
 };
