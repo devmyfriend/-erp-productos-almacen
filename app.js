@@ -10,11 +10,7 @@ import typeProductsRoutes from './src/routes/tipo.producto.routes.js';
 
 import productsActivRoutes from './src/routes/producto.activo.routes.js';
 
-import productSubscriptionRoutes from './src/routes/producto.suscripcion.routes.js';
-
 import productComboRoutes from './src/routes/producto.combo.routes.js';
-
-import politicasMembresiaRoutes from './src/routes/politicas.membresia.routes.js';
 
 import storeRoutes from './src/routes/almacen.routes.js';
 
@@ -59,11 +55,7 @@ const App = {
 
 		app.use('/api/v1/productos/activo', productsActivRoutes);
 
-		app.use('/api/v1/productos/suscripcion', productSubscriptionRoutes);
-
 		app.use('/api/v1/productos/combo', productComboRoutes);
-
-		app.use('/api/v1/politicasMembresia', politicasMembresiaRoutes);
 
 		app.use('/api/v1/almacen', storeRoutes);
 
