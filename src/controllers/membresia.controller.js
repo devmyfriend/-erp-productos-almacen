@@ -321,7 +321,6 @@ const updatetype = async (req, res) => {
 
 		await TypeMembershipModel.update(
 			Object.assign(data, {
-				ActualizadoPor: data.ActualizadoPor,
 				ActualizadoEn: new Date(),
 			}),
 			{
@@ -412,6 +411,44 @@ const createTypeSchedule = async (req, res) => {
 	}
 };
 
+const updateTypeSchedule = async (req, res) => {
+	try {
+		const data = req.body;
+		const typeScheduleFound = await findTypeScheduleById(data.TipoPeriodoId);
+		const userFound = await findUserById(data.ActualizadoPor);
+		const typeNameFound = await findTypeScheduleByName(data.NombrePeriodo);
+
+		if (!typeScheduleFound.exist) {
+			return res.status(404).json({ error: 'Periodo no encontrado' });
+		}
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+		if (
+			typeNameFound.exist &&
+			typeNameFound.data.TipoPeriodoId != data.TipoPeriodoId
+		) {
+			return res.status(404).json({ error: 'El nombre ya está en uso' });
+		}
+
+		await TypeScheduleModel.update(
+			Object.assign(data, { ActualizadoEn: new Date() }),
+			{
+				where: {
+					TipoPeriodoId: data.TipoPeriodoId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Se ha editado el registro' });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
@@ -425,4 +462,5 @@ export const methods = {
 	disableType,
 	findAllTypeSchedule,
 	createTypeSchedule,
+	updateTypeSchedule,
 };

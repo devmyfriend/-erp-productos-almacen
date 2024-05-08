@@ -243,3 +243,21 @@ export const createScheduleSchema = [
 		.isInt({ min: 1 })
 		.withMessage('El campo CreadoPor debe ser un número entero positivo.'),
 ];
+
+export const updateSchedulesSchema = [
+	body('TipoPeriodoId')
+		.notEmpty()
+		.withMessage('El campo TipoPeriodoId no puede estar vacío.')
+		.isInt({ min: 1 })
+		.withMessage('El campo TipoPeriodoId debe ser un número entero positivo.'),
+	body('NombrePeriodo')
+		.notEmpty()
+		.withMessage('El campo NombrePeriodo no puede estar vacío.')
+		.isString()
+		.withMessage('El campo NombrePeriodo debe se una cadena de texto.'),
+	body('ActualizadoPor')
+		.notEmpty()
+		.withMessage('El campo ActualizadoPor no puede estar vacío.')
+		.isInt({ min: 1 })
+		.withMessage('El campo ActualizadoPor debe ser un número entero positivo.'),
+];

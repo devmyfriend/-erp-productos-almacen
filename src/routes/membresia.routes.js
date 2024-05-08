@@ -473,4 +473,44 @@ router.post(
 	methods.createTypeSchedule,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/periodo/editar:
+ *   put:
+ *     summary: Editar un Periodo
+ *     tags: [Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TipoPeriodoId:
+ *                 type: integer
+ *               NombrePeriodo:
+ *                 type: string
+ *                 example: Nuevo Periodo (editado)
+ *               ActualizadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Periodo editado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de la creación.
+ *                    example: "Se ha editado el periodo"
+ */
+router.put(
+	'/periodo/editar',
+	schemas.updateSchedulesSchema,
+	validateSchema,
+	methods.updateTypeSchedule,
+);
+
 export default router;
