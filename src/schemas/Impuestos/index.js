@@ -1,5 +1,7 @@
 import { body, param } from 'express-validator'
 
+//cfgImpuestos
+
 export const createTaxSchema = [
     body( 'NombreImpuesto' )
     .notEmpty()
@@ -57,6 +59,61 @@ export const disableTax = [
     .isInt()
     .notEmpty()
     .withMessage('El campo BorradoPor es obligatorio y debe ser numérico')
+]
+
+//cfgImpuestosCompuetos
+
+export const createCompositeTax = [
+    body( 'Nombre' )
+    .notEmpty()
+    .isString()
+    .isLength( { min: 3, max: 50 } )
+    .withMessage('El campo Nombre es obligatorio y debe de tener un mínimo de 3 y un máximo de 50 caracteres'),
+    body( 'Predeterminado' )
+    .isBoolean()
+    .withMessage('El campo Predeterminado solo adminite valores booleanos'),
+    body( 'CreadoPor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo CreapoPor es obligatorio y debe de ser un valor numérico')
+
+]
+
+export const findCompositeTax = [
+    param( 'ImpuestoCompuestoId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El parametro ImpuestoCompuestoId es obligatorio y debe ser del tipo numero')
+]
+
+export const updateCompositeTax = [
+    body( 'ImpuestoCompuestoId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ImpuestoCompuestoId es obligatorio y debe ser numérico'),
+    body( 'Nombre' )
+    .notEmpty()
+    .isString()
+    .isLength( { min: 3, max: 50 } )
+    .withMessage('El campo Nombre es obligatorio y debe de tener un mínimo de 3 y un máximo de 50 caracteres'),
+    body( 'Predeterminado' )
+    .isBoolean()
+    .withMessage('El campo Predeterminado solo adminite valores booleanos'),
+    body( 'ActualizadoPor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ActualizadoPor es obligatorio y debe de ser un valor numérico')
+]
+
+export const disableCompositeTax = [
+    body( 'ImpuestoCompuestoId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ImpuestoCompuestoId es obligatorio y debe ser numérico'),
+    body( 'BorradoPor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ActualizadoPor es obligatorio y debe de ser un valor numérico')
 ]
 
 
