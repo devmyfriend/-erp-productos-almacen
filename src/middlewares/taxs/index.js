@@ -1,4 +1,5 @@
 
+import { cfgCompositeTaxesxRateModel } from "../../models/cfg.imp.compuesto.x.tasa.model.js";
 import { cfgTaxModel } from "../../models/cfg.impuesto.model.js";
 import { cfgCompositeTaxs } from "../../models/cfg.impuestos.compuestos.model.js";
 import { Impuesto } from "../../models/common/impuesto.model.js";
@@ -192,5 +193,53 @@ export const validateCompositeTaxId = async ( req, res, next ) =>{
 
 }
 
-//TODO VALIDACIONES DE CALCULOS 
+//TODO: VALIDACIONES DE CALCULOS 
+
+//cfgimpuestoscompuestosxtasa
+
+export const validateCompositeTaxIdByTaxRate = async( req, res, next )=>{
+    
+    const { ImpuestoCompuestoId, ImpuestoTasaId } = req.body
+
+    try{
+
+        //todo: promesa con pipe
+
+        const [ compositetaxid, taxid] = await Promise.all([
+            cfgCompositeTaxs.findOne({
+                where:{
+                    ImpuestoCompuestoId,
+                    Borrado: false
+                }
+            }),
+            cfgCompositeTaxesxRateModel.findOne({
+                where:{
+                    ImpuestoTasaId,
+                    Borrado:false
+                }
+            })            
+        ])
+
+        if( !compositetaxid ){
+            return res.status(404).send({
+                 status: 'Error de validación',
+                 error: 'No se encontro el registro del Impuesto Compuesto'
+            })
+        }
+
+        if( !compositetaxid ){
+            return res.status(404).send({
+                 status: 'Error de validación',
+                 error: 'No se encontro el registro de la Tasa de Impuesto'
+            })
+        }
+
+        next()
+
+    }catch( error ){
+        return res.status(500).send({
+            error: 'Error interno en el servidor'
+        })
+    }
+}
 
