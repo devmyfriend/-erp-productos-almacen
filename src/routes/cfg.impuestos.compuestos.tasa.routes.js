@@ -10,7 +10,7 @@ const router = Router()
 /**
  * @swagger
  * tags:
- *   - name: Impuesto Compuesto x Tasa Impuesto
+ *   - name: Impuestos
  *     description: Rregistro de la relación de los impuestos compuestos por tasas de impuestos..
  */
 
@@ -19,7 +19,7 @@ const router = Router()
  * /api/v1/impcompxtasaimp:
  *  post:
  *      summary: Crea una nueva relación del impuesto compuestos con las diferentes tasas de impuestos.
- *      tags: [Impuesto Compuesto x Tasa Impuesto]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -60,7 +60,7 @@ router.post( '/', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateC
  * /api/v1/impcompxtasaimp/detail/{ImpuestoCompuestoId}:
  *   get:
  *      summary: Busca las relaciones del impuiesto compuesto.
- *      tags: [Impuesto Compuesto x Tasa Impuesto]
+ *      tags: [Impuestos]
  *      parameters:
  *        - in: path
  *          name: ImpuestoCompuestoId
@@ -89,7 +89,7 @@ router.get('/detail/:ImpuestoCompuestoId', schemas.validateGetComsiteTaxbyTaxRat
  * /api/v1/impcompxtasaimp:
  *  put:
  *      summary: actualiza la relación del impuesto compuestos con las diferentes tasas de impuestos.
- *      tags: [Impuesto Compuesto x Tasa Impuesto]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -130,7 +130,7 @@ router.put( '/', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateCo
  * /api/v1/impcompxtasaimp:
  *  delete:
  *      summary: Borra la relación del impuesto compuestos con las diferentes tasas de impuestos.
- *      tags: [Impuesto Compuesto x Tasa Impuesto]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:

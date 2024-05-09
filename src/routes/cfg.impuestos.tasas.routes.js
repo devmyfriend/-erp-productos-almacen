@@ -9,7 +9,7 @@ const router = Router()
 /**
  * @swagger
  * tags:
- *   - name: Impuestos por tasa
+ *   - name: Impuestos
  *     description: Regisrta los impuestos por la tasa a sociado a él.
  */
 
@@ -18,7 +18,7 @@ const router = Router()
  * /api/v1/impuestostasa/:
  *  post:
  *      summary: Crea una nueva relación de el impuesto a una tasa porcentual.
- *      tags: [Impuestos por tasa]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -79,7 +79,7 @@ router.post( '/', schemas.validatateCreateTaxRate, validateSchema, validateTaxId
  * /api/v1/impuestostasa/{ImpuestoTasaId}:
  *  get:
  *      summary: Obtiene la configuración de la relación del impueto con la tasa.
- *      tags: [Impuestos por tasa]
+ *      tags: [Impuestos]
  *      parameters:
  *          - in: path
  *            name: ImpuestoTasaId
@@ -109,7 +109,7 @@ router.get( '/:ImpuestoTasaId', schemas.validateGetTaxRate, validateSchema, vali
  * /api/v1/impuestostasa/:
  *  put:
  *      summary: Actualiza la relación de el impuesto a una tasa porcentual.
- *      tags: [Impuestos por tasa]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -170,7 +170,7 @@ router.put( '/', schemas.validatateUpdateTaxtRate, validateSchema, validateTaxRa
  * /api/v1/impuestostasa/:
  *  delete:
  *      summary: Borrar una relación de el impuesto a una tasa porcentual.
- *      tags: [Impuestos por tasa]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:

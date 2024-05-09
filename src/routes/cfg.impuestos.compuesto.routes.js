@@ -9,8 +9,8 @@ const router = Router()
 /**
  * @swagger
  * tags:
- *   - name: Impuestos compuetos
- *     description: Administra los impuestos compuetos.
+ *   - name: Impuestos
+ *     description: Administra los Impuestos.
  */
 
 /**
@@ -18,7 +18,7 @@ const router = Router()
  * /api/v1/impuestocompuesto/:
  *  post:
  *      summary: Crea un nuevo impuesto compuesto.
- *      tags: [Impuestos compuetos]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -64,7 +64,7 @@ router.post( '/iva/', methods.calculateCompoundTaxes)
  * /api/v1/impuestocompuesto/:
  *   get:
  *      summary: En lista los impuestos compuestos
- *      tags: [Impuestos compuetos]
+ *      tags: [Impuestos]
  *      responses:
  *        200:
  *          description: Lista de impuestos compuestos
@@ -86,7 +86,7 @@ router.get( '/list/', methods.getCompositeTaxList )
  * /api/v1/conversionu/{ImpuestoCompuestoId}:
  *   get:
  *      summary: Buscar el Impuesto Compuesto por medio de su id
- *      tags: [Impuestos compuetos]
+ *      tags: [Impuestos]
  *      parameters:
  *        - in: path
  *          name: ImpuestoCompuestoId
@@ -115,7 +115,7 @@ router.get( '/:ImpuestoCompuestoId', schemas.findCompositeTaxSchema, validateSch
  * /api/v1/impuestocompuesto/:
  *  put:
  *      summary: Actualiza un impuesto compuesto.
- *      tags: [Impuestos compuetos]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -156,7 +156,7 @@ router.put( '/', schemas.updateCompositeTaxSchema, validateCompositeTaxId, valid
  * /api/v1/impuestocompuesto/:
  *  delete:
  *      summary: Borra un impuesto compuesto.
- *      tags: [Impuestos compuetos]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:

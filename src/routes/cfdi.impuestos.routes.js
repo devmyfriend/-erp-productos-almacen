@@ -10,7 +10,7 @@ const router = Router()
 /**
  * @swagger
  * tags:
- *   - name: cfgImpuestos
+ *   - name: Impuestos
  *     description: Registro de impuestos.
  */
 
@@ -19,7 +19,7 @@ const router = Router()
  * /api/v1/cfgimp:
  *  post:
  *      summary: Crea un nuevo impuesto.
- *      tags: [cfgImpuestos]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -60,7 +60,7 @@ router.post('/', schemas.createTaxSchema, validateSchema, validateTaxName, valid
  * /api/v1/cfgimp:
  *   get:
  *      summary: En lista los diferentes tipos de impuestos.
- *      tags: [cfgImpuestos]  
+ *      tags: [Impuestos]  
  *      responses:
  *        200:
  *          description: Desplega el listado de impuestos.
@@ -82,7 +82,7 @@ router.get('/',methods.findAll)
  * /api/v1/cfgimp/{taxid}:
  *   get:
  *      summary: Busca el impuesto por medio del id
- *      tags: [cfgImpuestos]
+ *      tags: [Impuestos]
  *      parameters:
  *        - in: path
  *          name: taxid
@@ -112,7 +112,7 @@ router.get('/:taxid', schemas.findByIdTax, validateSchema, methods.findById)
  * /api/v1/cfgimp/{taxname}:
  *   get:
  *      summary: Busca el impuesto por medio del nombre del impuesto
- *      tags: [cfgImpuestos]
+ *      tags: [Impuestos]
  *      parameters:
  *        - in: path
  *          name: taxname
@@ -141,7 +141,7 @@ router.get('/impuesto/:taxname', schemas.findByName, validateSchema, methods.fin
  * /api/v1/cfgimp:
  *  put:
  *      summary: Actualiza los datos del impuesto
- *      tags: [cfgImpuestos]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
@@ -182,7 +182,7 @@ router.put('/', schemas.updateTaxSchema, validateSchema, validateTaxId, validate
  * /api/v1/cfgimp:
  *  delete:
  *      summary: Elimina el impuesto
- *      tags: [cfgImpuestos]
+ *      tags: [Impuestos]
  *      requestBody:
  *          required: true
  *          content:
