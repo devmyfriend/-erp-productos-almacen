@@ -129,6 +129,29 @@ export const validateComsiteTaxbyTaxRate =[
     .withMessage('El campo ImpuestoTasaId es obligatorio y debe ser numérico')
 ]
 
+export const validateGetComsiteTaxbyTaxRate =[
+    param( 'ImpuestosCompuestoID' )
+    .notEmpty()
+    .isInt()
+    .withMessage('El campo ImpuestoCompuestoId es obligarorio y debe ser numérico')
+    
+]
+
+export const validateDisableCompositeTaxByTaxRate = [
+    body( 'ImpuestoCompuestoId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ImpuestoCompuestoId es obligatorio y debe ser numérico'),
+    body( 'ImpuestoTasaId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ImpuestoTasaId es obligatorio y debe ser numérico'),
+    body( 'BorradoPor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ActualizadoPor es obligatorio y debe de ser un valor numérico')
+]
+
 //cfgimpuestostasa
 
 export const validatateCreateTaxtRate = [
