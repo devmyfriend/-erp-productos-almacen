@@ -9,7 +9,7 @@ const router = Router()
 /**
  * @swagger
  * tags:
- *   - name: Conversión de medidas
+ *   - name: Unidades de medidas
  *     description: Registro de conversiones de medida para los diversos productos.
  */
 
@@ -18,7 +18,7 @@ const router = Router()
  * /api/v1/conversionu/:
  *  post:
  *      summary: Crea una nueva conversión de unidad de medida.
- *      tags: [Conversión de medidas]
+ *      tags: [Unidades de medidas]
  *      requestBody:
  *          required: true
  *          content:
@@ -63,7 +63,7 @@ router.post('/', schema.creatConversionUnitSchema, validateSchema, methods.creat
  * /api/v1/conversionu/:
  *   get:
  *      summary: En lista las conversiones .
- *      tags: [Conversión de medidas]
+ *      tags: [Unidades de medidas]
  *      responses:
  *        200:
  *          description: Buscar unidad de medida por medio de UnidadId
@@ -86,7 +86,7 @@ router.get('/', methods.findAll)
  * /api/v1/conversionu/{unitsourceid}:
  *   get:
  *      summary: Buscar por UnidadId.
- *      tags: [Conversión de medidas]
+ *      tags: [Unidades de medidas]
  *      parameters:
  *        - in: path
  *          name: unitsourceid
@@ -115,7 +115,7 @@ router.get('/:unitsourceid', schema.findByUnitSourceIdSchema, validateSchema, me
  * /api/v1/conversionu/:
  *  put:
  *      summary: Actualiza los datos de la unidad de medida.
- *      tags: [Conversión de medidas]
+ *      tags: [Unidades de medidas]
  *      requestBody:
  *          required: true
  *          content:
@@ -160,7 +160,7 @@ router.put('/', schema.updateConversionUnitSchema, validateSchema, methods.updat
  * /api/v1/conversionu/:
  *  delete:
  *      summary: Deshabilita la unidad de medida.
- *      tags: [Conversión de medidas]
+ *      tags: [Unidades de medidas]
  *      requestBody:
  *          required: true
  *          content:
