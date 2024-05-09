@@ -274,3 +274,33 @@ export const validateNameTaxRate = async ( req, res, next )=>{
 
 }
 
+export const validateTaxRateId = async ( req, res, next ) =>{
+
+
+    const taxrateid = req.body.ImpuestoTasaId
+
+    try{
+        const tax = await cfgTaxRateModel.findOne({
+            where:{
+                ImpuestoTasaId: taxrateid,
+                Borrado: false
+            }
+        })
+
+        if( !tax){
+            return res.status(404).send({
+                 status: 'Error de validación',
+                 message: 'No se encontro el Impuesto'
+            })
+        }
+
+        next()
+
+    }catch( error ){
+        return res.status(500).send({
+            error: 'Error interno en el servidor'
+        })
+    }
+
+}
+

@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { methods } from "../controllers/cfg.impuesto.tasa.js";
-
+import * as schemas from '../schemas/Impuestos/index.js'
+import { validateSchema } from '../middlewares/express-validator/index.js'
+import { validateNameTaxRate, validateTaxId, validateTaxRateId } from "../middlewares/taxs/index.js";
 
 const router = Router()
 
@@ -70,7 +72,7 @@ const router = Router()
  *                       type: object
  */
 
-router.post( '/', methods.createTaxRate )
+router.post( '/', schemas.validatateCreateTaxRate, validateSchema, validateTaxId, validateNameTaxRate, methods.createTaxRate )
 
 /**
  * @swagger
@@ -100,7 +102,7 @@ router.post( '/', methods.createTaxRate )
  *                       type: object
  */
 
-router.get( '/:ImpuestoTasaId', methods.getTaxRate )
+router.get( '/:ImpuestoTasaId', schemas.validateGetTaxRate, validateSchema, validateTaxId, methods.getTaxRate )
 
 /**
  * @swagger
@@ -161,7 +163,7 @@ router.get( '/:ImpuestoTasaId', methods.getTaxRate )
  *                       type: object
  */
 
-router.put( '/', methods.updateTaxRate )
+router.put( '/', schemas.validatateUpdateTaxtRate, validateSchema, validateTaxRateId, validateTaxId, validateTaxId, validateNameTaxRate, methods.updateTaxRate )
 
 /**
  * @swagger
@@ -198,6 +200,6 @@ router.put( '/', methods.updateTaxRate )
  *                       type: object
  */
 
-router.delete( '/', methods.disableTaxRate )
+router.delete( '/', schemas.validateDisabelTaxRate, validateTaxId, methods.disableTaxRate )
 
 export default router

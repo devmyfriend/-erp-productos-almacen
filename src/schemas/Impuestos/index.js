@@ -154,7 +154,7 @@ export const validateDisableCompositeTaxByTaxRate = [
 
 //cfgimpuestostasa
 
-export const validatateCreateTaxtRate = [
+export const validatateCreateTaxRate = [
     body( 'ImpuestoId' )
     .isInt()
     .notEmpty()
