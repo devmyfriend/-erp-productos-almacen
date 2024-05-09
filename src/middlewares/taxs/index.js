@@ -1,6 +1,7 @@
 
 import { cfgCompositeTaxesxRateModel } from "../../models/cfg.imp.compuesto.x.tasa.model.js";
 import { cfgTaxModel } from "../../models/cfg.impuesto.model.js";
+import { cfgTaxRateModel } from "../../models/cfg.impuesto.tasa.model.js";
 import { cfgCompositeTaxs } from "../../models/cfg.impuestos.compuestos.model.js";
 import { Impuesto } from "../../models/common/impuesto.model.js";
 
@@ -241,5 +242,35 @@ export const validateCompositeTaxIdByTaxRate = async( req, res, next )=>{
             error: 'Error interno en el servidor'
         })
     }
+}
+
+//cfgImpuestosTasa
+
+export const validateNameTaxRate = async ( req, res, next )=>{
+
+    const nameTax = req.body.Nombre
+
+    try{
+
+        const tax = await cfgTaxRateModel.findOne({
+            where:{
+                Nombre: nameTax,
+                Borrado: false
+            }
+        })
+
+        if( tax ){
+            return res.status(400).send({
+                 status: 'Error de validación',
+                 errors: 'El nombre de la tasa ya se encuentra registrado previamente'
+            })
+        }
+
+    }catch( error ){
+        return res.status(500).send({
+            error: 'Error interno en el servidor'
+        })
+    }
+
 }
 
