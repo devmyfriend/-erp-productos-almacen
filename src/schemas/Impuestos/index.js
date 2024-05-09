@@ -129,3 +129,96 @@ export const validateComsiteTaxbyTaxRate =[
     .withMessage('El campo ImpuestoTasaId es obligatorio y debe ser numérico')
 ]
 
+//cfgimpuestostasa
+
+export const validatateCreateTaxtRate = [
+    body( 'ImpuestoId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo impuestoId es obligatorio y debe ser un valor numérico'),
+    body( 'Nombre' )
+    .isString()
+    .notEmpty()
+    .isLength( { min:3, max:30 } )
+    .withMessage('El campo Nombre es obligatorio y debe ser de una logintud mínima de 3 caracteres y una máxima de 30 caracteres'),
+    body( 'Tasa' )
+    .isDecimal()
+    .notEmpty()
+    .withMessage('El campo Tasa es obligatorio y debe ser un valor decimal'),    
+    body( 'Retencion' )
+    .isBoolean()
+    .notEmpty()
+    .withMessage('El campo Retencion es obligatorio'),
+    body( 'TipoFactor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campor TipoFactor es obligatorio y debe ser valores númericos'),
+    body( 'IVA_S_IEPS' )
+    .isBoolean()
+    .notEmpty()
+    .withMessage('El campo IVA_S_IEPS es obligatorio y son valores booleanos'),
+    body( 'Desglosar' )
+    .isBoolean()
+    .notEmpty()
+    .withMessage('El campo Desglosar es obligatorio y son valores booleanos'),
+    body( 'CreadoPor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo CreapoPor es obligatorio y debe de ser un valor numérico'),
+]
+
+export const validateGetTaxRate = [
+    param( 'ImpuestoTasaId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ImpuestoTasaId es obligatorio')
+]
+
+export const validatateUpdateTaxtRate = [
+    body( 'ImpuestoId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo impuestoId es obligatorio y debe ser un valor numérico'),
+    body( 'Nombre' )
+    .isString()
+    .notEmpty()
+    .isLength( { min:3, max:30 } )
+    .withMessage('El campo Nombre es obligatorio y debe ser de una logintud mínima de 3 caracteres y una máxima de 30 caracteres'),
+    body( 'Tasa' )
+    .isDecimal()
+    .notEmpty()
+    .withMessage('El campo Tasa es obligatorio y debe ser un valor decimal'),    
+    body( 'Retencion' )
+    .isBoolean()
+    .notEmpty()
+    .withMessage('El campo Retencion es obligatorio'),
+    body( 'TipoFactor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campor TipoFactor es obligatorio y debe ser valores númericos'),
+    body( 'IVA_S_IEPS' )
+    .isBoolean()
+    .notEmpty()
+    .withMessage('El campo IVA_S_IEPS es obligatorio y son valores booleanos'),
+    body( 'Desglosar' )
+    .isBoolean()
+    .notEmpty()
+    .withMessage('El campo Desglosar es obligatorio y son valores booleanos'),
+    body( 'ActualizadoPor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ActualizadoPor es obligatorio y debe de ser un valor numérico'),
+]
+
+export const validateDisabelTaxRate = [
+    body( 'ImpuestoTasaId' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo ImpuestoTasaId es obligatorio y debe ser valores numéricos'),
+    body( 'BorradoPor' )
+    .isInt()
+    .notEmpty()
+    .withMessage('El campo BorradoPor es obligatorio y debe de ser un valor numérico')
+]
+
+
