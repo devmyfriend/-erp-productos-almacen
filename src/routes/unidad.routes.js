@@ -16,7 +16,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/unidades:
+ * /api/v1/unidades/crear:
  *  post:
  *      summary: Crea una nueva unidad de medida.
  *      tags: [Unidades de medidas]
@@ -49,11 +49,11 @@ const router = Router()
  *                       type: object
  */
 
-router.post('/', schema.creatUnitSchema, validateSchema, validateUnitName, methods.create)
+router.post('/crear', schema.creatUnitSchema, validateSchema, validateUnitName, methods.create)
 
 /**
  * @swagger
- * /api/v1/unidades/{unidadid}:
+ * /api/v1/unidades/detalles/{unidadid}:
  *   get:
  *      summary: Buscar por UnidadId.
  *      tags: [Unidades de medidas]
@@ -78,7 +78,7 @@ router.post('/', schema.creatUnitSchema, validateSchema, validateUnitName, metho
  *                       type: object
  */
 
-router.get( '/:unitid', schema.findById, validateSchema, validateUnitId, methods.findById )
+router.get( '/detalles/:unitid', schema.findById, validateSchema, validateUnitId, methods.findById )
 
 /**
  * @swagger
@@ -107,11 +107,11 @@ router.get( '/:unitid', schema.findById, validateSchema, validateUnitId, methods
  *                       type: object
  */
 
-router.get( '/nombreunidad/:unitname',schema.findByUnitName,validateSchema, validateFindUnitName, methods.findByName )
+router.get( '/detalles_nombre/:unitname',schema.findByUnitName,validateSchema, validateFindUnitName, methods.findByName )
 
 /**
  * @swagger
- * /api/v1/unidades/:
+ * /api/v1/unidades/lista:
  *   get:
  *      summary: Despliega todas las unidades de medias.
  *      tags: [Unidades de medidas]
@@ -129,11 +129,11 @@ router.get( '/nombreunidad/:unitname',schema.findByUnitName,validateSchema, vali
  *                       type: object
  */
 
-router.get( '/', methods.findAll )
+router.get( '/lista', methods.findAll )
 
 /**
  * @swagger
- * /api/v1/unidades:
+ * /api/v1/unidades/editar:
  *  put:
  *      summary: Actualiza los datos de la unidad de medida.
  *      tags: [Unidades de medidas]
@@ -170,11 +170,11 @@ router.get( '/', methods.findAll )
  *                       type: object
  */
 
-router.put( '/', schema.updateUnit, validateSchema, validateUnitName ,methods.update )
+router.put( '/editar', schema.updateUnit, validateSchema, validateUnitName ,methods.update )
 
 /**
  * @swagger
- * /api/v1/unidades:
+ * /api/v1/unidades/borrar:
  *  delete:
  *      summary: Deshabilita la unidad de medida.
  *      tags: [Unidades de medidas]
@@ -207,6 +207,6 @@ router.put( '/', schema.updateUnit, validateSchema, validateUnitName ,methods.up
  *                       type: object
  */
 
-router.delete( '/', schema.disableUnit, validateSchema, methods.disable )
+router.delete( '/borrar', schema.disableUnit, validateSchema, methods.disable )
 
 export default router
