@@ -1,3 +1,4 @@
+import { UnitConversionModel } from "../../models/ConversionUnidad.model.js"
 import { UnitModel } from "../../models/unidad.model.js"
 
 
@@ -84,3 +85,70 @@ export const validateFindUnitName = async ( req, res, next )=>{
         })
     }
 }
+
+
+//Conversiones
+
+export const validateConversionId = async (req, res, next)=>{
+
+    const conversionid = req.body.ConversionId
+
+    try{
+
+        const data  = await UnitConversionModel.findOne({
+            where:{
+                ConversionId: conversionid,
+                Borrado: false
+            }
+        })
+
+        if ( !data ){
+            return res.status(404).send({
+                 status: 'Error de validación',
+                 message: 'No se encontro la conversión de unidad'
+            })
+        }
+
+        next()
+
+    }catch( error ){
+        console.log( error )
+        return res.status(500).send({
+            errors: 'Error interno en el servidor'
+       })
+    }
+
+}
+
+export const validateIsUnitId = async ( req, res, next )=>{
+
+    const sourceUnit = req.body.UnidadDestinoId
+
+    try{
+
+        const data = await UnitModel.findOne({
+            where:{
+                UnidadId : sourceUnit,
+                Borrado: false
+            }
+        })
+
+        if(!data){
+            return res.status(404).send({
+                 status: 'Error de validación',
+                 message: 'No se encontro la unidad para la conversión'
+            })
+        }
+
+        next()
+
+    }catch( error ){
+        console.log( error )
+        return res.status(500).send({
+            errors: 'Error interno en el servidor'
+       })
+    }
+
+
+}
+

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { methods } from "../controllers/conversionunidad.controller.js";
 import * as schema  from '../schemas/conversiones/index.js'
 import { validateSchema } from "../middlewares/express-validator/index.js";
+import { validateConversionId, validateIsUnitId } from "../middlewares/unit/index.js";
 
 const router = Router()
 
@@ -56,7 +57,7 @@ const router = Router()
  *                       type: object
  */
 
-router.post('/crear', schema.creatConversionUnitSchema, validateSchema, methods.createUnitConversion)
+router.post('/crear', schema.creatConversionUnitSchema, validateSchema, validateIsUnitId, methods.createUnitConversion)
 
 /**
  * @swagger
@@ -112,7 +113,7 @@ router.get('/detalles/:unitsourceid', schema.findByUnitSourceIdSchema, validateS
 
 /**
  * @swagger
- * /api/v1/unidades/conversion/:
+ * /api/v1/unidades/conversion/editar:
  *  put:
  *      summary: Actualiza los datos de la unidad de medida.
  *      tags: [Unidades de medidas]
@@ -130,11 +131,11 @@ router.get('/detalles/:unitsourceid', schema.findByUnitSourceIdSchema, validateS
  *                      UnidadDestinoId:
  *                          type: integer
  *                          description: El id de la unidad de medida que a la que sera convertidad la base
- *                          example: Pieza
+ *                          example: 13
  *                      FactorConversion:
  *                          type: decimal
  *                          description: El numero de veces de unidades que conforma a la unidad base
- *                          example: Pieza
+ *                          example: 12
  *                      ActualizadoPor:
  *                          type: integer
  *                          description: El id del usuario que actualiza la unidad de medida
@@ -153,7 +154,7 @@ router.get('/detalles/:unitsourceid', schema.findByUnitSourceIdSchema, validateS
  *                       type: object
  */
 
-router.put('/editar', schema.updateConversionUnitSchema, validateSchema, methods.updateUnitConversion)
+router.put('/editar', schema.updateConversionUnitSchema, validateSchema, validateConversionId, validateIsUnitId, methods.updateUnitConversion)
 
 /**
  * @swagger
