@@ -15,7 +15,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/impuestocompuesto/:
+ * /api/v1/impuestos/compuestos/crear:
  *  post:
  *      summary: Crea un nuevo impuesto compuesto.
  *      tags: [Impuestos]
@@ -53,15 +53,15 @@ const router = Router()
  */
 
 
-router.post( '/', schemas.createCompositeTaxSchema, validateSchema, validateNameCompositeTax, validatePredeterminedCompositeTax , methods.createCompositeTax )
+router.post( '/crear', schemas.createCompositeTaxSchema, validateSchema, validateNameCompositeTax, validatePredeterminedCompositeTax , methods.createCompositeTax )
 
 
-
-router.post( '/iva/', methods.calculateCompoundTaxes)
+//todo crear calculos.
+// router.post( '/iva/', methods.calculateCompoundTaxes)
 
 /**
  * @swagger
- * /api/v1/impuestocompuesto/:
+ * /api/v1/impuestos/compuestos/lista:
  *   get:
  *      summary: En lista los impuestos compuestos
  *      tags: [Impuestos]
@@ -79,11 +79,11 @@ router.post( '/iva/', methods.calculateCompoundTaxes)
  *                       type: object
  */
 
-router.get( '/list/', methods.getCompositeTaxList )
+router.get( '/lista', methods.getCompositeTaxList )
 
 /**
  * @swagger
- * /api/v1/conversionu/{ImpuestoCompuestoId}:
+ * /api/v1/impuestos/compuestos/detalles/{ImpuestoCompuestoId}:
  *   get:
  *      summary: Buscar el Impuesto Compuesto por medio de su id
  *      tags: [Impuestos]
@@ -108,11 +108,11 @@ router.get( '/list/', methods.getCompositeTaxList )
  *                       type: object
  */
 
-router.get( '/:ImpuestoCompuestoId', schemas.findCompositeTaxSchema, validateSchema, methods.getCompositeTax )
+router.get( '/detalles/:ImpuestoCompuestoId', schemas.findCompositeTaxSchema, validateSchema, methods.getCompositeTax )
 
 /**
  * @swagger
- * /api/v1/impuestocompuesto/:
+ * /api/v1/impuestos/compuestos/editar:
  *  put:
  *      summary: Actualiza un impuesto compuesto.
  *      tags: [Impuestos]
@@ -123,6 +123,10 @@ router.get( '/:ImpuestoCompuestoId', schemas.findCompositeTaxSchema, validateSch
  *                schema:
  *                  type: object
  *                  properties:
+ *                       ImpuestoCompuestoId:
+ *                          type: integer
+ *                          description: Identificador del impuesto compuesto
+ *                          exmaple: 1
  *                       Nombre:
  *                          type: string
  *                          description: Nombre del impuesto compuesto
@@ -149,11 +153,11 @@ router.get( '/:ImpuestoCompuestoId', schemas.findCompositeTaxSchema, validateSch
  *                       type: object
  */
 
-router.put( '/', schemas.updateCompositeTaxSchema, validateCompositeTaxId, validateNameCompositeTax, validatePredeterminedCompositeTax, methods.updateCompositeTax )
+router.put( '/editar', schemas.updateCompositeTaxSchema, validateCompositeTaxId, validateNameCompositeTax, validatePredeterminedCompositeTax, methods.updateCompositeTax )
 
 /**
  * @swagger
- * /api/v1/impuestocompuesto/:
+ * /api/v1/impuestos/compuesto/borrar:
  *  delete:
  *      summary: Borra un impuesto compuesto.
  *      tags: [Impuestos]
@@ -186,6 +190,6 @@ router.put( '/', schemas.updateCompositeTaxSchema, validateCompositeTaxId, valid
  *                       type: object
  */
 
-router.delete( '/', validateCompositeTaxId, methods.disableCompositeTax )
+router.delete( '/borrar', validateCompositeTaxId, methods.disableCompositeTax )
 
 export default router
