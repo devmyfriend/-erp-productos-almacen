@@ -10,11 +10,7 @@ import typeProductsRoutes from './src/routes/tipo.producto.routes.js';
 
 import productsActivRoutes from './src/routes/producto.activo.routes.js';
 
-import productSubscriptionRoutes from './src/routes/producto.suscripcion.routes.js';
-
 import productComboRoutes from './src/routes/producto.combo.routes.js';
-
-import politicasMembresiaRoutes from './src/routes/politicas.membresia.routes.js';
 
 import storeRoutes from './src/routes/almacen.routes.js';
 
@@ -36,6 +32,7 @@ import taxByRate from './src/routes/cfg.impuestos.tasas.routes.js'
 
 import compositeTaxByTaxRate from './src/routes/cfg.impuestos.compuestos.tasa.routes.js'
 
+import membershipRoutes from './src/routes/membresia.routes.js';
 
 // Base de datos
 import { Connection } from './src/database/mariadb.database.js';
@@ -70,11 +67,7 @@ const App = {
 
 		app.use('/api/v1/productos/activo', productsActivRoutes);
 
-		app.use('/api/v1/productos/suscripcion', productSubscriptionRoutes);
-
 		app.use('/api/v1/productos/combo', productComboRoutes);
-
-		app.use('/api/v1/politicasMembresia', politicasMembresiaRoutes);
 
 		app.use('/api/v1/almacen', storeRoutes);
 
@@ -98,6 +91,8 @@ const App = {
 
 		
 		
+		app.use('/api/v1/membresias', membershipRoutes);
+
 		app.use('/', (req, res) => {
 			res.status(404).json({ error: 'error en la solicitud' });
 		});
