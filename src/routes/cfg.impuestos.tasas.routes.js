@@ -15,7 +15,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/impuestostasa/:
+ * /api/v1/impuestos/tasa/crear:
  *  post:
  *      summary: Crea una nueva relación de el impuesto a una tasa porcentual.
  *      tags: [Impuestos]
@@ -72,11 +72,11 @@ const router = Router()
  *                       type: object
  */
 
-router.post( '/', schemas.validatateCreateTaxRate, validateSchema, validateTaxId, validateNameTaxRate, methods.createTaxRate )
+router.post( '/crear', schemas.validatateCreateTaxRate, validateSchema, validateTaxId, validateNameTaxRate, methods.createTaxRate )
 
 /**
  * @swagger
- * /api/v1/impuestostasa/{ImpuestoTasaId}:
+ * /api/v1/impuestos/tasa/detalles/{ImpuestoTasaId}:
  *  get:
  *      summary: Obtiene la configuración de la relación del impueto con la tasa.
  *      tags: [Impuestos]
@@ -102,11 +102,11 @@ router.post( '/', schemas.validatateCreateTaxRate, validateSchema, validateTaxId
  *                       type: object
  */
 
-router.get( '/:ImpuestoTasaId', schemas.validateGetTaxRate, validateSchema, validateTaxId, methods.getTaxRate )
+router.get( '/detalles/:ImpuestoTasaId', schemas.validateGetTaxRate, validateSchema, validateTaxId, methods.getTaxRate )
 
 /**
  * @swagger
- * /api/v1/impuestostasa/:
+ * /api/v1/impuestos/tasa/editar:
  *  put:
  *      summary: Actualiza la relación de el impuesto a una tasa porcentual.
  *      tags: [Impuestos]
@@ -163,11 +163,11 @@ router.get( '/:ImpuestoTasaId', schemas.validateGetTaxRate, validateSchema, vali
  *                       type: object
  */
 
-router.put( '/', schemas.validatateUpdateTaxtRate, validateSchema, validateTaxRateId, validateTaxId, validateTaxId, validateNameTaxRate, methods.updateTaxRate )
+router.put( '/editar', schemas.validatateUpdateTaxtRate, validateSchema, validateTaxRateId, validateTaxId, validateTaxId, validateNameTaxRate, methods.updateTaxRate )
 
 /**
  * @swagger
- * /api/v1/impuestostasa/:
+ * /api/v1/impuestos/tasa/borrar:
  *  delete:
  *      summary: Borrar una relación de el impuesto a una tasa porcentual.
  *      tags: [Impuestos]
@@ -200,6 +200,6 @@ router.put( '/', schemas.validatateUpdateTaxtRate, validateSchema, validateTaxRa
  *                       type: object
  */
 
-router.delete( '/', schemas.validateDisabelTaxRate, validateTaxId, methods.disableTaxRate )
+router.delete( '/borrar', schemas.validateDisabelTaxRate, validateTaxId, methods.disableTaxRate )
 
 export default router
