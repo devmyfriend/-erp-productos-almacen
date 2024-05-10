@@ -29,6 +29,12 @@ export const FamilyModel = Connection.define(
         ActualizadoEn:{
             type: DataTypes.DATE,
         },
+        BorradoPor:{
+            type: DataTypes.INTEGER
+        },
+        BorradoEn: {
+            type: DataTypes.DATE
+        }
     },
 
     {
