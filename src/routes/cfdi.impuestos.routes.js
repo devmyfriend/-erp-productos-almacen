@@ -134,7 +134,7 @@ router.get('/detalles/:taxid', schemas.findByIdTax, validateSchema, methods.find
  *                       type: object
  */
 
-router.get('/impuesto/detalles_nombre/:taxname', schemas.findByName, validateSchema, methods.findByName)
+router.get('/detalles_nombre/:taxname', schemas.findByName, validateSchema, methods.findByName)
 
 /**
  * @swagger
@@ -156,7 +156,11 @@ router.get('/impuesto/detalles_nombre/:taxname', schemas.findByName, validateSch
  *                      NombreImpuesto:
  *                          type: string
  *                          description: El nombre del impuesto
- *                          example: Pieza
+ *                          example: IVA
+ *                      ClaveImpuesto:
+ *                          type: string
+ *                          description: Es la clave del tabla SAT_Impuesto
+ *                          example: "002"
  *                      ActualizadoPor:
  *                          type: integer
  *                          description: El id del usuario que actualiza el impuesto
@@ -194,7 +198,7 @@ router.put('/editar', schemas.updateTaxSchema, validateSchema, validateTaxId, va
  *                          type: integer
  *                          description: El id del cfgImpuesto
  *                          example: 1
- *                      ActualizadoPor:
+ *                      BorradoPor:
  *                          type: integer
  *                          description: El id del usuario para borrar el impuesto
  *                          example: 1
