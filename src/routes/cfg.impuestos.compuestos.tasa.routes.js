@@ -16,7 +16,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/impcompxtasaimp:
+ * /api/v1/impuestos/compuestos/tasas/crear:
  *  post:
  *      summary: Crea una nueva relación del impuesto compuestos con las diferentes tasas de impuestos.
  *      tags: [Impuestos]
@@ -53,11 +53,11 @@ const router = Router()
  *                       type: object
  */
 
-router.post( '/', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxIdByTaxRate, methods.createCompositeTaxesxRate )
+router.post( '/crear', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxIdByTaxRate, methods.createCompositeTaxesxRate )
 
 /**
  * @swagger
- * /api/v1/impcompxtasaimp/detail/{ImpuestoCompuestoId}:
+ * /api/v1/impuestos/compuestos/tasas/detalles/{ImpuestoCompuestoId}:
  *   get:
  *      summary: Busca las relaciones del impuiesto compuesto.
  *      tags: [Impuestos]
@@ -82,11 +82,11 @@ router.post( '/', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateC
  *                       type: object
  */
 
-router.get('/detail/:ImpuestoCompuestoId', schemas.validateGetComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxId, methods.getDetailCompositeTaxesxRate )
+router.get('/detalles/:ImpuestoCompuestoId', schemas.validateGetComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxId, methods.getDetailCompositeTaxesxRate )
 
 /**
  * @swagger
- * /api/v1/impcompxtasaimp:
+ * /api/v1/impuestos/compuestos/tasas/editar:
  *  put:
  *      summary: actualiza la relación del impuesto compuestos con las diferentes tasas de impuestos.
  *      tags: [Impuestos]
@@ -123,11 +123,11 @@ router.get('/detail/:ImpuestoCompuestoId', schemas.validateGetComsiteTaxbyTaxRat
  *                       type: object
  */
 
-router.put( '/', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxIdByTaxRate, methods.updateCompositeTaxesxRate )
+router.put( '/editar', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxIdByTaxRate, methods.updateCompositeTaxesxRate )
 
 /**
  * @swagger
- * /api/v1/impcompxtasaimp:
+ * /api/v1/impuestos/compuestos/tasas/borrar:
  *  delete:
  *      summary: Borra la relación del impuesto compuestos con las diferentes tasas de impuestos.
  *      tags: [Impuestos]
@@ -164,6 +164,6 @@ router.put( '/', schemas.validateComsiteTaxbyTaxRate, validateSchema, validateCo
  *                       type: object
  */
 
-router.delete( '/', schemas.validateDisableCompositeTaxByTaxRate, validateSchema, methods.disableCompositeTaxexxRate )
+router.delete( '/borrar', schemas.validateDisableCompositeTaxByTaxRate, validateSchema, methods.disableCompositeTaxexxRate )
 
 export default router
