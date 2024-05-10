@@ -30,6 +30,7 @@ export const validateTaxName = async ( req, res, next )=>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
             errors: 'Error interno en el servidor'
         })
@@ -60,6 +61,7 @@ export const validateTaxCode = async ( req, res, next )=>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
              error: 'Error interno en el servidor'
         })
@@ -90,6 +92,7 @@ export const validateTaxId = async ( req, res, next )=>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
             error: 'Error interno en el servidor'
        })
@@ -125,6 +128,7 @@ export const validateNameCompositeTax = async ( req, res, next )=>{
         next()
         
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
             error: 'Error interno en el servidor'
         })
@@ -187,6 +191,7 @@ export const validateCompositeTaxId = async ( req, res, next ) =>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
             error: 'Error interno en el servidor'
         })
@@ -238,6 +243,7 @@ export const validateCompositeTaxIdByTaxRate = async( req, res, next )=>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
             error: 'Error interno en el servidor'
         })
@@ -267,6 +273,7 @@ export const validateNameTaxRate = async ( req, res, next )=>{
         }
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
             error: 'Error interno en el servidor'
         })
@@ -297,6 +304,7 @@ export const validateTaxRateId = async ( req, res, next ) =>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
             error: 'Error interno en el servidor'
         })

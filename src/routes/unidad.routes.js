@@ -53,7 +53,7 @@ router.post('/crear', schema.creatUnitSchema, validateSchema, validateUnitName, 
 
 /**
  * @swagger
- * /api/v1/unidades/detalles/{unidadid}:
+ * /api/v1/unidades/detalles/{unitid}:
  *   get:
  *      summary: Buscar por UnidadId.
  *      tags: [Unidades de medidas]
@@ -82,7 +82,7 @@ router.get( '/detalles/:unitid', schema.findById, validateSchema, validateUnitId
 
 /**
  * @swagger
- * /api/v1/unidades/{unitname}:
+ * /api/v1/unidades/detalles_nombre/{unitname}:
  *   get:
  *      summary: Buscar por NombreUnidad.
  *      tags: [Unidades de medidas]

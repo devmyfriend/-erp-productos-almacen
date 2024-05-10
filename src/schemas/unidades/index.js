@@ -28,7 +28,7 @@ export const findById = [
 
 export const findByUnitName = [
     param('unitname')
-    .isInt()
+    .isString()
     .notEmpty()
     .isLength({ min:2, max: 50 })
     .withMessage(
@@ -66,7 +66,7 @@ export const disableUnit = [
     .withMessage(
         'El campo UnidadId deber ser un numero y no puede ser vario o null'
     ),
-    body('ActualizadoPor')
+    body('BorradoPor')
     .isInt()
     .notEmpty()
     .withMessage(

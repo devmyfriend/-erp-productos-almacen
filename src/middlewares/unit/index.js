@@ -24,6 +24,7 @@ export const validateUnitName = async ( req, res, next )=>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
              errors: 'Error interno en el servidor'
         })
@@ -33,8 +34,6 @@ export const validateUnitName = async ( req, res, next )=>{
 export const validateUnitId = async ( req, res, next )=>{
 
     const unitid = req.params.unitid
-    
-
     try{
         const unit = await  UnitModel.findByPk( unitid )
 
@@ -58,6 +57,7 @@ export const validateUnitId = async ( req, res, next )=>{
 export const validateFindUnitName = async ( req, res, next )=>{
 
     const unitname = req.params.unitname
+    console.log(unitname)
 
     try{
         const unit = await  UnitModel.findOne({
@@ -78,6 +78,7 @@ export const validateFindUnitName = async ( req, res, next )=>{
         next()
 
     }catch( error ){
+        console.log( error )
         return res.status(500).send({
              errors: 'Error interno en el servidor'
         })
