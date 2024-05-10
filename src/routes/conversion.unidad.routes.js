@@ -15,7 +15,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/conversionu/:
+ * /api/v1/unidades/conversion/crear:
  *  post:
  *      summary: Crea una nueva conversión de unidad de medida.
  *      tags: [Unidades de medidas]
@@ -56,11 +56,11 @@ const router = Router()
  *                       type: object
  */
 
-router.post('/', schema.creatConversionUnitSchema, validateSchema, methods.createUnitConversion)
+router.post('/crear', schema.creatConversionUnitSchema, validateSchema, methods.createUnitConversion)
 
 /**
  * @swagger
- * /api/v1/conversionu/:
+ * /api/v1/unidades/conversion/lista:
  *   get:
  *      summary: En lista las conversiones .
  *      tags: [Unidades de medidas]
@@ -79,11 +79,11 @@ router.post('/', schema.creatConversionUnitSchema, validateSchema, methods.creat
  */
 
 
-router.get('/', methods.findAll)
+router.get('/lista', methods.findAll)
 
 /**
  * @swagger
- * /api/v1/conversionu/{unitsourceid}:
+ * /api/v1/unidades/conversion/detalles/{unitsourceid}:
  *   get:
  *      summary: Buscar por UnidadId.
  *      tags: [Unidades de medidas]
@@ -108,11 +108,11 @@ router.get('/', methods.findAll)
  *                       type: object
  */
 
-router.get('/:unitsourceid', schema.findByUnitSourceIdSchema, validateSchema, methods.findByUnitSourceId)
+router.get('/detalles/:unitsourceid', schema.findByUnitSourceIdSchema, validateSchema, methods.findByUnitSourceId)
 
 /**
  * @swagger
- * /api/v1/conversionu/:
+ * /api/v1/unidades/conversion/:
  *  put:
  *      summary: Actualiza los datos de la unidad de medida.
  *      tags: [Unidades de medidas]
@@ -153,11 +153,11 @@ router.get('/:unitsourceid', schema.findByUnitSourceIdSchema, validateSchema, me
  *                       type: object
  */
 
-router.put('/', schema.updateConversionUnitSchema, validateSchema, methods.updateUnitConversion)
+router.put('/editar', schema.updateConversionUnitSchema, validateSchema, methods.updateUnitConversion)
 
 /**
  * @swagger
- * /api/v1/conversionu/:
+ * /api/v1/unidades/conversion/borrar:
  *  delete:
  *      summary: Deshabilita la unidad de medida.
  *      tags: [Unidades de medidas]
@@ -190,6 +190,6 @@ router.put('/', schema.updateConversionUnitSchema, validateSchema, methods.updat
  *                       type: object
  */
 
-router.delete('/', schema.disableConversionUnitSchema, validateSchema, methods.disableConversionUnit)
+router.delete('/borrar', schema.disableConversionUnitSchema, validateSchema, methods.disableConversionUnit)
 
 export default router

@@ -79,7 +79,7 @@ const App = {
 
 		app.use( '/api/v1/unidades', unitRoutes  );
 
-		app.use( '/api/v1/unidades/conversionu', unitconversionRoutes  );
+		app.use( '/api/v1/unidades/conversion', unitconversionRoutes  );
 
 		app.use( '/api/v1/impuestos', cfgTaxModel );
 
