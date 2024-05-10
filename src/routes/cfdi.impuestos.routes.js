@@ -16,7 +16,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/cfgimp:
+ * /api/v1/impuestos/crear:
  *  post:
  *      summary: Crea un nuevo impuesto.
  *      tags: [Impuestos]
@@ -53,11 +53,11 @@ const router = Router()
  *                       type: object
  */
 
-router.post('/', schemas.createTaxSchema, validateSchema, validateTaxName, validateTaxCode,  methods.createTax)
+router.post('/crear', schemas.createTaxSchema, validateSchema, validateTaxName, validateTaxCode,  methods.createTax)
 
 /**
  * @swagger
- * /api/v1/cfgimp:
+ * /api/v1/impuestos/lista:
  *   get:
  *      summary: En lista los diferentes tipos de impuestos.
  *      tags: [Impuestos]  
@@ -75,11 +75,11 @@ router.post('/', schemas.createTaxSchema, validateSchema, validateTaxName, valid
  *                       type: object
  */
 
-router.get('/',methods.findAll)
+router.get('/lista',methods.findAll)
 
 /**
  * @swagger
- * /api/v1/cfgimp/{taxid}:
+ * /api/v1/impuestos/detalles/{taxid}:
  *   get:
  *      summary: Busca el impuesto por medio del id
  *      tags: [Impuestos]
@@ -105,11 +105,11 @@ router.get('/',methods.findAll)
  */
 
 
-router.get('/:taxid', schemas.findByIdTax, validateSchema, methods.findById)
+router.get('/detalles/:taxid', schemas.findByIdTax, validateSchema, methods.findById)
 
 /**
  * @swagger
- * /api/v1/cfgimp/{taxname}:
+ * /api/v1/impuestos/detalles_nombre/{taxname}:
  *   get:
  *      summary: Busca el impuesto por medio del nombre del impuesto
  *      tags: [Impuestos]
@@ -134,11 +134,11 @@ router.get('/:taxid', schemas.findByIdTax, validateSchema, methods.findById)
  *                       type: object
  */
 
-router.get('/impuesto/:taxname', schemas.findByName, validateSchema, methods.findByName)
+router.get('/impuesto/detalles_nombre/:taxname', schemas.findByName, validateSchema, methods.findByName)
 
 /**
  * @swagger
- * /api/v1/cfgimp:
+ * /api/v1/impuestos/editar:
  *  put:
  *      summary: Actualiza los datos del impuesto
  *      tags: [Impuestos]
@@ -175,11 +175,11 @@ router.get('/impuesto/:taxname', schemas.findByName, validateSchema, methods.fin
  *                       type: object
  */
 
-router.put('/', schemas.updateTaxSchema, validateSchema, validateTaxId, validateTaxName, validateTaxCode, methods.updateTax)
+router.put('/editar', schemas.updateTaxSchema, validateSchema, validateTaxId, validateTaxName, validateTaxCode, methods.updateTax)
 
 /**
  * @swagger
- * /api/v1/cfgimp:
+ * /api/v1/impuestos/borrar:
  *  delete:
  *      summary: Elimina el impuesto
  *      tags: [Impuestos]
@@ -212,6 +212,6 @@ router.put('/', schemas.updateTaxSchema, validateSchema, validateTaxId, validate
  *                       type: object
  */
 
-router.delete('/', schemas.disableTax, validateSchema, validateTaxId, methods.disableTax)
+router.delete('/borrar', schemas.disableTax, validateSchema, validateTaxId, methods.disableTax)
 
 export default router

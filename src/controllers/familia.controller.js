@@ -138,7 +138,7 @@ const undisable = async ( req, res )=>{
 
 }
 
-const getFamily = async ( req, res )=>{
+const getFamilyById = async ( req, res )=>{
 
     const FamiliaId = req.params.FamiliaId
 
@@ -164,9 +164,11 @@ const getFamily = async ( req, res )=>{
 
 }
 
+
 export const methods = {
     create,
     update,
     disable,
-    undisable
+    undisable,
+    getFamilyById,
 }

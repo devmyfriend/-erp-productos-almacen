@@ -81,13 +81,13 @@ const App = {
 
 		app.use( '/api/v1/conversionu', unitconversionRoutes  );
 
-		app.use( '/api/v1/cfgimp', cfgTaxModel );
+		app.use( '/api/v1/impuestos', cfgTaxModel );
 
-		app.use( '/api/v1/impuestocompuesto', compositeTax );
+		app.use( '/api/v1/impuestos/compuestos', compositeTax );
 		
-		app.use( '/api/v1/impcompxtasaimp', compositeTaxByTaxRate )
+		app.use( '/api/v1/impuestos/compuestos/tasas', compositeTaxByTaxRate )
 		
-		app.use( '/api/v1/impuestostasa', taxByRate )
+		app.use( '/api/v1/impuestos/tasa', taxByRate )
 
 		
 		
