@@ -32,6 +32,18 @@ import taxByRate from './src/routes/cfg.impuestos.tasas.routes.js'
 
 import compositeTaxByTaxRate from './src/routes/cfg.impuestos.compuestos.tasa.routes.js'
 
+import unitRoutes from './src/routes/unidad.routes.js';
+
+import unitconversionRoutes from './src/routes/conversion.unidad.routes.js'
+
+import cfgTaxModel from './src/routes/cfdi.impuestos.routes.js'
+
+import compositeTax from './src/routes/cfg.impuestos.compuesto.routes.js'
+
+import taxByRate from './src/routes/cfg.impuestos.tasas.routes.js'
+
+import compositeTaxByTaxRate from './src/routes/cfg.impuestos.compuestos.tasa.routes.js'
+
 import membershipRoutes from './src/routes/membresia.routes.js';
 
 // Base de datos
