@@ -2,7 +2,7 @@ import { Router } from "express";
 import { methods } from '../controllers/cfgimpuesto.compuesto.tasa.controller.js'
 import * as schemas from '../schemas/Impuestos/index.js'
 import { validateSchema } from '../middlewares/express-validator/index.js'
-import { validateCompositeTaxId, validateCompositeTaxIdByTaxRate } from "../middlewares/taxs/index.js";
+import { validateCompositeTaxId, validateCompositeTaxIdByParam, validateCompositeTaxIdByTaxRate } from "../middlewares/taxs/index.js";
 
 
 const router = Router()
@@ -82,7 +82,7 @@ router.post( '/crear', schemas.validateComsiteTaxbyTaxRate, validateSchema, vali
  *                       type: object
  */
 
-router.get('/detalles/:ImpuestoCompuestoId', schemas.validateGetComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxId, methods.getDetailCompositeTaxesxRate )
+router.get('/detalles/:ImpuestoCompuestoId', schemas.validateGetComsiteTaxbyTaxRate, validateSchema, validateCompositeTaxIdByParam, methods.getDetailCompositeTaxesxRate )
 
 /**
  * @swagger

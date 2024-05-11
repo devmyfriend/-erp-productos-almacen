@@ -119,7 +119,7 @@ export const disableCompositeTaxSchema = [
 //cfgimpuestoscompuestosxtasas
 
 export const validateComsiteTaxbyTaxRate =[
-    body( 'ImpuestosCompuestoID' )
+    body( 'ImpuestoCompuestoId' )
     .notEmpty()
     .isInt()
     .withMessage('El campo ImpuestoCompuestoId es obligarorio y debe ser numérico'),
@@ -130,7 +130,7 @@ export const validateComsiteTaxbyTaxRate =[
 ]
 
 export const validateGetComsiteTaxbyTaxRate =[
-    param( 'ImpuestosCompuestoID' )
+    param( 'ImpuestoCompuestoId' )
     .notEmpty()
     .isInt()
     .withMessage('El campo ImpuestoCompuestoId es obligarorio y debe ser numérico')
