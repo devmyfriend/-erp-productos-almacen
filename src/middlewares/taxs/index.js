@@ -181,7 +181,7 @@ export const validateCompositeTaxId = async ( req, res, next ) =>{
             }
         })
 
-        if( tax ){
+        if( !tax ){
             return res.status(400).send({
                  status: 'Error de validación',
                  errors: 'No se encontro el ID el impuesto compuesto'

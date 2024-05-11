@@ -153,11 +153,11 @@ router.get( '/detalles/:ImpuestoCompuestoId', schemas.findCompositeTaxSchema, va
  *                       type: object
  */
 
-router.put( '/editar', schemas.updateCompositeTaxSchema, validateCompositeTaxId, validateNameCompositeTax, validatePredeterminedCompositeTax, methods.updateCompositeTax )
+router.put( '/editar', schemas.updateCompositeTaxSchema, validateSchema, validateCompositeTaxId, validateNameCompositeTax, validatePredeterminedCompositeTax, methods.updateCompositeTax )
 
 /**
  * @swagger
- * /api/v1/impuestos/compuesto/borrar:
+ * /api/v1/impuestos/compuestos/borrar:
  *  delete:
  *      summary: Borra un impuesto compuesto.
  *      tags: [Impuestos]
