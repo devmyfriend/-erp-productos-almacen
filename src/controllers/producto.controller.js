@@ -10,12 +10,9 @@ import {
 import { Connection as sequelize } from '../database/mariadb.database.js';
 import { GenProductModel } from '../models/producto.gral.model.js';
 
-// CALL sp_admon_productos(2, NULL)
-// CALL sp_admon_productos(2, 'TABPER123123')
-
 const findAll = async (req, res) => {
 	try {
-		const data = await sequelize.query("CALL sp_admon_productos(1, NULL) ")
+		const data = await sequelize.query('CALL sp_admon_productos(1, NULL) ');
 
 		console.log(data);
 
@@ -37,7 +34,7 @@ const findById = async (req, res) => {
 		const productCode = req.params.id;
 
 		const data = await sequelize.query('CALL sp_admon_productos(?, ?)', {
-			replacements: [2,productCode],
+			replacements: [2, productCode],
 			type: sequelize.QueryTypes.RAW,
 		});
 
