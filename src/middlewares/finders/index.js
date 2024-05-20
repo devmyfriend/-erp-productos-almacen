@@ -1,4 +1,5 @@
 import {
+	AccessModel,
 	GenProductModel,
 	LinetModel,
 	MembershipModel,
@@ -134,5 +135,19 @@ export const findTypeScheduleById = async id =>
 export const findTypeScheduleByName = async name =>
 	findItem(TypeScheduleModel, {
 		NombrePeriodo: name,
+		Borrado: false,
+	});
+
+/* Acces per Memberships */
+
+export const findAccesById = async id =>
+	findItem(AccessModel, {
+		AccesoId: id,
+		Borrado: false,
+	});
+
+export const findAccesByName = async name =>
+	findItem(AccessModel, {
+		NombreAcceso: name,
 		Borrado: false,
 	});

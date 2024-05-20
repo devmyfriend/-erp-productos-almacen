@@ -11,3 +11,4 @@ export { MembershipModel } from './membresia.model.js';
 export { TypeMembershipModel } from './tipo.membresia.model.js';
 export { TypeScheduleModel } from './tipo.perido.model.js';
 export { TypeServiceModel } from './tipo.servicio.model.js';
+export {AccessModel} from './acceso.js'

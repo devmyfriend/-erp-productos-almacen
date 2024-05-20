@@ -22,6 +22,8 @@ import serviceRoutes from './src/routes/servicio.routes.js';
 
 import membershipRoutes from './src/routes/membresia.routes.js';
 
+import membershipAccessRoutes from './src/routes/membresia.acceso.routes.js';
+
 // Base de datos
 import { Connection } from './src/database/mariadb.database.js';
 
@@ -66,6 +68,8 @@ const App = {
 		app.use('/api/v1/servicios', serviceRoutes);
 
 		app.use('/api/v1/membresias', membershipRoutes);
+		
+		app.use('/api/v1/membresias/acceso', membershipAccessRoutes)
 
 		app.use('/', (req, res) => {
 			res.status(404).json({ error: 'error en la solicitud' });
