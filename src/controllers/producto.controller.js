@@ -10,26 +10,14 @@ import {
 import { Connection as sequelize } from '../database/mariadb.database.js';
 import { GenProductModel } from '../models/producto.gral.model.js';
 
+// CALL sp_admon_productos(2, NULL)
+// CALL sp_admon_productos(2, 'TABPER123123')
+
 const findAll = async (req, res) => {
 	try {
-		const data = await GenProductModel.findAll({
-			attributes: [
-				'ProductoId',
-				'CodigoProducto',
-				'TipoProductoId',
-				'NombreProducto',
-				'LineaId',
-				'CreadoEn',
-			],
+		const data = await sequelize.query("CALL sp_admon_productos(1, NULL) ")
 
-			where: {
-				Borrado: 0,
-			},
-
-			order: [['ProductoId', 'desc']],
-
-			limit: 10,
-		});
+		console.log(data);
 
 		if (data.length < 1) {
 			return res.status(404).json({ error: 'No hay datos disponibles' });
@@ -48,8 +36,8 @@ const findById = async (req, res) => {
 	try {
 		const productCode = req.params.id;
 
-		const data = await sequelize.query('CALL sp_producto_detalle(?)', {
-			replacements: [productCode],
+		const data = await sequelize.query('CALL sp_admon_productos(?, ?)', {
+			replacements: [2,productCode],
 			type: sequelize.QueryTypes.RAW,
 		});
 
