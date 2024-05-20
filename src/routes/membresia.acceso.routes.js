@@ -40,7 +40,7 @@ router.get('/', methods.findAll);
  * /api/v1/membresias/acceso/crear:
  *   post:
  *     summary: Crear un nuevo Acceso
- *     tags: [Accesos Membresias] 
+ *     tags: [Accesos Membresias]
  *     requestBody:
  *       required: true
  *       content:
@@ -82,13 +82,12 @@ router.post(
 	methods.create,
 );
 
-
 /**
  * @swagger
  * /api/v1/membresias/acceso/editar:
  *   put:
  *     summary: Crear un nuevo Acceso
- *     tags: [Accesos Membresias] 
+ *     tags: [Accesos Membresias]
  *     requestBody:
  *       required: true
  *       content:
@@ -134,26 +133,5 @@ router.put(
 	methods.update,
 );
 
-
-
-
-//AccesoId
-
-/*
-
- *     responses:
- *       200:
- *         description: Producto creado exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                  message:
- *                    type: string
- *                    description: Mensaje de confirmación de la creación.
- *                    example: "Se ha creado el producto"
-
-*/
 
 export default router;
