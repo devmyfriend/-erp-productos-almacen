@@ -177,7 +177,7 @@ router.delete(
  * @swagger
  * /api/v1/membresias/acceso/agregar:
  *   post:
- *     summary: Accesos por membresia 
+ *     summary: Accesos por membresia
  *     tags: [Accesos Membresias]
  *     requestBody:
  *       required: true
@@ -189,12 +189,20 @@ router.delete(
  *               MembresiaId:
  *                 type: integer
  *                 description: Id de membresia
- *               AccesoId:
- *                 type: integer
- *                 description: Id del acceso
  *               CreadoPor:
  *                 type: integer
  *                 description: ID del usuario que creó el acceso
+ *               Accesos:
+ *                 type: array
+ *                 description: Array de objetos de Id de acceso
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     AccesoId:
+ *                       type: integer
+ *                       example: 1
+ *                       description: Id del acceso
+ * 
  *     responses:
  *       200:
  *         description: Accesos agregados
@@ -203,14 +211,16 @@ router.delete(
  *             schema:
  *               type: object
  *               properties:
- *                  message:
- *                    type: string
- *                    description: Mensaje de confirmación de .
- *                    example: "Se ha creado el registro"
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de confirmación de .
+ *                   example: "Se ha creado el registro"
  */
 
 router.post(
 	'/agregar',
+	schemas.addAccessSchema,
+	validateSchema,
 	methods.addAccess,
 );
 

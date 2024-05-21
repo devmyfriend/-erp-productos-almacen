@@ -9,7 +9,7 @@ export const MembershipAccessModel = Connection.define(
 			primaryKey: true,
 		},
 
-        AccesoId: {
+        MembresiaId: {
 			type: DataTypes.NUMBER,
 			primaryKey: true,
 		},
