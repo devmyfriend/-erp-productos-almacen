@@ -1,6 +1,8 @@
 import {
+	AccessModel,
 	GenProductModel,
 	LinetModel,
+	MembershipAccessModel,
 	MembershipModel,
 	ProductModel,
 	ServiceModel,
@@ -135,4 +137,24 @@ export const findTypeScheduleByName = async name =>
 	findItem(TypeScheduleModel, {
 		NombrePeriodo: name,
 		Borrado: false,
+	});
+
+/* Access per Memberships */
+
+export const findAccesById = async id =>
+	findItem(AccessModel, {
+		AccesoId: id,
+		Borrado: false,
+	});
+
+export const findAccesByName = async name =>
+	findItem(AccessModel, {
+		NombreAcceso: name,
+		Borrado: false,
+	});
+
+export const findPermissionInMembership = async (AccesoId, MembresiaId) =>
+	findItem(MembershipAccessModel, {
+		AccesoId,
+		MembresiaId,
 	});

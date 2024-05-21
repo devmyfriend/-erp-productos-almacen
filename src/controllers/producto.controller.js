@@ -102,7 +102,7 @@ const create = async (req, res) => {
 		if (codeFound.exist) {
 			return res
 				.status(409)
-				.json({ error: 'El Codigo de producto ya está enuso' });
+				.json({ error: 'El Codigo de producto ya está en uso' });
 		}
 
 		const newData = await GenProductModel.create(data);

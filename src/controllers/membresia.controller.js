@@ -1,4 +1,5 @@
 import { Op, Sequelize } from 'sequelize';
+import { Connection as conn } from '../database/mariadb.database.js';
 import {
 	findAllMembershipById,
 	findMembershipById,
@@ -111,7 +112,16 @@ const findById = async (req, res) => {
 			},
 		});
 
-		return res.status(200).json({ response: data, type, typeSchedule });
+		const access = await conn.query('CALL sp_acceso_membresia(6)');
+
+		return res.status(200).json({
+			response: {
+				...data.dataValues,
+				...typeSchedule.dataValues,
+				...type.dataValues,
+			},
+			access,
+		});
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({
@@ -196,7 +206,7 @@ const update = async (req, res) => {
 	}
 };
 
-export const disable = async (req, res) => {
+const disable = async (req, res) => {
 	try {
 		const data = req.body;
 		const membershipFound = await findMembershipById(data.MembresiaId);
@@ -229,7 +239,7 @@ export const disable = async (req, res) => {
 	}
 };
 
-export const enable = async (req, res) => {
+const enable = async (req, res) => {
 	try {
 		const data = req.body;
 		const membershipFound = await findAllMembershipById(data.MembresiaId);
@@ -399,7 +409,7 @@ const updatetype = async (req, res) => {
 	}
 };
 
-export const disableType = async (req, res) => {
+const disableType = async (req, res) => {
 	try {
 		const data = req.body;
 		const typeFound = await findTypeMembershipById(data.TipoMembresiaId);
