@@ -20,7 +20,7 @@ const router = Router();
  *     tags: [Productos e Insumos]
  *     responses:
  *       200:
- *         description: Lista del Productos e Insumos
+ *         description: Respuesta
  *         content:
  *           application/json:
  *             schema:
@@ -50,7 +50,7 @@ router.get('/', methods.findAll);
  *           type: string
  *     responses:
  *       200:
- *         description: Lista del Productos e Insumos
+ *         description: Respuesta
  *         content:
  *           application/json:
  *             schema:
