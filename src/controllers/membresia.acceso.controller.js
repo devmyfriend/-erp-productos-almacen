@@ -123,9 +123,14 @@ const disable = async (req, res) => {
 	}
 };
 
+const addAccess = async (req, res) => {
+	return res.json(req.body);
+};
+
 export const methods = {
 	findAll,
 	create,
 	update,
 	disable,
+	addAccess,
 };

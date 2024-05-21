@@ -173,4 +173,45 @@ router.delete(
 	methods.disable,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/acceso/agregar:
+ *   post:
+ *     summary: Accesos por membresia 
+ *     tags: [Accesos Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               MembresiaId:
+ *                 type: integer
+ *                 description: Id de membresia
+ *               AccesoId:
+ *                 type: integer
+ *                 description: Id del acceso
+ *               CreadoPor:
+ *                 type: integer
+ *                 description: ID del usuario que creó el acceso
+ *     responses:
+ *       200:
+ *         description: Accesos agregados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación de .
+ *                    example: "Se ha creado el registro"
+ */
+
+router.post(
+	'/agregar',
+	methods.addAccess,
+);
+
 export default router;
