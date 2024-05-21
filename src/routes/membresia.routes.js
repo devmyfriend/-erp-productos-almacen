@@ -38,6 +38,36 @@ router.get('/', methods.findAll);
 
 /**
  * @swagger
+ * /api/v1/membresias/buscar/{nombre}:
+ *   get:
+ *     summary: Buscar Membresias
+ *     tags: [Membresias]
+ *     parameters:
+ *       - in: path
+ *         name: nombre
+ *         required: true
+ *         description: nombre de Membresia a buscar
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Respuesta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 response:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ */
+
+router.get('/buscar/:id', methods.findByName);
+
+/**
+ * @swagger
  * /api/v1/membresias/detalle/{id}:
  *   get:
  *     summary: Obtener detalles de una membresía por ID
@@ -277,6 +307,36 @@ router.get('/tipo', methods.findAllType);
 
 /**
  * @swagger
+ * /api/v1/membresias/tipo/buscar/{nombre}:
+ *   get:
+ *     summary: Buscar tipos de membresias
+ *     tags: [Membresias]
+ *     parameters:
+ *       - in: path
+ *         name: nombre
+ *         required: true
+ *         description: Nombre de Membresia a buscar
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Respuesta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 response:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ */
+
+router.get('/tipo/buscar/:id', methods.findTypeByName);
+
+/**
+ * @swagger
  * /api/v1/membresias/tipo/crear:
  *   post:
  *     summary: Crear un nuevo Tipo de Membresia
@@ -427,6 +487,37 @@ router.delete(
  *                     properties:
  */
 router.get('/periodo', methods.findAllTypeSchedule);
+
+/**
+ * @swagger
+ * /api/v1/membresias/periodo/buscar/{nombre}:
+ *   get:
+ *     summary: Buscar  periodos
+ *     tags: [Membresias]
+ *     parameters:
+ *       - in: path
+ *         name: nombre
+ *         required: true
+ *         description: Nombre periodo
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Respuesta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 response:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ */
+
+router.get('/periodo/buscar/:id', methods.findAllTypeScheduleByname);
+
 
 /**
  * @swagger
