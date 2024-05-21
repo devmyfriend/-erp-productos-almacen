@@ -29,6 +29,29 @@ const findAll = async (req, res) => {
 	}
 };
 
+const findByName = async (req, res) => {
+	try {
+		const name = req.params.id;
+
+		const data = await sequelize.query('CALL sp_admon_productos(?, ?)', {
+			replacements: [3, name],
+			type: sequelize.QueryTypes.RAW,
+		});
+
+		if (data.length < 1) {
+			return res.status(404).json({ error: 'No hay datos disponibles' });
+		}
+
+		return res.status(200).json({ response: data });
+	} catch (error) {
+		console.log(error);
+
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 const findById = async (req, res) => {
 	try {
 		const productCode = req.params.id;
@@ -227,6 +250,7 @@ const enable = async (req, res) => {
 
 export const methods = {
 	findAll,
+	findByName,
 	create,
 	findById,
 	update,
