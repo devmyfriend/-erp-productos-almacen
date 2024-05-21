@@ -16,11 +16,11 @@ const router = Router();
  * @swagger
  * /api/v1/productos:
  *   get:
- *     summary: Obtener una lista general del Productos e Insumos
+ *     summary: Obtener una lista general de Productos e Insumos
  *     tags: [Productos e Insumos]
  *     responses:
  *       200:
- *         description: Lista del Productos e Insumos
+ *         description: Respuesta
  *         content:
  *           application/json:
  *             schema:
@@ -34,6 +34,36 @@ const router = Router();
  */
 
 router.get('/', methods.findAll);
+
+/**
+ * @swagger
+ * /api/v1/productos/buscar/{nombre}:
+ *   get:
+ *     summary: Buscar Productos
+ *     tags: [Productos e Insumos]
+ *     parameters:
+ *       - in: path
+ *         name: nombre
+ *         required: true
+ *         description: nombre del producto a buscar
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Respuesta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 response:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ */
+
+router.get('/buscar/:id', methods.findByName);
 
 /**
  * @swagger

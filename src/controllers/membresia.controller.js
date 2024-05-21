@@ -1,3 +1,4 @@
+import { Op, Sequelize } from 'sequelize';
 import {
 	findAllMembershipById,
 	findMembershipById,
@@ -29,6 +30,37 @@ const findAll = async (req, res) => {
 			where: {
 				Borrado: false,
 			},
+		});
+
+		return res.status(200).json({ response: data });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
+const findByName = async (req, res) => {
+	try {
+		const name = req.params.id;
+		const data = await MembershipModel.findAll({
+			attributes: [
+				'MembresiaId',
+				'TipoMembresiaId',
+				'NombreMembresia',
+				'Descripcion',
+				'Puntos',
+				'ClaveUnidadsat',
+				'ClaveProdcutoServicio',
+			],
+			where: Sequelize.where(
+				Sequelize.fn('lower', Sequelize.col('NombreMembresia')),
+				{
+					[Op.like]: `%${name.toLowerCase()}%`,
+				},
+			),
+			Borrado: false,
 		});
 
 		return res.status(200).json({ response: data });
@@ -255,6 +287,34 @@ const findAllType = async (req, res) => {
 	}
 };
 
+const findTypeByName = async (req, res) => {
+	try {
+		const name = req.params.id;
+		const data = await TypeMembershipModel.findAll({
+			attributes: [
+				'TipoMembresiaId',
+				'TipoPeriodoId',
+				'NombreTipoMembresia',
+				'Cita',
+				'MinimoAsociados',
+			],
+			where: Sequelize.where(
+				Sequelize.fn('lower', Sequelize.col('NombreTipoMembresia')),
+				{
+					[Op.like]: `%${name.toLowerCase()}%`,
+				},
+			),
+		});
+
+		return res.status(200).json({ response: data });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 const createType = async (req, res) => {
 	try {
 		const data = req.body;
@@ -375,7 +435,29 @@ export const disableType = async (req, res) => {
 const findAllTypeSchedule = async (req, res) => {
 	try {
 		const data = await TypeScheduleModel.findAll({
-			attributes: ['TipoPeriodoId', 'NombrePeriodo'],
+			attributes: ['TipoPeriodoId', 'NombrePeriodo', 'Borrado'],
+		});
+
+		return res.status(200).json({ response: data });
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
+const findAllTypeScheduleByname = async (req, res) => {
+	try {
+		const name = req.params.id;
+		const data = await TypeScheduleModel.findAll({
+			attributes: ['TipoPeriodoId', 'NombrePeriodo', 'Borrado'],
+			where: Sequelize.where(
+				Sequelize.fn('lower', Sequelize.col('NombrePeriodo')),
+				{
+					[Op.like]: `%${name.toLowerCase()}%`,
+				},
+			),
 		});
 
 		return res.status(200).json({ response: data });
@@ -482,17 +564,20 @@ const disableTypeSchedule = async (req, res) => {
 
 export const methods = {
 	findAll,
+	findByName,
 	findById,
 	create,
 	update,
 	disable,
 	enable,
 	findAllType,
+	findTypeByName,
 	createType,
 	updatetype,
 	disableType,
 	findAllTypeSchedule,
+	findAllTypeScheduleByname,
 	createTypeSchedule,
 	updateTypeSchedule,
-	disableTypeSchedule
+	disableTypeSchedule,
 };
