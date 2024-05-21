@@ -34,7 +34,7 @@ const findByName = async (req, res) => {
 		const name = req.params.id;
 
 		const data = await sequelize.query('CALL sp_admon_productos(?, ?)', {
-			replacements: [3, name],
+			replacements: [3, name.toLowerCase()],
 			type: sequelize.QueryTypes.RAW,
 		});
 
