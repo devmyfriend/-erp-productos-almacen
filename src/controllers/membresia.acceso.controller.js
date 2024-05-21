@@ -76,7 +76,7 @@ const update = async (req, res) => {
 			return res.status(409).json({ error: 'El nombre ya está en uso' });
 		}
 
-		const newData = await AccessModel.update(
+		await AccessModel.update(
 			Object.assign(data, { ActualizadoEn: new Date() }),
 			{ where: { AccesoId: data.AccesoId } },
 		);
@@ -92,8 +92,40 @@ const update = async (req, res) => {
 	}
 };
 
+const disable = async (req, res) => {
+	try {
+		const data = req.body;
+
+		const dataFound = await findAccesById(data.AccesoId);
+		const userFound = await findUserById(data.BorradoPor);
+
+		if (!dataFound.exist) {
+			return res.status(404).json({ error: 'Acceso no encontrado' });
+		}
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		await AccessModel.update(
+			Object.assign(data, { BorradoEn: new Date(), Borrado: true }),
+			{ where: { AccesoId: data.AccesoId } },
+		);
+
+		return res.status(200).json({
+			message: 'Se ha borrado el registro',
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			error: 'Error interno del servidor',
+		});
+	}
+};
+
 export const methods = {
 	findAll,
 	create,
 	update,
+	disable,
 };

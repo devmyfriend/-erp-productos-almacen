@@ -76,3 +76,17 @@ export const updateMembershipAccesSchema = [
 		.isInt()
 		.withMessage('El campo ActualizadoPor debe ser un número entero.'),
 ];
+
+
+export const disableMembershipAccesSchema = [
+	body('AccesoId')
+		.notEmpty()
+		.withMessage('El campo AccesoId no puede estar vacío.')
+		.isInt()
+		.withMessage('El campo AccesoId debe ser un número entero.'),
+
+	body('BorradoPor')
+		.notEmpty()
+		.isInt()
+		.withMessage('El campo BorradoPor debe ser un número entero.'),
+];

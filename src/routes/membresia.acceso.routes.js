@@ -133,5 +133,44 @@ router.put(
 	methods.update,
 );
 
+/**
+ * @swagger
+ * /api/v1/membresias/acceso/borrar:
+ *   delete:
+ *     summary: Borrar un Acceso
+ *     tags: [Accesos Membresias]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               AccesoId:
+ *                 type: integer
+ *                 description: Id del acceso
+ *               BorradoPor:
+ *                 type: integer
+ *                 description: Id del usuario que creó el acceso
+ *     responses:
+ *       200:
+ *         description: Acceso borrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Se ha borrado el registro"
+ */
+
+router.delete(
+	'/borrar',
+	schemas.disableMembershipAccesSchema,
+	validateSchema,
+	methods.disable,
+);
 
 export default router;
