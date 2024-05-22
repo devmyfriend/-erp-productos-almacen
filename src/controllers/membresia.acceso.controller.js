@@ -10,13 +10,7 @@ import { AccessModel, MembershipAccessModel } from '../models/index.js';
 const findAll = async (req, res) => {
 	try {
 		const data = await AccessModel.findAll({
-			attributes: [
-				'AccesoId',
-				'NombreAcceso',
-				'Horario',
-				'Completo',
-				'CreadoEn',
-			],
+			attributes: ['AccesoId', 'NombreAcceso', 'Completo', 'CreadoEn'],
 			order: [['AccesoId', 'DESC']],
 		});
 

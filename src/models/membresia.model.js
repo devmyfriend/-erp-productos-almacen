@@ -12,8 +12,10 @@ export const MembershipModel = Connection.define(
 		TipoMembresiaId: {
 			type: DataTypes.NUMBER,
 		},
-
 		NombreMembresia: {
+			type: DataTypes.STRING,
+		},
+		Horario: {
 			type: DataTypes.STRING,
 		},
 		Descripcion: {
@@ -21,7 +23,7 @@ export const MembershipModel = Connection.define(
 		},
 		Puntos: {
 			type: DataTypes.NUMBER,
-		} ,
+		},
 		ClaveUnidadsat: {
 			type: DataTypes.STRING,
 		},

@@ -51,10 +51,6 @@ router.get('/', methods.findAll);
  *               NombreAcceso:
  *                 type: string
  *                 description: Nombre del acceso
- *               Horario:
- *                 type: string
- *                 description: Horario del acceso
- *                 example: 00:00,00:00
  *               Completo:
  *                 type: boolean
  *                 description: Indica si el acceso está completo o no
@@ -101,11 +97,7 @@ router.post(
  *               NombreAcceso:
  *                 type: string
  *                 description: Nombre del acceso
- *                 example: Premium
- *               Horario:
- *                 type: string
- *                 description: Horario del acceso
- *                 example: 00:00,00:00
+ *                 example: Regadera
  *               Completo:
  *                 type: boolean
  *                 description: Indica si el acceso está completo o no
