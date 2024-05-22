@@ -114,6 +114,10 @@ router.get('/detalle/:id', methods.findById);
  *               NombreMembresia:
  *                 type: string
  *                 example: Nueva membresia
+ *               Horario:
+ *                 type: string
+ *                 description: Horario del acceso
+ *                 example: 00:00,00:00
  *               Descripcion:
  *                 type: string
  *                 example: Ejemplo de una descripcion
@@ -169,6 +173,10 @@ router.post(
  *               NombreMembresia:
  *                 type: string
  *                 example: Nueva membresia editada
+ *               Horario:
+ *                 type: string
+ *                 description: Horario del acceso
+ *                 example: 00:00,00:00
  *               Descripcion:
  *                 type: string
  *                 example: Ejemplo de una descripcion editada

@@ -13,9 +13,6 @@ export const AccessModel = Connection.define(
 		NombreAcceso: {
 			type: DataTypes.STRING,
 		},
-		Horario: {
-			type: DataTypes.STRING,
-		},
 
 		Completo: {
 			type: DataTypes.BOOLEAN,
