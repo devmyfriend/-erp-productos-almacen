@@ -1,5 +1,6 @@
 import {
 	AccessModel,
+	AssetModel,
 	GenProductModel,
 	LinetModel,
 	MembershipAccessModel,
@@ -157,4 +158,16 @@ export const findPermissionInMembership = async (AccesoId, MembresiaId) =>
 	findItem(MembershipAccessModel, {
 		AccesoId,
 		MembresiaId,
+	});
+
+/* Assets */
+
+export const findAllAssetById = id =>
+	findItem(AssetModel, {
+		ActivoId: id,
+	});
+
+export const findAllAssetByName = name =>
+	findItem(AssetModel, {
+		NombreActivo: name,
 	});
