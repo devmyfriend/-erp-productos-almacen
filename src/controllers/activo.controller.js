@@ -107,7 +107,7 @@ const create = async (req, res) => {
 		}
 
 		await AssetModel.create(data);
-        
+
 		return res.status(200).json({ message: 'Se ha creado el registro' });
 	} catch (error) {
 		{
