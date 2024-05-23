@@ -191,4 +191,42 @@ router.put(
 	methods.update,
 );
 
+/**
+ * @swagger
+ * /api/v1/activos/borrar:
+ *   delete:
+ *     summary: Eliminar un Activo
+ *     tags: [Activos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ActivoId:
+ *                 type: integer
+ *                 example: 1
+ *               BorradoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Activo eliminado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Activo eliminado"
+ */
+router.delete(
+	'/borrar',
+	schemas.disableAssetSchema,
+	validateSchema,
+	methods.disable,
+);
+
 export default router;

@@ -83,5 +83,18 @@ export const updateAssetSchema = [
 	body('ActualizadoPor')
 		.notEmpty()
 		.isInt({ min: 0 })
-		.withMessage('El campo ActualizadoPor debe ser un número entero no negativo.'),
+		.withMessage(
+			'El campo ActualizadoPor debe ser un número entero no negativo.',
+		),
+];
+
+export const disableAssetSchema = [
+	body('ActivoId')
+		.notEmpty()
+		.isInt({ min: 0 })
+		.withMessage('ID del activo debe ser un número entero no negativo.'),
+	body('BorradoPor')
+		.notEmpty()
+		.isInt({ min: 0 })
+		.withMessage('El campo BorradoPor debe ser un número entero no negativo.'),
 ];

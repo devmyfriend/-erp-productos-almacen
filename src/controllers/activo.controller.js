@@ -153,14 +153,45 @@ const update = async (req, res) => {
 		return res.status(200).json({ message: 'Se ha editado el registro' });
 	} catch (error) {
 		console.log(error.message);
-
 		return res.status(500).json({ error: 'Error interno del servidor' });
 	}
 };
+
+const disable = async (req, res) => {
+	try {
+		const data = req.body;
+		const dataFound = await findAssetById(data.ActivoId);
+		const userFound = await findUserById(data.BorradoPor);
+
+		if (!dataFound.exist) {
+			return res.status(404).json({ error: 'El activo no existe' });
+		}
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		await AssetModel.update(
+			Object.assign(data, { Borrado: true, BorradoEn: new Date() }),
+			{
+				where: {
+					ActivoId: data.ActivoId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Se ha eliminado el registro' });
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({ error: 'Error interno del servidor' });
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
 	findByName,
 	create,
 	update,
+	disable,
 };
