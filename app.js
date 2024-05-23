@@ -8,9 +8,7 @@ import productsRoutes from './src/routes/producto.routes.js';
 
 import typeProductsRoutes from './src/routes/tipo.producto.routes.js';
 
-import productsActivRoutes from './src/routes/producto.activo.routes.js';
-
-import productComboRoutes from './src/routes/producto.combo.routes.js';
+import assetRoutes from './src/routes/activos.routes.js';
 
 import storeRoutes from './src/routes/almacen.routes.js';
 
@@ -55,10 +53,6 @@ const App = {
 
 		app.use('/api/v1/productos/tipo', typeProductsRoutes);
 
-		app.use('/api/v1/productos/activo', productsActivRoutes);
-
-		app.use('/api/v1/productos/combo', productComboRoutes);
-
 		app.use('/api/v1/almacen', storeRoutes);
 
 		app.use('/api/v1/almacen/producto', storeProducRoutes);
@@ -68,8 +62,10 @@ const App = {
 		app.use('/api/v1/servicios', serviceRoutes);
 
 		app.use('/api/v1/membresias', membershipRoutes);
-		
-		app.use('/api/v1/membresias/acceso', membershipAccessRoutes)
+
+		app.use('/api/v1/membresias/acceso', membershipAccessRoutes);
+
+		app.use('/api/v1/activos', assetRoutes);
 
 		app.use('/', (req, res) => {
 			res.status(404).json({ error: 'error en la solicitud' });
