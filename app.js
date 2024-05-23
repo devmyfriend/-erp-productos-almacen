@@ -10,8 +10,6 @@ import typeProductsRoutes from './src/routes/tipo.producto.routes.js';
 
 import assetRoutes from './src/routes/activos.routes.js';
 
-import productComboRoutes from './src/routes/producto.combo.routes.js';
-
 import storeRoutes from './src/routes/almacen.routes.js';
 
 import storeProducRoutes from './src/routes/almacen.producto.routes.js';
@@ -54,8 +52,6 @@ const App = {
 		app.use('/api/v1/productos', productsRoutes);
 
 		app.use('/api/v1/productos/tipo', typeProductsRoutes);
-
-		app.use('/api/v1/productos/combo', productComboRoutes);
 
 		app.use('/api/v1/almacen', storeRoutes);
 
