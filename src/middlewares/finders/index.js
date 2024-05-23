@@ -167,6 +167,12 @@ export const findAllAssetById = id =>
 		ActivoId: id,
 	});
 
+export const findAssetById = id =>
+	findItem(AssetModel, {
+		ActivoId: id,
+		Borrado: false
+	});
+
 export const findAllAssetByName = name =>
 	findItem(AssetModel, {
 		NombreActivo: name,

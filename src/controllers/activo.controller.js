@@ -3,6 +3,7 @@ import { Connection as conn } from '../database/mariadb.database.js';
 import {
 	findAllAssetById,
 	findAllAssetByName,
+	findAssetById,
 	findLineById,
 	findUserById,
 } from '../middlewares/finders/index.js';
@@ -112,9 +113,48 @@ const create = async (req, res) => {
 	} catch (error) {
 		{
 			console.log(error.message);
-
 			return res.status(500).json({ error: 'Error interno del servidor' });
 		}
+	}
+};
+
+const update = async (req, res) => {
+	try {
+		const data = req.body;
+		const dataFound = await findAssetById(data.ActivoId);
+		const userFound = await findUserById(data.ActualizadoPor);
+		const nameFound = await findAllAssetByName(data.NombreActivo);
+		const lineFound = await findLineById(data.LineaId);
+
+		if (!dataFound.exist) {
+			return res.status(404).json({ error: 'El activo no existe' });
+		}
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (nameFound.exist && nameFound.data.ActivoId != data.ActivoId) {
+			return res.status(409).json({ error: 'El nombre ya está en uso' });
+		}
+
+		if (!lineFound.exist) {
+			return res.status(404).json({ error: 'La linea no existe' });
+		}
+
+		await AssetModel.update(
+			Object.assign(data, { ActualizadoEn: new Date() }),
+			{
+				where: {
+					ActivoId: data.ActivoId,
+				},
+			},
+		);
+		return res.status(200).json({ message: 'Se ha editado el registro' });
+	} catch (error) {
+		console.log(error.message);
+
+		return res.status(500).json({ error: 'Error interno del servidor' });
 	}
 };
 export const methods = {
@@ -122,4 +162,5 @@ export const methods = {
 	findById,
 	findByName,
 	create,
+	update,
 };

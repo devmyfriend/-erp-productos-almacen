@@ -141,4 +141,54 @@ router.post(
 	methods.create,
 );
 
+/**
+ * @swagger
+ * /api/v1/activos/editar:
+ *   put:
+ *     summary: Editar un nuevo activo
+ *     tags: [Activos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ActivoId:
+ *                 type: integer
+ *               NombreActivo:
+ *                 type: string
+ *               Descripcion:
+ *                 type: string
+ *               Existencias:
+ *                 type: integer
+ *               Precio:
+ *                 type: number
+ *               ImpuestoCompuestoId:
+ *                 type: integer
+ *               LineaId:
+ *                 type: integer
+ *               ActualizadoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Respuesta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Se ha editado el registro"
+ */
+
+router.put(
+	'/editar',
+	schemas.updateAssetSchema,
+	validateSchema,
+	methods.update,
+);
+
 export default router;
