@@ -122,3 +122,27 @@ export const setAssetSchema = [
 			'El campo NumeroSerie no puede estar vacío y debe ser un string',
 		),
 ];
+
+export const updateCodeAssetSchema = [
+	body('ActivoSerieId')
+		.notEmpty()
+		.withMessage('El campo ActivoSerieId no puede estar vacío')
+		.isInt()
+		.withMessage('El ActivoSerieId debe ser un número entero'),
+	body('ActivoId')
+		.notEmpty()
+		.withMessage('El campo ActivoId no puede estar vacío')
+		.isInt()
+		.withMessage('El ActivoId debe ser un número entero'),
+	body('NumeroSerie')
+		.notEmpty()
+		.isString()
+		.withMessage(
+			'El campo NumeroSerie no puede estar vacío y debe ser un string',
+		),
+	body('ActualizadoPor')
+		.notEmpty()
+		.withMessage('El campo ActualizadoPor no puede estar vacío')
+		.isInt()
+		.withMessage('El ActualizadoPor debe ser un número entero'),
+];

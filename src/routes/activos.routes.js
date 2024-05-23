@@ -231,7 +231,7 @@ router.delete(
 
 /**
  * @swagger
- * /api/v1/activos/crear/codigo:
+ * /api/v1/activos/serie/crear:
  *   post:
  *     summary: Alta del activo
  *     tags: [Activos]
@@ -272,10 +272,90 @@ router.delete(
  *                    example: "Se ha creado el registro"
  */
 router.post(
-	'/crear/codigo',
+	'/serie/crear',
 	schemas.setAssetSchema,
 	validateSchema,
 	methods.setCode,
 );
+
+/**
+ * @swagger
+ * /api/v1/activos/serie/editar:
+ *   put:
+ *     summary: Editar serie
+ *     tags: [Activos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ActivoSerieId:
+ *                 type: integer
+ *                 example: 1
+ *               ActivoId:
+ *                 type: integer
+ *                 example: 1
+ *               NumeroSerie:
+ *                 type: string
+ *                 example: AHSHD2AH1JH3H2DDKA3WD
+ *                 description: Numero de serie
+ *               ActualizadoPor:
+ *                 type: integer
+ *                 description: ID del usuario que creó el acceso
+ *
+ *     responses:
+ *       200:
+ *         description: Activo agregado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de confirmación.
+ *                   example: "Se ha editado el registro"
+ */
+router.put(
+	'/serie/editar',
+	schemas.updateCodeAssetSchema,
+	validateSchema,
+	methods.updateCode,
+);
+
+/**
+ * @swagger
+ * /api/v1/activos/serie/borrar:
+ *   delete:
+ *     summary: Eliminar codigo de serie
+ *     tags: [Activos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ActivoSerieId:
+ *                 type: integer
+ *                 example: 1
+ *               BorradoPor:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Eliminado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Activo eliminado"
+ */
+router.delete('/serie/borrar', methods.disableCode);
 
 export default router;

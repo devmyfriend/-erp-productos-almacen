@@ -184,3 +184,6 @@ export const findAssetByCode = code =>
 		NumeroSerie: code,
 		Borrado: false,
 	});
+
+export const findCodeAssetById = ActivoSerieId =>
+	findItem(CodeAssetModel, { ActivoSerieId, Borrado: false });

@@ -4,11 +4,14 @@ import { Connection } from '../database/mariadb.database.js';
 export const CodeAssetModel = Connection.define(
 	'CodeAsset',
 	{
-		ActivoId: {
+		ActivoSerieId: {
 			type: DataTypes.NUMBER,
 			primaryKey: true,
 			allowNull: false,
 			autoIncrement: true,
+		},
+		ActivoId: {
+			type: DataTypes.NUMBER,
 		},
 		NumeroSerie: {
 			type: DataTypes.STRING,

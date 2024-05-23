@@ -5,6 +5,7 @@ import {
 	findAllAssetByName,
 	findAssetByCode,
 	findAssetById,
+	findCodeAssetById,
 	findLineById,
 	findUserById,
 } from '../middlewares/finders/index.js';
@@ -221,7 +222,79 @@ const setCode = async (req, res) => {
 			});
 		}
 
-		return res.status(200).json(data);
+		return res.status(200).json({ message: 'Se ha creado el registro' });
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({ error: 'Error interno del servidor' });
+	}
+};
+
+const updateCode = async (req, res) => {
+	try {
+		const data = req.body;
+		const userFound = await findUserById(data.ActualizadoPor);
+		const assetFound = await findAssetById(data.ActivoId);
+		const datafound = await findCodeAssetById(data.ActivoSerieId);
+		const code = await findAssetByCode(data.NumeroSerie);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!assetFound.exist) {
+			return res.status(404).json({ error: 'El activo no existe' });
+		}
+
+		if (!datafound.exist) {
+			return res.status(404).json({ error: 'El registro no existe' });
+		}
+
+		if (code.exist && code.data.ActivoSerieId != data.ActivoSerieId) {
+			return res
+				.status(409)
+				.json({ error: 'El código ya está en uso: ' + data.NumeroSerie });
+		}
+
+		await CodeAssetModel.update(
+			Object.assign(data, { ActualizadoEn: new Date() }),
+			{
+				where: {
+					ActivoSerieId: data.ActivoSerieId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Se ha editado el registro' });
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({ error: 'Error interno del servidor' });
+	}
+};
+
+const disableCode = async (req, res) => {
+	try {
+		const data = req.body;
+		const userFound = await findUserById(data.BorradoPor);
+		const datafound = await findCodeAssetById(data.ActivoSerieId);
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		if (!datafound.exist) {
+			return res.status(404).json({ error: 'El registro no existe' });
+		}
+
+		await CodeAssetModel.update(
+			Object.assign(data, { Borrado: true, BorradoEn: new Date() }),
+			{
+				where: {
+					ActivoSerieId: data.ActivoSerieId,
+				},
+			},
+		);
+
+		return res.status(200).json({ message: 'Se ha eliminado el registro' });
 	} catch (error) {
 		console.log(error.message);
 		return res.status(500).json({ error: 'Error interno del servidor' });
@@ -236,4 +309,6 @@ export const methods = {
 	update,
 	disable,
 	setCode,
+	updateCode,
+	disableCode,
 };
