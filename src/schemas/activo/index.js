@@ -146,3 +146,15 @@ export const updateCodeAssetSchema = [
 		.isInt()
 		.withMessage('El ActualizadoPor debe ser un número entero'),
 ];
+
+
+export const disableCodeAssetSchema = [
+	body('ActivoSerieId')
+		.notEmpty()
+		.isInt({ min: 0 })
+		.withMessage('ID del activo debe ser un número entero no negativo.'),
+	body('BorradoPor')
+		.notEmpty()
+		.isInt({ min: 0 })
+		.withMessage('El campo BorradoPor debe ser un número entero no negativo.'),
+];

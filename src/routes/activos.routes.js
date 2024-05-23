@@ -356,6 +356,11 @@ router.put(
  *                    description: Mensaje de confirmación.
  *                    example: "Activo eliminado"
  */
-router.delete('/serie/borrar', methods.disableCode);
+router.delete(
+	'/serie/borrar',
+	schemas.disableCodeAssetSchema,
+	validateSchema,
+	methods.disableCode,
+);
 
 export default router;
