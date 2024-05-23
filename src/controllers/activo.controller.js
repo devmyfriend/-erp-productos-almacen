@@ -1,8 +1,9 @@
-import { AssetModel } from '../models/index.js';
+import { AssetModel, CodeAssetModel } from '../models/index.js';
 import { Connection as conn } from '../database/mariadb.database.js';
 import {
 	findAllAssetById,
 	findAllAssetByName,
+	findAssetByCode,
 	findAssetById,
 	findLineById,
 	findUserById,
@@ -187,6 +188,46 @@ const disable = async (req, res) => {
 	}
 };
 
+const setCode = async (req, res) => {
+	try {
+		const data = req.body;
+		const assetFound = await findAssetById(data.ActivoId);
+		const userFound = await findUserById(data.CreadoPor);
+
+		if (!assetFound.exist) {
+			return res.status(404).json({ error: 'El activo no existe' });
+		}
+
+		if (!userFound.exist) {
+			return res.status(404).json({ error: 'Usuario no encontrado' });
+		}
+
+		for (let i = 0; i < data.items.length; i++) {
+			const item = data.items[i];
+			const code = await findAssetByCode(item.NumeroSerie);
+			if (code.exist) {
+				return res
+					.status(409)
+					.json({ error: 'El código ya está en uso: ' + item.NumeroSerie });
+			}
+		}
+
+		for (let i = 0; i < data.items.length; i++) {
+			const item = data.items[i];
+			await CodeAssetModel.create({
+				ActivoId: data.ActivoId,
+				NumeroSerie: item.NumeroSerie,
+				CreadoPor: data.CreadoPor,
+			});
+		}
+
+		return res.status(200).json(data);
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({ error: 'Error interno del servidor' });
+	}
+};
+
 export const methods = {
 	findAll,
 	findById,
@@ -194,4 +235,5 @@ export const methods = {
 	create,
 	update,
 	disable,
+	setCode,
 };

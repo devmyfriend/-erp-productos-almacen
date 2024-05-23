@@ -1,6 +1,7 @@
 import {
 	AccessModel,
 	AssetModel,
+	CodeAssetModel,
 	GenProductModel,
 	LinetModel,
 	MembershipAccessModel,
@@ -170,10 +171,16 @@ export const findAllAssetById = id =>
 export const findAssetById = id =>
 	findItem(AssetModel, {
 		ActivoId: id,
-		Borrado: false
+		Borrado: false,
 	});
 
 export const findAllAssetByName = name =>
 	findItem(AssetModel, {
 		NombreActivo: name,
+	});
+
+export const findAssetByCode = code =>
+	findItem(CodeAssetModel, {
+		NumeroSerie: code,
+		Borrado: false,
 	});

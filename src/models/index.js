@@ -13,4 +13,5 @@ export { TypeScheduleModel } from './tipo.perido.model.js';
 export { TypeServiceModel } from './tipo.servicio.model.js';
 export { AccessModel } from './acceso.js';
 export { MembershipAccessModel } from './accesos.membresia.model.js';
-export {AssetModel} from './activo.model.js'
+export { AssetModel } from './activo.model.js';
+export { CodeAssetModel } from './activo.serie.model.js';

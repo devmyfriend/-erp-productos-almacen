@@ -229,4 +229,53 @@ router.delete(
 	methods.disable,
 );
 
+/**
+ * @swagger
+ * /api/v1/activos/crear/codigo:
+ *   post:
+ *     summary: Alta del activo
+ *     tags: [Activos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ActivoId:
+ *                 type: integer
+ *                 example: 1
+ *               CreadoPor:
+ *                 type: integer
+ *                 description: ID del usuario que creó el acceso
+ *               items:
+ *                 type: array
+ *                 description: Array de objetos de los codigos
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     NumeroSerie:
+ *                       type: string
+ *                       example: AHSHD2AH1JH3H2DDKA3WD
+ *                       description: Numero de serie
+ *     responses:
+ *       200:
+ *         description: Activo agregado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  message:
+ *                    type: string
+ *                    description: Mensaje de confirmación.
+ *                    example: "Se ha creado el registro"
+ */
+router.post(
+	'/crear/codigo',
+	schemas.setAssetSchema,
+	validateSchema,
+	methods.setCode,
+);
+
 export default router;

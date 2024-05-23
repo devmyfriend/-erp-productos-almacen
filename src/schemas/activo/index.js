@@ -98,3 +98,27 @@ export const disableAssetSchema = [
 		.isInt({ min: 0 })
 		.withMessage('El campo BorradoPor debe ser un número entero no negativo.'),
 ];
+
+export const setAssetSchema = [
+	body('ActivoId')
+		.notEmpty()
+		.withMessage('El campo ActivoId no puede estar vacío')
+		.isInt()
+		.withMessage('El ActivoId debe ser un número entero'),
+	body('CreadoPor')
+		.notEmpty()
+		.withMessage('El campo CreadoPor no puede estar vacío')
+		.isInt()
+		.withMessage('El CreadoPor debe ser un número entero'),
+	body('items')
+		.notEmpty()
+		.withMessage('El campo items no puede estar vacío')
+		.isArray()
+		.withMessage('El campo items debe ser un array'),
+	body('items.*.NumeroSerie')
+		.notEmpty()
+		.isString()
+		.withMessage(
+			'El campo NumeroSerie no puede estar vacío y debe ser un string',
+		),
+];
